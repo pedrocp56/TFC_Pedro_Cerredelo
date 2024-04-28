@@ -1,0 +1,7 @@
+Se actualizo en PDF de la Memoria.
+ 
+EN el pdf BD-Tabla-Vistas esta detallado el sript de la BD(que tambien va suelto), la informacion sobre cada tabla y las ideas de las vistas que seguramente de aqui al final cambien un poco o se añadan otras y se eliminen algunas.
+
+A mayores en La carmeta rest, esta realizado el API rest para la tabla armas la parte del crud basico. Aun no realice el resto ya que cada vez que avanzo un poco siempre toco un poco la base de datos o necesito otras cosas.
+
+En la carpeta proyecto va la APP para movil que de momento no tiene nada ya que lo poco que hice no me funciona asi que decici empezar de cero ya que tenia muy sucio el codigo.
