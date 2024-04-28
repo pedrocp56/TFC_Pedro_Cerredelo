@@ -1,3 +1,5 @@
+GitHub:https://github.com/pedrocp56/TFC_Pedro_Cerredelo
+
 Se actualizo en PDF de la Memoria.
  
 EN el pdf BD-Tabla-Vistas esta detallado el sript de la BD(que tambien va suelto), la informacion sobre cada tabla y las ideas de las vistas que seguramente de aqui al final cambien un poco o se añadan otras y se eliminen algunas.
