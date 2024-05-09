@@ -28,8 +28,8 @@ public class ArmaController {
 
     @GetMapping(Variables.ARMA_SEARCH_BY_NAME)
     public Arma getArma(@PathVariable String name) {
-        Optional<Arma> a = armaRest.findByNombre(name);
-        return a.orElse(null);
+        Arma a = armaRest.findByNombre(name);
+        return a;
     }
 
 

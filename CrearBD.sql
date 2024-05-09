@@ -5,6 +5,7 @@ USE GestorPartidas;
 CREATE TABLE Usuario (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     Nombre VARCHAR(25) NOT NULL UNIQUE,
+    Contrasenha VARCHAR(25) NOT NULL,
     Estado VARCHAR(100),
     Foto VARCHAR(255)
 );

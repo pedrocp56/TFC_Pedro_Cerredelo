@@ -1,21 +1,22 @@
 package com.pedrocerredelo.app.Personaje.Model;
 
+import com.pedrocerredelo.app.Campanha.Model.Campanha;
+import com.pedrocerredelo.app.Usuario.Model.Usuario;
 import jakarta.persistence.*;
 
 
 @Entity
-@Table
+@Table(name = "Personaje")
 public class Personaje {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
-    private Long id;
+    @ManyToOne
+    @JoinColumn(name = "Usuario_ID")
+    private Usuario usuario;
 
-    @Column(name = "Usuario_ID", nullable = false)
-    private Long usuarioId;
-
-    @Column(name = "Campaña_ID", nullable = false)
-    private Long campañaId;
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "Campaña_ID")
+    private Campanha campaña;
 
     @Column(name = "Personaje_Nombre", unique = true, nullable = false, length = 50)
     private String nombre;
@@ -44,28 +45,22 @@ public class Personaje {
     @Column(name = "foto", length = 255)
     private String foto;
 
-    public Long getId() {
-        return id;
+    // Constructor, getters y setters
+
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public Long getUsuarioId() {
-        return usuarioId;
+    public Campanha getCampaña() {
+        return campaña;
     }
 
-    public void setUsuarioId(Long usuarioId) {
-        this.usuarioId = usuarioId;
-    }
-
-    public Long getCampañaId() {
-        return campañaId;
-    }
-
-    public void setCampañaId(Long campañaId) {
-        this.campañaId = campañaId;
+    public void setCampaña(Campanha campaña) {
+        this.campaña = campaña;
     }
 
     public String getNombre() {
@@ -140,3 +135,4 @@ public class Personaje {
         this.foto = foto;
     }
 }
+

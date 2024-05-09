@@ -11,6 +11,6 @@ public interface ArmaRest extends JpaRepository<Arma, Long> {
         Optional<Arma> buscarPorNombre(String nombre);
      */
 
-    Optional<Arma> findByNombre(String nombre);
+    Arma findByNombre(String nombre);
 }
 

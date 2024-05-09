@@ -8,7 +8,6 @@ public class Arma {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column
     private String nombre;
     @Column

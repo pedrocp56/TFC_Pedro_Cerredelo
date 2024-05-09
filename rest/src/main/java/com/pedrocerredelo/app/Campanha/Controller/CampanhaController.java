@@ -25,12 +25,9 @@ public class CampanhaController {
         return c;
     }
     /*
-    @GetMapping(Variables.CAMPANHA_SEARCH)
-    public Campanha getCampanha(@PathVariable String nombre) {
-        new RuntimeException("Aun no planteado");
-        //campanha c = campanhaRest.findByNombre(nombre).orElseThrow(() -> new RuntimeException("campanha no encontrada"));
-        Campanha c = campanhaRest.findById(1L).orElseThrow(() -> new RuntimeException("campanha no encontrada"));
-
+    @GetMapping(Variables.CAMPANHA_SEARCH_BY_NAME)
+    public Campanha getCampanha(@PathVariable String nombre){
+        Campanha c = CampanhaRest.fingByNombre(nombre);
         return c;
     }
     */
