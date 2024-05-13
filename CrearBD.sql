@@ -33,7 +33,6 @@ CREATE TABLE Arma (
 );
 
 CREATE TABLE Personaje (
-    ID INT AUTO_INCREMENT,
     Usuario_ID INT NOT NULL,
     Campaña_ID INT NOT NULL,
     Personaje_Nombre VARCHAR(50) NOT NULL UNIQUE,
@@ -45,7 +44,7 @@ CREATE TABLE Personaje (
     Caracteristica_Carisma INT NOT NULL,
     Bono_Competencia INT NOT NULL,
     Foto VARCHAR(255),
-    PRIMARY KEY (ID),
+    PRIMARY KEY (Usuario_ID, Campaña_ID),
     FOREIGN KEY (Usuario_ID) REFERENCES Usuario(ID),
     FOREIGN KEY (Campaña_ID) REFERENCES Campaña(ID)
 );
@@ -53,12 +52,14 @@ CREATE TABLE Personaje (
 CREATE TABLE Arma_Personaje (
     Arma_ID INT NOT NULL,
     Usuario_ID INT NOT NULL,
-    Personaje_ID INT NOT NULL,
+    Campaña_ID INT NOT NULL,
     Ataque_Total INT NOT NULL,
     Bonificación_Adicional INT NOT NULL,
     Competencia BOOLEAN NOT NULL,
-    PRIMARY KEY (Arma_ID, Usuario_ID, Personaje_ID),
+    PRIMARY KEY (Arma_ID, Usuario_ID, Campaña_ID),
     FOREIGN KEY (Arma_ID) REFERENCES Arma(ID),
     FOREIGN KEY (Usuario_ID) REFERENCES Usuario(ID),
-    FOREIGN KEY (Personaje_ID) REFERENCES Personaje(ID)
+    FOREIGN KEY (Usuario_ID, Campaña_ID) REFERENCES Personaje(Usuario_ID, Campaña_ID) 
 );
+
+

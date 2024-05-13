@@ -27,13 +27,13 @@ public class UsuarioController {
         Optional<Usuario> s = usuarioRest.findById(id);
         return s.orElse(null);
     }
-/*
+
     @GetMapping(Variables.USUARIO_SEARCH_BY_LOGIN)
-    public Usuario getUsuario(@RequestBody Map<String, String> login) {
-        Usuario s = usuarioRest.findByNombreAndContrasenha(login.get("nombre"), login.get("contrasenha"));
-        return s;
+    public Usuario getUsuario(@PathVariable("nombre") String nombre, @PathVariable("contrasenha") String contrasenha) {
+        Usuario usuario = usuarioRest.findByNombreAndContrasenha(nombre, contrasenha);
+        return usuario;
     }
-*/
+
 
     @PostMapping(Variables.USUARIO_SAVE)
     public boolean guardarUsuario(@RequestBody Usuario Usuario) {
