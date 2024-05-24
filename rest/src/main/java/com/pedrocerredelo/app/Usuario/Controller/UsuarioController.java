@@ -5,6 +5,8 @@ import com.pedrocerredelo.app.Usuario.Model.Usuario;
 import com.pedrocerredelo.app.Usuario.Repository.UsuarioRest;
 import com.pedrocerredelo.app.Variables;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,22 +31,37 @@ public class UsuarioController {
     }
 
     @GetMapping(Variables.USUARIO_SEARCH_BY_LOGIN)
-    public Usuario getUsuario(@PathVariable("nombre") String nombre, @PathVariable("contrasenha") String contrasenha) {
+    public ResponseEntity<Usuario> getUsuario(@PathVariable("nombre") String nombre, @PathVariable("contrasenha") String contrasenha) {
         Usuario usuario = usuarioRest.findByNombreAndContrasenha(nombre, contrasenha);
-        return usuario;
+        if (usuario != null) {
+            return ResponseEntity.ok(usuario); // Devuelve el usuario encontrado
+        } else {
+            return ResponseEntity.notFound().build(); // Devuelve una respuesta 404 Not Found
+        }
+    }
+
+    @GetMapping(Variables.USUARIO_SEARCH_BY_NOMBRE)
+    public ResponseEntity<Usuario> getUsuario(@PathVariable("nombre") String nombre) {
+        Usuario usuario = usuarioRest.findByNombre(nombre);
+        if (usuario != null) {
+            return ResponseEntity.ok(usuario); // Devuelve el usuario encontrado
+        } else {
+            return ResponseEntity.notFound().build(); // Devuelve una respuesta 404 Not Found
+        }
     }
 
 
     @PostMapping(Variables.USUARIO_SAVE)
-    public boolean guardarUsuario(@RequestBody Usuario Usuario) {
+    public ResponseEntity<?> guardarUsuario(@RequestBody Usuario usuario) {
         try {
-            usuarioRest.save(Usuario);
-            return true;
+            usuarioRest.save(usuario);
+            return ResponseEntity.ok().body("{\"success\": true}");
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("{\"error\": \"Error al guardar el usuario\"}");
         }
     }
+
 
     @PutMapping(Variables.USUARIO_UPDATE)
     public String actualizarUsuario(@PathVariable long id, @RequestBody Usuario Usuario) {

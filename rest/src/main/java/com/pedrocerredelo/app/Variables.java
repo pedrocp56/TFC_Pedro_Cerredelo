@@ -25,7 +25,8 @@ public class Variables {
     public static final String USUARIO_BASE_PATH = "/Usuarios";
     public static final String USUARIO_GET_ALL = "/verUsuarios";
     public static final String USUARIO_SEARCH = "/buscarUsuario/{id}";
-    public static final String USUARIO_SEARCH_BY_LOGIN = "/buscarUsuarioByLogin/{nombre}/{contrasenha}";
+    public static final String USUARIO_SEARCH_BY_NOMBRE = "/buscarUsuarioNombre/{nombre}";
+    public static final String USUARIO_SEARCH_BY_LOGIN = "/Login/{nombre}/{contrasenha}";
     public static final String USUARIO_SAVE = "/guardarUsuario";
     public static final String USUARIO_UPDATE = "/actualizarUsuario/{id}";
     public static final String USUARIO_DELETE = "/eliminarUsuario/{id}";
