@@ -1,14 +1,23 @@
 package com.cerredelo.gestor;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 import android.util.Log;
 
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
@@ -27,6 +36,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import Clases.ImagenUtils;
 import Clases.Usuario;
 
 public class Registro extends AppCompatActivity {
@@ -34,79 +44,107 @@ public class Registro extends AppCompatActivity {
     private EditText usernameEditText;
     private EditText passwordEditText;
     private Button registerButton;
-    private RequestQueue queue;
     private Button backToLoginButton;
+    private ImageView vistaFoto;
+    private ImageButton tomarFotoButton;
+    private RequestQueue queue;
+    private ActivityResultLauncher<Intent> someActivityResultLauncher;
+    private String imagen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
+        imagen = null;
 
-        // Inicializar las vistas y la cola de solicitudes
+        // Inicializar las vistas
         usernameEditText = findViewById(R.id.register_username);
         passwordEditText = findViewById(R.id.register_password);
         registerButton = findViewById(R.id.register_confirm_button);
         backToLoginButton = findViewById(R.id.back_to_login_button);
+        vistaFoto = findViewById(R.id.vistaFoto);
+        tomarFotoButton = findViewById(R.id.tomarFoto);
+
+        // Inicializar la cola de solicitudes
         queue = Volley.newRequestQueue(this);
 
-        // Configurar el botón "Volver a Inicio" para ir a la pantalla de inicio de sesión
-        backToLoginButton.setOnClickListener(new View.OnClickListener() {
+        // Configurar el ActivityResultLauncher para tomar una foto
+        ActivityResultLauncher<Intent> someActivityResultLauncher =
+                registerForActivityResult(
+                        new ActivityResultContracts.StartActivityForResult(),
+                        new ActivityResultCallback<ActivityResult>() {
+                            @Override
+                            public void onActivityResult(ActivityResult result) {
+                                if (result.getResultCode() == Activity.RESULT_OK) {
+                                    Intent data = result.getData();
+
+                                    if (data != null) {
+                                        Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+                                        vistaFoto.setImageBitmap(bitmap);
+                                        vistaFoto.setVisibility(View.VISIBLE);
+                                        imagen= ImagenUtils.bitmapToBase64(bitmap);
+                                    }
+                                }
+
+                            }
+                        }
+                );
+
+        // Configurar el botón "Tomar Foto"
+        tomarFotoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Navegar a la pantalla de inicio de sesión (Login)
-                Intent intent = new Intent(Registro.this, Login.class);
-                startActivity(intent);
-                finish(); // Cerrar la actividad actual
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                someActivityResultLauncher.launch(takePictureIntent);
             }
         });
 
-        // Configurar el botón de registro para manejar el clic del usuario
+        // Configurar el botón "Volver a Inicio"
+        backToLoginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Registro.this, Login.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        // Configurar el botón de registro
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Obtener los datos de usuario y contraseña ingresados por el usuario
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
-
-                // Realizar la solicitud a la API para registrar un nuevo usuario
                 buscarUsuario(username, password);
             }
         });
     }
 
-    private void buscarUsuario(String username,String password) {
-        // Verificar si el usuario es un correo electrónico válido
+    private void buscarUsuario(String username, String password) {
         if (!isValidEmail(username)) {
             Toast.makeText(Registro.this, "El usuario debe ser un correo electrónico válido", Toast.LENGTH_SHORT).show();
             return;
         }
-        // Verificar si la contraseña tiene entre 5 y 13 caracteres
+
         if (password.length() < 5 || password.length() > 13) {
             Toast.makeText(Registro.this, "La contraseña debe tener entre 5 y 13 caracteres", Toast.LENGTH_SHORT).show();
             return;
         }
 
-
-        // URL del endpoint de tu API para verificar si el usuario ya está registrado
         String RegistroUrl = "http://192.168.1.33:8080/Usuarios/buscarUsuarioNombre/" + username;
 
-        // Crear la solicitud JSON para verificar si el usuario ya está registrado
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, RegistroUrl, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            // Comprobar si la respuesta contiene datos pertinentes
                             if (response.has("id")) {
-                                // Usuario encontrado, mostrar un mensaje al usuario
                                 Toast.makeText(Registro.this, "El usuario ya está registrado", Toast.LENGTH_SHORT).show();
                             } else {
-                                // Usuario no encontrado, permitir que el usuario se registre
-                                crearNuevoUsuario(username,password);
+                                crearNuevoUsuario(username, password);
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
-                            // Error al procesar la respuesta JSON
                             Toast.makeText(Registro.this, "Error de procesamiento de datos", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -114,10 +152,8 @@ public class Registro extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // Manejar los errores de la solicitud aquí
                         if (error instanceof ClientError) {
-                            // Error de cliente (por ejemplo, 404 Not Found), el usuario no existe, permitir que el usuario se registre
-                            crearNuevoUsuario(username,password);
+                            crearNuevoUsuario(username, password);
                         } else if (error instanceof NoConnectionError) {
                             Toast.makeText(Registro.this, "No se puede conectar al servidor", Toast.LENGTH_SHORT).show();
                         } else if (error instanceof TimeoutError) {
@@ -132,51 +168,38 @@ public class Registro extends AppCompatActivity {
                     }
                 });
 
-        // Agregar la solicitud a la cola de solicitudes
         queue.add(request);
     }
 
-
     private void crearNuevoUsuario(String username, String password) {
-        // URL del endpoint de tu API para registrar un nuevo usuario
         String registerUrl = "http://192.168.1.33:8080/Usuarios/guardarUsuario";
-        // Crear un JSONObject con los datos del nuevo usuario
         JSONObject userData = new JSONObject();
         try {
             userData.put("nombre", username);
             userData.put("contrasenha", password);
-            userData.put("estado","Nueva cuenta");
-            userData.put("foto",null);
-            // Puedes agregar más campos según los requisitos de tu API
+            userData.put("estado", "Nueva cuenta");
+            userData.put("foto", imagen);
         } catch (JSONException e) {
             e.printStackTrace();
-            // Error al crear los datos del usuario
             Toast.makeText(Registro.this, "Error al crear los datos del usuario", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Crear la solicitud JSON para registrar un nuevo usuario
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, registerUrl, userData,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        // Verificar si la respuesta indica que el usuario se ha registrado correctamente
                         try {
                             boolean success = response.getBoolean("success");
                             if (success) {
-                                // Usuario registrado con éxito, mostrar un mensaje de éxito al usuario
                                 Toast.makeText(Registro.this, "Usuario registrado exitosamente", Toast.LENGTH_SHORT).show();
-                                // Puedes agregar lógica adicional aquí, como navegar a la pantalla de inicio de sesión
-                                // Por ejemplo, navegar a la pantalla de registro
                                 Intent intent = new Intent(Registro.this, PantallaPrincipal.class);
                                 startActivity(intent);
                             } else {
-                                // Fallo al registrar el usuario, mostrar un mensaje de error al usuario
                                 Toast.makeText(Registro.this, "Fallo al registrar el usuario", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            // Error al procesar la respuesta JSON
                             Toast.makeText(Registro.this, "Error de procesamiento de datos", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -184,14 +207,11 @@ public class Registro extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // Manejar los errores de la solicitud aquí
-                        // Por ejemplo, mostrar un mensaje de error al usuario indicando que ocurrió un error de red
                         Toast.makeText(Registro.this, error.toString(), Toast.LENGTH_LONG).show();
                         Log.d("TAG", error.toString());
                     }
                 });
 
-        // Agregar la solicitud a la cola de solicitudes
         queue.add(request);
     }
 
@@ -199,3 +219,4 @@ public class Registro extends AppCompatActivity {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 }
+

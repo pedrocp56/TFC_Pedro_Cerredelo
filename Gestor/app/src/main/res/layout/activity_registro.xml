@@ -23,24 +23,25 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center">
 
         <ImageView
             android:id="@+id/vistaFoto"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:background="@drawable/sinimagen"
-            android:contentDescription="Imagen tomada" />
+            android:contentDescription="Imagen tomada"
+            android:scaleType="centerCrop" />
 
         <ImageButton
             android:id="@+id/tomarFoto"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:src="@drawable/camara"
-            android:layout_gravity="center_vertical"
             android:background="@android:color/transparent"
             android:contentDescription="Tomar Foto"
-            android:onClick="tomarFoto"
+            android:layout_marginStart="16dp"
             android:scaleType="fitCenter" />
     </LinearLayout>
 
@@ -55,3 +56,4 @@
         android:text="Volver a Inicio" />
 
 </LinearLayout>
+
