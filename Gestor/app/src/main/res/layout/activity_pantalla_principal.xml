@@ -1,18 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
     android:padding="16dp"
     tools:context=".PantallaPrincipal">
 
-    <Button
-        android:id="@+id/logout_button"
-        style="@style/ButtonStyle"
-        android:text="Cerrar Sesión" />
+        <!-- Barra superior con fondo azul -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#3F51B5"
+            android:padding="8dp"
+            android:gravity="center_vertical">
+
+                <!-- Texto de usuario -->
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nombre de Usuario"
+                    android:textSize="20sp"
+                    android:textColor="#FFFFFF"
+                    android:layout_gravity="center"/>
+                <!-- Icono de usuario -->
+                <ImageView
+                    android:id="@+id/user_icon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/sinimagen"
+                    android:layout_marginEnd="8dp"/>
+                <!-- Menú desplegable -->
+                <Spinner
+                    android:id="@+id/menuusuario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF"/>
+
+        </LinearLayout>
+
+        <!-- Espacio en blanco -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="16dp"/>
+
+        <!-- Botones de Campañas y Personajes -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="8dp">
+
+                <!-- Botón de Campañas -->
+                <Button
+                    android:id="@+id/campaigns_button"
+                    style="@style/ButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Campañas"
+                    android:layout_marginEnd="8dp"/>
+
+                <!-- Botón de Personajes -->
+                <Button
+                    android:id="@+id/characters_button"
+                    style="@style/ButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Personajes"
+                    android:layout_marginStart="8dp"/>
+
+        </LinearLayout>
 
 </LinearLayout>
+

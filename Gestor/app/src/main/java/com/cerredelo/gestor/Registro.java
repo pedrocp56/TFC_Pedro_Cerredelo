@@ -35,6 +35,7 @@ public class Registro extends AppCompatActivity {
     private EditText passwordEditText;
     private Button registerButton;
     private RequestQueue queue;
+    private Button backToLoginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,19 @@ public class Registro extends AppCompatActivity {
         usernameEditText = findViewById(R.id.register_username);
         passwordEditText = findViewById(R.id.register_password);
         registerButton = findViewById(R.id.register_confirm_button);
+        backToLoginButton = findViewById(R.id.back_to_login_button);
         queue = Volley.newRequestQueue(this);
+
+        // Configurar el botón "Volver a Inicio" para ir a la pantalla de inicio de sesión
+        backToLoginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navegar a la pantalla de inicio de sesión (Login)
+                Intent intent = new Intent(Registro.this, Login.class);
+                startActivity(intent);
+                finish(); // Cerrar la actividad actual
+            }
+        });
 
         // Configurar el botón de registro para manejar el clic del usuario
         registerButton.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +75,18 @@ public class Registro extends AppCompatActivity {
     }
 
     private void buscarUsuario(String username,String password) {
+        // Verificar si el usuario es un correo electrónico válido
+        if (!isValidEmail(username)) {
+            Toast.makeText(Registro.this, "El usuario debe ser un correo electrónico válido", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        // Verificar si la contraseña tiene entre 5 y 13 caracteres
+        if (password.length() < 5 || password.length() > 13) {
+            Toast.makeText(Registro.this, "La contraseña debe tener entre 5 y 13 caracteres", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
         // URL del endpoint de tu API para verificar si el usuario ya está registrado
         String RegistroUrl = "http://192.168.1.33:8080/Usuarios/buscarUsuarioNombre/" + username;
 
@@ -120,6 +145,8 @@ public class Registro extends AppCompatActivity {
         try {
             userData.put("nombre", username);
             userData.put("contrasenha", password);
+            userData.put("estado","Nueva cuenta");
+            userData.put("foto",null);
             // Puedes agregar más campos según los requisitos de tu API
         } catch (JSONException e) {
             e.printStackTrace();
@@ -168,4 +195,7 @@ public class Registro extends AppCompatActivity {
         queue.add(request);
     }
 
+    private boolean isValidEmail(String email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
 }
