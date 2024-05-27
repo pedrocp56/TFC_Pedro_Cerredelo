@@ -62,7 +62,6 @@ public class UsuarioController {
         }
     }
 
-
     @PutMapping(Variables.USUARIO_UPDATE)
     public String actualizarUsuario(@PathVariable long id, @RequestBody Usuario Usuario) {
         Usuario s = usuarioRest.findById(id).orElseThrow(() -> new RuntimeException("Usuario no encontrada"));
