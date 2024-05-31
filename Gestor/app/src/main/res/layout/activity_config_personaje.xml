@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Nombre del Usuario -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id="@+id/textUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Usuario:"
+            android:textStyle="bold"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/textNombreUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre Usuario"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+
+    <!-- Nombre del personaje -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id="@+id/textNombre"
+            android:layout_width="300px"
+            android:layout_height="wrap_content"
+            android:text="Nombre del personaje:"
+            android:textStyle="bold"
+            android:layout_weight="1"/>
+
+        <EditText
+            android:id="@+id/editNombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:hint="Ingrese el nombre"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+
+    <!-- Fuerza -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id="@+id/textFuerza"
+            android:layout_width="200px"
+            android:layout_height="wrap_content"
+            android:text="Fuerza:"
+            android:textStyle="bold"
+            android:layout_weight="1"/>
+
+        <EditText
+            android:id="@+id/editFuerza"
+            android:layout_width="200px"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:hint="Ingrese la fuerza"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+
+    <!-- Destreza -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id="@+id/textDestreza"
+            android:layout_width="200px"
+            android:layout_height="wrap_content"
+            android:text="Destreza:"
+            android:textStyle="bold"
+            android:layout_weight="1"/>
+
+        <EditText
+            android:id="@+id/editDestreza"
+            android:layout_width="200px"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:hint="Ingrese la Destreza"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+    <!-- Constitucion -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id="@+id/textConstitucion"
+            android:layout_width="200px"
+            android:layout_height="wrap_content"
+            android:text="Constitucion:"
+            android:textStyle="bold"
+            android:layout_weight="1"/>
+
+        <EditText
+            android:id="@+id/editConstitucion"
+            android:layout_width="200px"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:hint="Ingrese la Constitucion"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+    <!-- Inteligencia -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id="@+id/textInteligencia"
+            android:layout_width="200px"
+            android:layout_height="wrap_content"
+            android:text="Inteligencia:"
+            android:textStyle="bold"
+            android:layout_weight="1"/>
+
+        <EditText
+            android:id="@+id/editInteligencia"
+            android:layout_width="200px"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:hint="Ingrese la Inteligencia"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+    <!-- Sabiduria -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id="@+id/textSabiduria"
+            android:layout_width="200px"
+            android:layout_height="wrap_content"
+            android:text="Sabiduria:"
+            android:textStyle="bold"
+            android:layout_weight="1"/>
+
+        <EditText
+            android:id="@+id/editSabiduria"
+            android:layout_width="200px"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:hint="Ingrese la Sabiduria"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+    <!-- Carisma -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id="@+id/textCarisma"
+            android:layout_width="200px"
+            android:layout_height="wrap_content"
+            android:text="Carisma:"
+            android:textStyle="bold"
+            android:layout_weight="1"/>
+
+        <EditText
+            android:id="@+id/editCarisma"
+            android:layout_width="200px"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:hint="Ingrese la Carisma"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+    <!-- Competencia -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id="@+id/textCompetencia"
+            android:layout_width="200px"
+            android:layout_height="wrap_content"
+            android:text="Competencia:"
+            android:textStyle="bold"
+            android:layout_weight="1"/>
+
+        <EditText
+            android:id="@+id/editCompetencia"
+            android:layout_width="200px"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:hint="Ingrese la Competencia"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+    <!-- Foto -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id="@+id/textFoto"
+            android:layout_width="200px"
+            android:layout_height="wrap_content"
+            android:text="URL de la foto:"
+            android:textStyle="bold"
+            android:layout_weight="1"/>
+
+        <EditText
+            android:id="@+id/editFoto"
+            android:layout_width="200px"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:hint="Ingrese la URL"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+
+    <!-- Botones -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/btnVolver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Volver"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/btnConfirmar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Confirmar"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>
+

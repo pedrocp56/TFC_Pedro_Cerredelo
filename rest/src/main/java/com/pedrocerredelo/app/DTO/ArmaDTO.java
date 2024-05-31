@@ -18,7 +18,7 @@ public class ArmaDTO {
 
     public static ArmaDTO converter(Arma arma) {
         ArmaDTO a = new ArmaDTO();
-        a.setId(arma.getID());
+        a.setId(arma.getId());
         a.setNombre(arma.getNombre());
         a.setAtaque(arma.getAtaque());
         a.setDaño(arma.getDaño());

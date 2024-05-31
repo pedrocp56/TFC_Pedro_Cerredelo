@@ -35,6 +35,7 @@ public class Variables {
     public static final String PERSONAJE_BASE_PATH = "/Personajes";
     public static final String PERSONAJE_GET_ALL = "/verPersonajes";
     public static final String PERSONAJE_SEARCH = "/buscarPersonaje/{id}";
+    public static final String PERSONAJE_SEARCH_BY_USER = "/buscarPersonajesPorUsuario/{usuarioId}";
     public static final String PERSONAJE_SEARCH_BY_NAME = "/buscarPersonajeByName";
     public static final String PERSONAJE_SAVE = "/guardarPersonaje";
     public static final String PERSONAJE_UPDATE = "/actualizarPersonaje/{id}";

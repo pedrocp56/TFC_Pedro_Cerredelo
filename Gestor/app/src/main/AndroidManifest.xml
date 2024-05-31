@@ -24,6 +24,21 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".configPersonaje"
+            android:exported="true" />
+        <activity
+            android:name=".item.item_personaje"
+            android:exported="true" />
+        <activity
+            android:name=".Personajes"
+            android:exported="true" />
+        <activity
+            android:name=".Campanhas"
+            android:exported="true" />
+        <activity
+            android:name=".Perfil"
+            android:exported="true" />
+        <activity
             android:name=".PantallaPrincipal"
             android:exported="true" />
         <activity
@@ -34,12 +49,13 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true"/>
+            android:exported="true" />
     </application>
 
 </manifest>

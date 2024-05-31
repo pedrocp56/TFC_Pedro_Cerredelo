@@ -3,34 +3,45 @@ package com.pedrocerredelo.app.Arma.Model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(schema = "Arma")
+@Table(name = "Arma")
 public class Arma {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     private Long id;
-    @Column
+
+    @Column(name = "Nombre", unique = true, nullable = false, length = 50)
     private String nombre;
-    @Column
+
+    @Column(name = "Ataque", nullable = false)
     private int ataque;
-    @Column
+
+    @Column(name = "Daño", nullable = false)
     private int daño;
-    @Column
+
+    @Column(name = "Tipo", nullable = false, length = 15)
     private String tipo;
-    @Column
+
+    @Column(name = "Arrojadiza")
     private boolean arrojadiza;
-    @Column
+
+    @Column(name = "Car", length = 15)
     private String car;
-    @Column
+
+    @Column(name = "Caracteristicas", columnDefinition = "TEXT")
     private String caracteristicas;
-    @Column
+
+    @Column(name = "Foto", length = 255)
     private String foto;
 
-    public Long getID() {
+    // Getters and Setters
+    public Long getId() {
         return id;
     }
 
-    public void setID(Long id) {
-        this.id = this.id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNombre() {

@@ -63,14 +63,21 @@ public class UsuarioController {
     }
 
     @PutMapping(Variables.USUARIO_UPDATE)
-    public String actualizarUsuario(@PathVariable long id, @RequestBody Usuario Usuario) {
-        Usuario s = usuarioRest.findById(id).orElseThrow(() -> new RuntimeException("Usuario no encontrada"));
-        s.setNombre(Usuario.getNombre());
-        s.setContrasenha(Usuario.getContrasenha());
-        s.setEstado(Usuario.getEstado());
-        s.setFoto(Usuario.getFoto());
-        usuarioRest.save(s);
-        return "Usuario " + id + " actualizada";
+    public ResponseEntity<String> actualizarUsuario(@PathVariable long id, @RequestBody Usuario usuario) {
+        Usuario usuarioExistente = usuarioRest.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        // Actualizar los campos del usuario
+        usuarioExistente.setNombre(usuario.getNombre());
+        usuarioExistente.setContrasenha(usuario.getContrasenha());
+        usuarioExistente.setEstado(usuario.getEstado());
+        usuarioExistente.setFoto(usuario.getFoto());
+
+        // Guardar los cambios en la base de datos
+        usuarioRest.save(usuarioExistente);
+
+        // Devolver una respuesta con un mensaje indicando que la actualización fue exitosa
+        return ResponseEntity.ok().body("{\"message\": \"success\"}");
     }
 
     @DeleteMapping(Variables.USUARIO_DELETE)

@@ -3,19 +3,29 @@ package Clases;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Usuario {
+import java.io.Serializable;
+
+public class Usuario implements Serializable {
         private Long id;
         private String nombre;
         private String contrasenha;
         private String estado;
         private String foto;
 
+    public Usuario(long id, String nombre, String contrasenha, String estado, String foto) {
+        this.id = id;
+        this.nombre = nombre;
+        this.contrasenha = contrasenha;
+        this.estado = estado;
+        this.foto = foto;
+    }
+
     public Usuario(JSONObject obj) throws JSONException {
-        setId( Long.parseLong(obj.get("id").toString()));
-        setNombre(obj.get("nombre").toString());
-        setContrasenha(obj.get("contrasenha").toString());
-        setEstado(obj.get("estado").toString());
-        setFoto(obj.get("foto").toString());
+        this.id = obj.getLong("id");
+        this.nombre = obj.getString("nombre");
+        this.contrasenha = obj.getString("contrasenha");
+        this.estado = obj.optString("estado", ""); // Usar optString para manejar valores null
+        this.foto = obj.optString("foto", null); // Usar optString para manejar valores null
     }
 
     public Long getId() {

@@ -1,6 +1,8 @@
 package com.cerredelo.gestor;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -84,9 +86,10 @@ public class Login extends AppCompatActivity {
                                 Toast.makeText(Login.this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
                                 // Convertir el JSONObject de la respuesta en un objeto Usuario
                                 Usuario login = new Usuario(response);
+                                // Guardar los datos del usuario en SharedPreferences
+                                saveUserData(login);
                                 Intent intent = new Intent(Login.this, PantallaPrincipal.class);
                                 startActivity(intent);
-                                Toast.makeText(Login.this, login.toString(), Toast.LENGTH_SHORT).show();
                                 finish(); // Cierra la actividad de inicio de sesión para evitar que el usuario regrese con el botón "Atrás"
                             }
                         } catch (JSONException e) {
@@ -119,6 +122,21 @@ public class Login extends AppCompatActivity {
 
         // Agregar la solicitud a la cola de solicitudes
         queue.add(request);
+    }
+
+    private void saveUserData(Usuario usuario) {
+        // Obtener el objeto SharedPreferences
+        SharedPreferences sharedPref = getSharedPreferences("UserPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        // Guardar los datos del usuario en SharedPreferences
+        editor.putLong("userId", usuario.getId());
+        editor.putString("userName", usuario.getNombre());
+        editor.putString("userContrasenha", usuario.getContrasenha());
+        editor.putString("userEstado", usuario.getEstado());
+        editor.putString("userFoto", usuario.getFoto());
+
+        editor.apply();
     }
 
 }
