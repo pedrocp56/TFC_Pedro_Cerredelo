@@ -4,9 +4,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class Personaje implements Serializable {
     private long personajeId;
+    private long usuarioId; // Este campo es parte de la clave compuesta
     private Usuario usuario;
     private String nombre;
     private int fuerza;
@@ -16,11 +18,12 @@ public class Personaje implements Serializable {
     private int sabiduria;
     private int carisma;
     private int bonoCompetencia;
-    private String foto;
+    private byte[] foto;
 
-    public Personaje(long personajeId, Usuario usuario, String nombre, int fuerza, int destreza, int constitucion,
-                     int inteligencia, int sabiduria, int carisma, int bonoCompetencia, String foto) {
+    public Personaje(long personajeId, long usuarioId, Usuario usuario, String nombre, int fuerza, int destreza, int constitucion,
+                     int inteligencia, int sabiduria, int carisma, int bonoCompetencia, byte[] foto) {
         this.personajeId = personajeId;
+        this.usuarioId = usuarioId;
         this.usuario = usuario;
         this.nombre = nombre;
         this.fuerza = fuerza;
@@ -35,6 +38,7 @@ public class Personaje implements Serializable {
 
     public Personaje(JSONObject obj) throws JSONException {
         this.personajeId = obj.getLong("personajeId");
+        this.usuarioId = obj.getLong("usuarioId"); // Asegúrate de que esto esté presente en el JSON
         this.usuario = new Usuario(obj.getJSONObject("usuario"));
         this.nombre = obj.getString("personajeNombre");
         this.fuerza = obj.getInt("caracteristicaFuerza");
@@ -44,19 +48,27 @@ public class Personaje implements Serializable {
         this.sabiduria = obj.getInt("caracteristicaSabiduria");
         this.carisma = obj.getInt("caracteristicaCarisma");
         this.bonoCompetencia = obj.getInt("bonoCompetencia");
-        this.foto = obj.optString("foto", null); // Usar optString para manejar valores null
+        this.foto = obj.has("foto") ? obj.getString("foto").getBytes() : null;
     }
 
     public Personaje() {
-
     }
 
+    // Getters y setters
     public long getPersonajeId() {
         return personajeId;
     }
 
     public void setPersonajeId(long personajeId) {
         this.personajeId = personajeId;
+    }
+
+    public long getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(long usuarioId) {
+        this.usuarioId = usuarioId;
     }
 
     public Usuario getUsuario() {
@@ -131,11 +143,11 @@ public class Personaje implements Serializable {
         this.bonoCompetencia = bonoCompetencia;
     }
 
-    public String getFoto() {
+    public byte[] getFoto() {
         return foto;
     }
 
-    public void setFoto(String foto) {
+    public void setFoto(byte[] foto) {
         this.foto = foto;
     }
 
@@ -143,6 +155,7 @@ public class Personaje implements Serializable {
     public String toString() {
         return "Personaje{" +
                 "personajeId=" + personajeId +
+                ", usuarioId=" + usuarioId +
                 ", " + usuario.toString() +
                 ", nombre='" + nombre + '\'' +
                 ", fuerza=" + fuerza +
@@ -152,7 +165,8 @@ public class Personaje implements Serializable {
                 ", sabiduria=" + sabiduria +
                 ", carisma=" + carisma +
                 ", bonoCompetencia=" + bonoCompetencia +
-                ", foto='" + foto + '\'' +
+                ", foto='" + Arrays.toString(foto) + '\'' +
                 '}';
     }
 }
+

@@ -30,8 +30,8 @@ public class PantallaPrincipal extends AppCompatActivity {
         userNameTextView = findViewById(R.id.user_name);
         userIconImageView = findViewById(R.id.user_icon);
         dropdownMenu = findViewById(R.id.menuusuario);
-        Button campaignsButton = findViewById(R.id.campaigns_button);
-        Button charactersButton = findViewById(R.id.characters_button);
+        Button armasBoton = findViewById(R.id.armas_button);
+        Button personajesBoton = findViewById(R.id.personajes_button);
 
         // Configurar el menú desplegable
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.opcionesPerfil, android.R.layout.simple_spinner_dropdown_item);
@@ -66,22 +66,24 @@ public class PantallaPrincipal extends AppCompatActivity {
         });
 
 // Configurar el clic en el botón "Campañas"
-        campaignsButton.setOnClickListener(new View.OnClickListener() {
+        armasBoton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Abrir la actividad de Campañas
-                Intent intent = new Intent(PantallaPrincipal.this, Campanhas.class);
+                Intent intent = new Intent(PantallaPrincipal.this, Armas.class);
                 startActivity(intent);
+                finish();
             }
         });
 
 // Configurar el clic en el botón "Personajes"
-        charactersButton.setOnClickListener(new View.OnClickListener() {
+        personajesBoton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Abrir la actividad de Personajes
                 Intent intent = new Intent(PantallaPrincipal.this, Personajes.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
@@ -111,8 +113,10 @@ public class PantallaPrincipal extends AppCompatActivity {
         ID=userId;
 
         // Decodificar la imagen de Base64 a Bitmap
+        /*
         if (!userFoto.isEmpty()) {
             userIconImageView.setImageBitmap(base64ToBitmap(userFoto));
         }
+        */
     }
 }

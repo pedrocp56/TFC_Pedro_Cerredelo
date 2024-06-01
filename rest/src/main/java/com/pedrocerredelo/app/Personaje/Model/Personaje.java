@@ -6,14 +6,9 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "Personaje")
 public class Personaje {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Personaje_ID")
-    private Long personajeId;
 
-    @ManyToOne
-    @JoinColumn(name = "Usuario_ID", nullable = false)
-    private Usuario usuario;
+    @EmbeddedId
+    private PersonajePK id;
 
     @Column(name = "Personaje_Nombre", nullable = false, length = 50)
     private String personajeNombre;
@@ -39,25 +34,19 @@ public class Personaje {
     @Column(name = "Bono_Competencia", nullable = false)
     private int bonoCompetencia;
 
-    @Column(name = "Foto", length = 255)
-    private String foto;
+    @Lob
+    @Column(name = "Foto")
+    private byte[] foto;
 
     // Getters y setters
 
-    public Long getPersonajeId() {
-        return personajeId;
+
+    public PersonajePK getId() {
+        return id;
     }
 
-    public void setPersonajeId(Long personajeId) {
-        this.personajeId = personajeId;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setId(PersonajePK id) {
+        this.id = id;
     }
 
     public String getPersonajeNombre() {
@@ -124,13 +113,11 @@ public class Personaje {
         this.bonoCompetencia = bonoCompetencia;
     }
 
-    public String getFoto() {
+    public byte[] getFoto() {
         return foto;
     }
 
-    public void setFoto(String foto) {
+    public void setFoto(byte[] foto) {
         this.foto = foto;
     }
-
-
 }

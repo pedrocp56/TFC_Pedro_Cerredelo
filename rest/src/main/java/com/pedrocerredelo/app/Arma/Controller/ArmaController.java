@@ -9,9 +9,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
 @RestController
-@RequestMapping(Variables.ARMA_BASE_PATH) //Ruta para todas las armas
+@RequestMapping(Variables.ARMA_BASE_PATH) // Ruta base para las operaciones relacionadas con Arma
 public class ArmaController {
+
     @Autowired
     private ArmaRest armaRest;
 
@@ -21,50 +25,50 @@ public class ArmaController {
     }
 
     @GetMapping(Variables.ARMA_SEARCH)
-    public Arma getArma(@PathVariable long id) {
-        Optional<Arma> a = armaRest.findById(id);
-        return a.orElse(null);
+    public ResponseEntity<Arma> getArma(@PathVariable long id) {
+        Optional<Arma> arma = armaRest.findById(id);
+        return arma.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
-
-    @GetMapping(Variables.ARMA_SEARCH_BY_NAME)
-    public Arma getArma(@PathVariable String name) {
-        Arma a = armaRest.findByNombre(name);
-        return a;
-    }
-
 
     @PostMapping(Variables.ARMA_SAVE)
-    public boolean guardarArma(@RequestBody Arma arma) {
+    public ResponseEntity<?> guardarArma(@RequestBody Arma arma) {
         try {
             armaRest.save(arma);
-            return true;
+            return ResponseEntity.ok().body("{\"success\": true}");
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("{\"error\": \"Error al guardar el arma\"}");
         }
     }
 
     @PutMapping(Variables.ARMA_UPDATE)
-    public String actualizarArma(@PathVariable long id, @RequestBody Arma arma) {
-        Arma a = armaRest.findById(id).orElseThrow(() -> new RuntimeException("Arma no encontrada"));
-        a.setNombre(arma.getNombre());
-        a.setAtaque(arma.getAtaque());
-        a.setDaño(arma.getDaño());
-        a.setTipo(arma.getTipo());
-        a.setArrojadiza(arma.isArrojadiza());
-        a.setCar(arma.getCar());
-        a.setCaracteristicas(arma.getCaracteristicas());
-        a.setFoto(arma.getFoto());
-        armaRest.save(a);
-        return "Arma " + id + " actualizada";
+    public ResponseEntity<String> actualizarArma(@PathVariable long id, @RequestBody Arma arma) {
+        Arma armaExistente = armaRest.findById(id)
+                .orElseThrow(() -> new RuntimeException("Arma no encontrada"));
+
+        // Actualizar los campos del arma
+        armaExistente.setNombre(arma.getNombre());
+        armaExistente.setAtaque(arma.getAtaque());
+        armaExistente.setDanho(arma.getDanho());
+        armaExistente.setTipo(arma.getTipo());
+        armaExistente.setArrojadiza(arma.isArrojadiza());
+        armaExistente.setCar(arma.getCar());
+        armaExistente.setCaracteristicas(arma.getCaracteristicas());
+        armaExistente.setFoto(arma.getFoto());
+
+        // Guardar los cambios en la base de datos
+        armaRest.save(armaExistente);
+
+        // Devolver una respuesta con un mensaje indicando que la actualización fue exitosa
+        return ResponseEntity.ok().body("{\"message\": \"success\"}");
     }
 
     @DeleteMapping(Variables.ARMA_DELETE)
     public String eliminarArma(@PathVariable long id) {
-        Arma a = armaRest.findById(id).orElseThrow(() -> new RuntimeException("Arma no encontrada"));
-        armaRest.delete(a);
+        Arma arma = armaRest.findById(id).orElseThrow(() -> new RuntimeException("Arma no encontrada"));
+        armaRest.delete(arma);
         return "Arma " + id + " eliminada";
     }
-
 }
+
 

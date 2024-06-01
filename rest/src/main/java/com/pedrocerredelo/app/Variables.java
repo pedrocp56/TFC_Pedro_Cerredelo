@@ -34,18 +34,22 @@ public class Variables {
     // Definición de las rutas de la API para las operaciones relacionadas con Personajes
     public static final String PERSONAJE_BASE_PATH = "/Personajes";
     public static final String PERSONAJE_GET_ALL = "/verPersonajes";
-    public static final String PERSONAJE_SEARCH = "/buscarPersonaje/{id}";
+    public static final String PERSONAJE_SEARCH = "/buscarPersonaje/{usuarioId}/{personajeId}";
     public static final String PERSONAJE_SEARCH_BY_USER = "/buscarPersonajesPorUsuario/{usuarioId}";
     public static final String PERSONAJE_SEARCH_BY_NAME = "/buscarPersonajeByName";
+    public static final String PERSONAJE_SEARCH_BY_ID = "/buscarPersonajeById/{personajeId}";
     public static final String PERSONAJE_SAVE = "/guardarPersonaje";
-    public static final String PERSONAJE_UPDATE = "/actualizarPersonaje/{id}";
-    public static final String PERSONAJE_DELETE = "/eliminarPersonaje/{id}";
+    public static final String PERSONAJE_UPDATE = "/actualizarPersonaje";
+    public static final String PERSONAJE_DELETE = "/eliminarPersonaje/{usuarioId}/{personajeId}";
 
     // Definición de las rutas de la API para las operaciones relacionadas con la relación Arma-Personaje
     public static final String ARMA_PERSONAJE_BASE_PATH = "/ArmaPersonaje";
     public static final String ARMA_PERSONAJE_GET_ALL = "/verArmaPersonajes";
-    public static final String ARMA_PERSONAJE_SAVE = "/asignarArmaPersonaje";
-    public static final String ARMA_PERSONAJE_DELETE = "/eliminarArmaPersonaje/{armaId}/{usuarioId}/{personajeId}";
+    public static final String ARMA_PERSONAJE_SAVE = "/guardarArmaPersonaje";
+    public static final String ARMA_PERSONAJE_UPDATE = "/actualizarArmaPersonaje";
+    public static final String ARMA_PERSONAJE_SEARCH_BY_IDS = "/buscarArma/{armaId}/{personajeId}/{usuarioId}";
+    public static final String ARMA_PERSONAJE_SEARCH_BY_PERSONAJE = "/buscarArmaPersonajePorPersonaje/{personajeId}";
+    public static final String ARMA_PERSONAJE_DELETE = "/eliminarArmaPersonaje/{armaId}/{personajeId}/{usuarioId}";
 
 
 }

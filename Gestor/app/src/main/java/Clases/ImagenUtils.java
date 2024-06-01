@@ -8,13 +8,11 @@ import java.io.ByteArrayOutputStream;
 
 public class ImagenUtils {
 
-    // Método para convertir un Bitmap a una cadena Base64
-    public static String bitmapToBase64(Bitmap bitmap) {
-        // Convertir la imagen a una cadena Base64
+    // Método para convertir un Bitmap a un array de bytes
+    public static byte[] bitmapToByteArray(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-        byte[] byteArray = byteArrayOutputStream.toByteArray();
-        return Base64.encodeToString(byteArray, Base64.DEFAULT);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 25, byteArrayOutputStream); // Ajustar calidad a 80%
+        return byteArrayOutputStream.toByteArray();
     }
 
     // Método para convertir una cadena Base64 a un Bitmap

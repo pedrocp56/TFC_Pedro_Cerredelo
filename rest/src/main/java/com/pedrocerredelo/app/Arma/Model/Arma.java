@@ -3,9 +3,8 @@ package com.pedrocerredelo.app.Arma.Model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Arma")
+@Table(schema = "Arma")
 public class Arma {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
@@ -17,8 +16,8 @@ public class Arma {
     @Column(name = "Ataque", nullable = false)
     private int ataque;
 
-    @Column(name = "Daño", nullable = false)
-    private int daño;
+    @Column(name = "Danho", nullable = false, length = 15)
+    private String danho;
 
     @Column(name = "Tipo", nullable = false, length = 15)
     private String tipo;
@@ -29,13 +28,15 @@ public class Arma {
     @Column(name = "Car", length = 15)
     private String car;
 
-    @Column(name = "Caracteristicas", columnDefinition = "TEXT")
+    @Column(name = "Caracteristicas")
     private String caracteristicas;
 
-    @Column(name = "Foto", length = 255)
-    private String foto;
+    @Lob
+    @Column(name = "Foto")
+    private byte[] foto;
 
-    // Getters and Setters
+    // Getters y Setters
+
     public Long getId() {
         return id;
     }
@@ -60,12 +61,12 @@ public class Arma {
         this.ataque = ataque;
     }
 
-    public int getDaño() {
-        return daño;
+    public String getDanho() {
+        return danho;
     }
 
-    public void setDaño(int daño) {
-        this.daño = daño;
+    public void setDanho(String danho) {
+        this.danho = danho;
     }
 
     public String getTipo() {
@@ -100,11 +101,12 @@ public class Arma {
         this.caracteristicas = caracteristicas;
     }
 
-    public String getFoto() {
+    public byte[] getFoto() {
         return foto;
     }
 
-    public void setFoto(String foto) {
+    public void setFoto(byte[] foto) {
         this.foto = foto;
     }
 }
+

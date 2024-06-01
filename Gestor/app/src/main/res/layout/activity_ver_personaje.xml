@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Nombre del Usuario -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Usuario:"
+            android:textStyle="bold"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/txtNombreUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre Usuario"
+            android:layout_weight="1"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+
+    <!-- Nombre del personaje -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:layout_width="300px"
+            android:layout_height="wrap_content"
+            android:text="Nombre del personaje:"
+            android:textStyle="bold"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/txtNombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Nombre"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Caracteristicas"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Base"
+            android:textStyle="bold"
+            android:textAlignment="center" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Bono"
+            android:textStyle="bold"
+            android:textAlignment="center" />
+
+    </LinearLayout>
+
+    <!-- Fuerza -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Fuerza:"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtFuerza"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Fuerza"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/txtBonoFuerza"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Bono Fuerza"
+            android:textAlignment="center" />
+
+    </LinearLayout>
+
+    <!-- Destreza -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Destreza:"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtDestreza"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Destreza"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/txtBonoDestreza"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Bono Destreza"
+            android:textAlignment="center" />
+
+    </LinearLayout>
+    <!-- Constitucion -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Constitucion:"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtConstitucion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Constitucion"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/txtBonoConstitucion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Bono Constitucion"
+            android:textAlignment="center" />
+
+    </LinearLayout>
+    <!-- Inteligencia -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Inteligencia:"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtInteligencia"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Inteligencia"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/txtBonoInteligencia"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Bono Inteligencia"
+            android:textAlignment="center" />
+
+    </LinearLayout>
+    <!-- Sabiduria -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Sabiduria:"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtSabiduria"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Sabiduria"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/txtBonoSabiduria"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Bono Sabiduria"
+            android:textAlignment="center" />
+
+    </LinearLayout>
+    <!-- Carisma -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Carisma:"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtCarisma"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Carisma"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/txtBonoCarisma"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Bono Carisma"
+            android:textAlignment="center" />
+
+    </LinearLayout>
+    <!-- Competencia -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:layout_width="200px"
+            android:layout_height="wrap_content"
+            android:text="Competencia:"
+            android:textStyle="bold"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/txtCompetencia"
+            android:layout_width="200px"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Ingrese la Competencia"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+    <!-- Foto -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id="@+id/textFoto"
+            android:layout_width="200px"
+            android:layout_height="wrap_content"
+            android:text="URL de la foto:"
+            android:textStyle="bold"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/txtFoto"
+            android:layout_width="200px"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="URL"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+
+    <!-- Botones -->
+    <Button
+        android:id="@+id/btnArmas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Armas"
+        android:layout_gravity="center"
+        android:layout_marginEnd="8dp"/>
+
+    <Button
+        android:id="@+id/btnVolver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Volver"
+        android:layout_gravity="center"
+        android:layout_marginEnd="8dp"/>
+
+
+
+</LinearLayout>
+
+
+
+

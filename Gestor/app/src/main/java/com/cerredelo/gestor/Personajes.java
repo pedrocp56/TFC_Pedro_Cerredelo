@@ -66,7 +66,7 @@ public class Personajes extends AppCompatActivity {
                 // Agregar lógica para abrir la actividad para crear un nuevo personaje
                 Intent intent = new Intent(Personajes.this, configPersonaje.class);
                 startActivity(intent);
-                Toast.makeText(Personajes.this, "Crear un nuevo personaje", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
 
@@ -76,6 +76,8 @@ public class Personajes extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Finalizar esta actividad y volver a la pantalla principal
+                Intent intent = new Intent(Personajes.this, PantallaPrincipal.class);
+                startActivity(intent);
                 finish();
             }
         });
@@ -118,7 +120,10 @@ public class Personajes extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         // Lógica para ver el personaje
-                        Toast.makeText(Personajes.this, "Ver " + personaje.getNombre(), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(Personajes.this, VerPersonaje.class);
+                        intent.putExtra("personajeId",personaje.getPersonajeId());
+                        startActivity(intent);
+                        finish();
                     }
                 });
 
@@ -130,6 +135,7 @@ public class Personajes extends AppCompatActivity {
                         // Pasar el objeto Personaje a la actividad configPersonaje
                         intent.putExtra("personajeId",personaje.getPersonajeId());
                         startActivity(intent);
+                        finish();
                     }
                 });
 
@@ -178,7 +184,7 @@ public class Personajes extends AppCompatActivity {
 
     // Método para eliminar el personaje
     private void eliminarPersonaje(final Personaje personaje) {
-        personajeControlador.eliminarPersonaje(personaje, new PersonajeControlador.OnPersonajeEliminadoListener() {
+        personajeControlador.eliminarPersonaje(userId, personaje.getPersonajeId(), new PersonajeControlador.OnPersonajeEliminadoListener() {
             @Override
             public void onPersonajeEliminado(String mensaje) {
                 Toast.makeText(Personajes.this, mensaje, Toast.LENGTH_SHORT).show();
@@ -191,5 +197,6 @@ public class Personajes extends AppCompatActivity {
             }
         });
     }
+
 }
 

@@ -33,8 +33,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
 
 import Clases.ImagenUtils;
 import Clases.Usuario;
@@ -49,7 +52,7 @@ public class Registro extends AppCompatActivity {
     private ImageButton tomarFotoButton;
     private RequestQueue queue;
     private ActivityResultLauncher<Intent> someActivityResultLauncher;
-    private String imagen;
+    private byte[] imagen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +85,7 @@ public class Registro extends AppCompatActivity {
                                         Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                                         vistaFoto.setImageBitmap(bitmap);
                                         vistaFoto.setVisibility(View.VISIBLE);
-                                        imagen= ImagenUtils.bitmapToBase64(bitmap);
+                                        imagen = ImagenUtils.bitmapToByteArray(bitmap);
                                     }
                                 }
 
@@ -99,76 +102,30 @@ public class Registro extends AppCompatActivity {
             }
         });
 
-        // Configurar el botón "Volver a Inicio"
-        backToLoginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Registro.this, Login.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
         // Configurar el botón de registro
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
-                buscarUsuario(username, password);
+
+                if (username.isEmpty() || password.isEmpty()) {
+                    Toast.makeText(Registro.this, "Por favor, ingrese un nombre de usuario y una contraseña", Toast.LENGTH_SHORT).show();
+                } else {
+                    crearNuevoUsuario(username, password);
+                }
             }
         });
-    }
 
-    private void buscarUsuario(String username, String password) {
-        if (!isValidEmail(username)) {
-            Toast.makeText(Registro.this, "El usuario debe ser un correo electrónico válido", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (password.length() < 5 || password.length() > 13) {
-            Toast.makeText(Registro.this, "La contraseña debe tener entre 5 y 13 caracteres", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        String RegistroUrl = "http://192.168.1.33:8080/Usuarios/buscarUsuarioNombre/" + username;
-
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, RegistroUrl, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            if (response.has("id")) {
-                                Toast.makeText(Registro.this, "El usuario ya está registrado", Toast.LENGTH_SHORT).show();
-                            } else {
-                                crearNuevoUsuario(username, password);
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            Toast.makeText(Registro.this, "Error de procesamiento de datos", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        if (error instanceof ClientError) {
-                            crearNuevoUsuario(username, password);
-                        } else if (error instanceof NoConnectionError) {
-                            Toast.makeText(Registro.this, "No se puede conectar al servidor", Toast.LENGTH_SHORT).show();
-                        } else if (error instanceof TimeoutError) {
-                            Toast.makeText(Registro.this, "Tiempo de espera agotado", Toast.LENGTH_SHORT).show();
-                        } else if (error instanceof NetworkError || error instanceof ServerError) {
-                            Toast.makeText(Registro.this, "Error del servidor, inténtelo de nuevo más tarde", Toast.LENGTH_SHORT).show();
-                        } else if (error instanceof AuthFailureError) {
-                            Toast.makeText(Registro.this, "Error de autenticación", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(Registro.this, "Error desconocido", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-
-        queue.add(request);
+        // Configurar el botón "Volver al login"
+        backToLoginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navegar a la actividad de inicio de sesión
+                Intent intent = new Intent(Registro.this, Login.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void crearNuevoUsuario(String username, String password) {
@@ -178,7 +135,7 @@ public class Registro extends AppCompatActivity {
             userData.put("nombre", username);
             userData.put("contrasenha", password);
             userData.put("estado", "Nueva cuenta");
-            userData.put("foto", imagen);
+            userData.put("foto", imagen != null ? new JSONArray(imagen) : null); // Convertir byte[] a JSONArray
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(Registro.this, "Error al crear los datos del usuario", Toast.LENGTH_SHORT).show();
@@ -213,10 +170,6 @@ public class Registro extends AppCompatActivity {
                 });
 
         queue.add(request);
-    }
-
-    private boolean isValidEmail(String email) {
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 }
 

@@ -1,8 +1,11 @@
 package com.pedrocerredelo.app.Personaje.Controller;
 
 import com.pedrocerredelo.app.Personaje.Model.Personaje;
+import com.pedrocerredelo.app.Personaje.Model.PersonajePK;
 import com.pedrocerredelo.app.Personaje.Repository.PersonajeRest;
 import com.pedrocerredelo.app.Variables;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,27 +18,30 @@ import java.util.Optional;
 @RequestMapping(Variables.PERSONAJE_BASE_PATH) // Ruta para todos personajes
 public class PersonajeController {
 
+    private static final Logger log = LoggerFactory.getLogger(PersonajeController.class);
     @Autowired
     private PersonajeRest personajeRepository;
 
     @GetMapping(Variables.PERSONAJE_GET_ALL)
     public List<Personaje> getPersonajes() {
+        log.info("Mondongo");
         return personajeRepository.findAll();
     }
 
     @GetMapping(Variables.PERSONAJE_SEARCH)
-    public Personaje getPersonaje(@PathVariable long id) {
+    public ResponseEntity<Personaje> getPersonaje(@PathVariable Long usuarioId, @PathVariable Long personajeId) {
+        PersonajePK id = new PersonajePK(personajeId, usuarioId);
         Optional<Personaje> personaje = personajeRepository.findById(id);
-        return personaje.orElse(null);
+        return personaje.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping(Variables.PERSONAJE_SEARCH_BY_NAME)
-    public ResponseEntity<Personaje> getPersonaje(@PathVariable("personajeNombre") String personajeNombre) {
+    public ResponseEntity<Personaje> getPersonajePorNombre(@PathVariable("personajeNombre") String personajeNombre) {
         Personaje personaje = personajeRepository.findByPersonajeNombre(personajeNombre);
         if (personaje != null) {
-            return ResponseEntity.ok(personaje); // Devuelve el personaje encontrado
+            return ResponseEntity.ok(personaje);
         } else {
-            return ResponseEntity.notFound().build(); // Devuelve una respuesta 404 Not Found
+            return ResponseEntity.notFound().build();
         }
     }
 
@@ -51,14 +57,14 @@ public class PersonajeController {
     }
 
     @PutMapping(Variables.PERSONAJE_UPDATE)
-    public ResponseEntity<Personaje> actualizarPersonaje(@PathVariable long id, @RequestBody Personaje personaje) {
+    public ResponseEntity<Personaje> actualizarPersonaje( @RequestBody Personaje personaje) {
         try {
+            PersonajePK id = new PersonajePK(personaje.getId().getPersonajeId(), personaje.getId().getUsuarioId());
             Personaje personajeExistente = personajeRepository.findById(id)
                     .orElseThrow(() -> new RuntimeException("Personaje no encontrado"));
 
             // Actualizar los campos del personaje
             personajeExistente.setPersonajeNombre(personaje.getPersonajeNombre());
-            personajeExistente.setUsuario(personaje.getUsuario());
             personajeExistente.setCaracteristicaFuerza(personaje.getCaracteristicaFuerza());
             personajeExistente.setCaracteristicaDestreza(personaje.getCaracteristicaDestreza());
             personajeExistente.setCaracteristicaConstitucion(personaje.getCaracteristicaConstitucion());
@@ -80,11 +86,11 @@ public class PersonajeController {
         }
     }
 
-
     @DeleteMapping(Variables.PERSONAJE_DELETE)
-    public ResponseEntity<String> eliminarPersonaje(@PathVariable long id) {
+    public ResponseEntity<String> eliminarPersonaje(@PathVariable Long usuarioId, @PathVariable Long personajeId) {
         try {
             // Intenta encontrar y eliminar el personaje con el ID proporcionado
+            PersonajePK id = new PersonajePK(personajeId, usuarioId);
             Personaje personaje = personajeRepository.findById(id)
                     .orElseThrow(() -> new RuntimeException("Personaje no encontrado"));
             personajeRepository.delete(personaje);
@@ -93,13 +99,21 @@ public class PersonajeController {
         } catch (Exception e) {
             // Si ocurre algún error, devuelve una respuesta de error con el mensaje correspondiente
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error al eliminar el personaje con ID: " + id);
+                    .body("Error al eliminar el personaje con ID: " + personajeId);
         }
     }
 
     @GetMapping(Variables.PERSONAJE_SEARCH_BY_USER)
     public ResponseEntity<List<Personaje>> getPersonajesPorUsuario(@PathVariable("usuarioId") Long usuarioId) {
-        List<Personaje> personajes = personajeRepository.findByUsuarioId(usuarioId);
+        List<Personaje> personajes = personajeRepository.findByIdUsuarioId(usuarioId);
         return ResponseEntity.ok(personajes); // Devuelve la lista de personajes encontrados
     }
+
+    @GetMapping(Variables.PERSONAJE_SEARCH_BY_ID)
+    public ResponseEntity<Personaje> getPersonaje(@PathVariable Long personajeId) {
+        Personaje personaje = personajeRepository.findByIdPersonajeId(personajeId);
+        return ResponseEntity.ok(personaje);
+    }
+
 }
+

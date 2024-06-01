@@ -134,7 +134,6 @@ public class Login extends AppCompatActivity {
         editor.putString("userName", usuario.getNombre());
         editor.putString("userContrasenha", usuario.getContrasenha());
         editor.putString("userEstado", usuario.getEstado());
-        editor.putString("userFoto", usuario.getFoto());
 
         editor.apply();
     }

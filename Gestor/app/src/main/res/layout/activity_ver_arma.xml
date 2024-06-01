@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+
+    <!-- Nombre del arma -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:layout_width="300px"
+            android:layout_height="wrap_content"
+            android:text="Nombre del arma:"
+            android:textStyle="bold"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/txtNombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Nombre"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Ataque:"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtAtaque"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Base"
+            android:textAlignment="center" />
+
+
+    </LinearLayout>
+
+    <!-- Danho -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Daño:"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtDanho"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Danho"
+            android:textAlignment="center" />
+
+    </LinearLayout>
+
+    <!-- Tipo -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Tipo:"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtTipo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Tipo"
+            android:textAlignment="center" />
+
+
+    </LinearLayout>
+    <!-- Arrojadiza -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Arrojadiza:"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtArrojadiza"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Arrojadiza"
+            android:textAlignment="center" />
+
+
+    </LinearLayout>
+    <!-- Caracteristica -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Caracteristica:"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtCaracteristica"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Caracteristica"
+            android:textAlignment="center" />
+
+
+    </LinearLayout>
+    <!-- Caracteristicas -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Caracteristicas:"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtCaracteristicas"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Caracteristicas"
+            android:textAlignment="center" />
+    </LinearLayout>
+    <!-- Foto -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id="@+id/textFoto"
+            android:layout_width="200px"
+            android:layout_height="wrap_content"
+            android:text="URL de la foto:"
+            android:textStyle="bold"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/txtFoto"
+            android:layout_width="200px"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="URL"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+
+    <!-- Botones -->
+    <Button
+        android:id="@+id/btnVolver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Volver"
+        android:layout_gravity="center"
+        android:layout_marginEnd="8dp"/>
+
+</LinearLayout>

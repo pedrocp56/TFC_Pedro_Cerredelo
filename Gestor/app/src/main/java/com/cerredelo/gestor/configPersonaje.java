@@ -123,7 +123,7 @@ public class configPersonaje extends AppCompatActivity {
         editSabiduria.setText(String.valueOf(personaje.getSabiduria()));
         editCarisma.setText(String.valueOf(personaje.getCarisma()));
         editCompetencia.setText(String.valueOf(personaje.getBonoCompetencia()));
-        editFoto.setText(personaje.getFoto());
+
     }
 
     private void actualizarPersonaje() {
@@ -138,7 +138,6 @@ public class configPersonaje extends AppCompatActivity {
         personaje.setSabiduria(Integer.parseInt(editSabiduria.getText().toString()));
         personaje.setCarisma(Integer.parseInt(editCarisma.getText().toString()));
         personaje.setBonoCompetencia(Integer.parseInt(editCompetencia.getText().toString()));
-        personaje.setFoto(editFoto.getText().toString());
 
         PersonajeControlador personajeControlador = new PersonajeControlador(this);
         Toast.makeText(configPersonaje.this, personaje.toString(), Toast.LENGTH_LONG).show();
@@ -146,6 +145,8 @@ public class configPersonaje extends AppCompatActivity {
             @Override
             public void onPersonajeActualizado(String mensaje) {
                 Toast.makeText(configPersonaje.this, mensaje, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(configPersonaje.this, Personajes.class);
+                startActivity(intent);
                 finish();
             }
 
@@ -168,13 +169,14 @@ public class configPersonaje extends AppCompatActivity {
         personaje.setSabiduria(Integer.parseInt(editSabiduria.getText().toString()));
         personaje.setCarisma(Integer.parseInt(editCarisma.getText().toString()));
         personaje.setBonoCompetencia(Integer.parseInt(editCompetencia.getText().toString()));
-        personaje.setFoto(editFoto.getText().toString());
 
         PersonajeControlador personajeControlador = new PersonajeControlador(this);
         personajeControlador.crearPersonaje(personaje, new PersonajeControlador.OnPersonajeCreadoListener() {
             @Override
             public void onPersonajeCreado(String mensaje) {
                 Toast.makeText(configPersonaje.this, mensaje, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(configPersonaje.this, Personajes.class);
+                startActivity(intent);
                 finish();
             }
 

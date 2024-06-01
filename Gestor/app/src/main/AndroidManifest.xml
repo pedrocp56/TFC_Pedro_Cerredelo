@@ -24,6 +24,21 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ArmasPersonaje"
+            android:exported="false" />
+        <activity
+            android:name=".item.item_ArmaPersonaje"
+            android:exported="false" />
+        <activity
+            android:name=".item.item_arma"
+            android:exported="true" />
+        <activity
+            android:name=".VerArma"
+            android:exported="true" />
+        <activity
+            android:name=".VerPersonaje"
+            android:exported="true" />
+        <activity
             android:name=".configPersonaje"
             android:exported="true" />
         <activity
@@ -33,7 +48,7 @@
             android:name=".Personajes"
             android:exported="true" />
         <activity
-            android:name=".Campanhas"
+            android:name=".Armas"
             android:exported="true" />
         <activity
             android:name=".Perfil"

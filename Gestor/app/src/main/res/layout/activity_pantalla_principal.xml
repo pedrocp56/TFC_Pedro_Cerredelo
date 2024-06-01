@@ -30,7 +30,7 @@
                     android:id="@+id/user_icon"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/sinimagen"
+                    android:src="@drawable/camara"
                     android:layout_marginEnd="8dp"/>
                 <!-- Menú desplegable -->
                 <Spinner
@@ -54,18 +54,18 @@
             android:gravity="center_horizontal"
             android:layout_marginTop="8dp">
 
-                <!-- Botón de Campañas -->
+                <!-- Botón de Armas -->
                 <Button
-                    android:id="@+id/campaigns_button"
+                    android:id="@+id/armas_button"
                     style="@style/ButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Campañas"
+                    android:text="Armas"
                     android:layout_marginEnd="8dp"/>
 
                 <!-- Botón de Personajes -->
                 <Button
-                    android:id="@+id/characters_button"
+                    android:id="@+id/personajes_button"
                     style="@style/ButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

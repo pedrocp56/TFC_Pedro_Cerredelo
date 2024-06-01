@@ -19,8 +19,9 @@ public class Usuario {
     @Column(name = "Estado", length = 100)
     private String estado;
 
-    @Column(name = "Foto", length = 255)
-    private String foto;
+    @Lob
+    @Column(name = "Foto")
+    private byte[] foto;
 
     public Long getId() {
         return id;
@@ -54,11 +55,11 @@ public class Usuario {
         this.estado = estado;
     }
 
-    public String getFoto() {
+    public byte[] getFoto() {
         return foto;
     }
 
-    public void setFoto(String foto) {
+    public void setFoto(byte[] foto) {
         this.foto = foto;
     }
 }

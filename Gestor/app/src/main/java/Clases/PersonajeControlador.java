@@ -62,16 +62,15 @@ public class PersonajeControlador {
         queue.add(jsonArrayRequest);
     }
 
-    // Interfaz para manejar la devolución de llamada cuando la lista de personajes ha sido cargada
     public interface OnListaPersonajesCargadaListener {
         void onListaPersonajesCargada(List<Personaje> personajes);
         void onError(String mensajeError);
     }
 
-    public void eliminarPersonaje(final Personaje personaje, final OnPersonajeEliminadoListener listener) {
-        String url = "http://192.168.1.33:8080/Personajes/eliminarPersonaje/" + personaje.getPersonajeId();
+    public void eliminarPersonaje(final long usuarioId, final long personajeId, final OnPersonajeEliminadoListener listener) {
+        String url = "http://192.168.1.33:8080/Personajes/eliminarPersonaje?usuarioId=" + usuarioId + "&personajeId=" + personajeId;
 
-        // Crear una solicitud POST para eliminar el personaje
+        // Crear una solicitud DELETE para eliminar el personaje
         StringRequest stringRequest = new StringRequest(Request.Method.DELETE, url,
                 new Response.Listener<String>() {
                     @Override
@@ -84,7 +83,8 @@ public class PersonajeControlador {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Mostrar mensaje de error al no poder realizar la solicitud
-                        listener.onError("Error al eliminar el personaje");                    }
+                        listener.onError("Error al eliminar el personaje");
+                    }
                 });
 
         // Agregar la solicitud a la cola de solicitudes de Volley
@@ -96,8 +96,8 @@ public class PersonajeControlador {
         void onError(String mensajeError);
     }
 
-    public void buscarPersonaje(final Long personajeID, final OnPersonajeEncontradoListener listener) {
-        String url = "http://192.168.1.33:8080/Personajes/buscarPersonaje/" + personajeID;
+    public void buscarPersonaje(final long usuarioId, final long personajeId, final OnPersonajeEncontradoListener listener) {
+        String url = "http://192.168.1.33:8080/Personajes/buscarPersonaje?usuarioId=" + usuarioId + "&personajeId=" + personajeId;
 
         // Crear una solicitud GET para buscar el personaje
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -134,12 +134,14 @@ public class PersonajeControlador {
         void onError(String mensajeError);
     }
 
-    public void actualizarPersonaje(final long personajeId, final Personaje personaje, final OnPersonajeActualizadoListener listener) {
-        String url = "http://192.168.1.33:8080/Personajes/actualizarPersonaje/" + personajeId;
+    public void actualizarPersonaje(final long usuarioId, final long personajeId, final Personaje personaje, final OnPersonajeActualizadoListener listener) {
+        String url = "http://192.168.1.33:8080/Personajes/actualizarPersonaje?usuarioId=" + usuarioId + "&personajeId=" + personajeId;
 
         // Convertir el objeto Personaje a JSON
         JSONObject personajeJson = new JSONObject();
         try {
+            personajeJson.put("personajeId", personaje.getPersonajeId());
+            personajeJson.put("usuarioId", usuarioId);
             personajeJson.put("personajeNombre", personaje.getNombre());
             personajeJson.put("caracteristicaFuerza", personaje.getFuerza());
             personajeJson.put("caracteristicaDestreza", personaje.getDestreza());
@@ -185,6 +187,8 @@ public class PersonajeControlador {
         // Convertir el objeto Personaje a JSON
         JSONObject personajeJson = new JSONObject();
         try {
+            personajeJson.put("personajeId", personaje.getPersonajeId());
+            personajeJson.put("usuarioId", personaje.getUsuarioId());
             personajeJson.put("personajeNombre", personaje.getNombre());
             personajeJson.put("caracteristicaFuerza", personaje.getFuerza());
             personajeJson.put("caracteristicaDestreza", personaje.getDestreza());
@@ -223,7 +227,6 @@ public class PersonajeControlador {
         void onPersonajeCreado(String mensaje);
         void onError(String mensajeError);
     }
-
-
 }
+
 

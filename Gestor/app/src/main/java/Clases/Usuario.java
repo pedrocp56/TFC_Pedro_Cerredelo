@@ -10,9 +10,9 @@ public class Usuario implements Serializable {
         private String nombre;
         private String contrasenha;
         private String estado;
-        private String foto;
+        private byte[] foto;
 
-    public Usuario(long id, String nombre, String contrasenha, String estado, String foto) {
+    public Usuario(long id, String nombre, String contrasenha, String estado, byte[] foto) {
         this.id = id;
         this.nombre = nombre;
         this.contrasenha = contrasenha;
@@ -25,7 +25,7 @@ public class Usuario implements Serializable {
         this.nombre = obj.getString("nombre");
         this.contrasenha = obj.getString("contrasenha");
         this.estado = obj.optString("estado", ""); // Usar optString para manejar valores null
-        this.foto = obj.optString("foto", null); // Usar optString para manejar valores null
+        this.foto = obj.optString("foto", null).getBytes(); // Usar optString para manejar valores null
     }
 
     public Long getId() {
@@ -60,11 +60,11 @@ public class Usuario implements Serializable {
         this.estado = estado;
     }
 
-    public String getFoto() {
+    public byte[] getFoto() {
         return foto;
     }
 
-    public void setFoto(String foto) {
+    public void setFoto(byte[] foto) {
         this.foto = foto;
     }
 

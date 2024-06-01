@@ -48,7 +48,7 @@ public class Perfil extends AppCompatActivity {
     private Button btnCambiarFoto;
     private RequestQueue queue;
     private ActivityResultLauncher<Intent> someActivityResultLauncher;
-    private String imagen;
+    private byte[] imagen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +90,7 @@ public class Perfil extends AppCompatActivity {
                             if (data != null) {
                                 Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                                 ivPerfilFoto.setImageBitmap(bitmap);
-                                imagen = ImagenUtils.bitmapToBase64(bitmap);
+                                imagen = ImagenUtils.bitmapToByteArray(bitmap);
                             }
                         }
                     }
@@ -153,7 +153,7 @@ public class Perfil extends AppCompatActivity {
         actualizarDatosUsuario(estado, nuevaContrasena, imagen);
     }
 
-    private void actualizarDatosUsuario(String estado, String contrasena, String foto) {
+    private void actualizarDatosUsuario(String estado, String contrasena, byte[] foto) {
         // Obtener el ID del usuario almacenado en SharedPreferences
         SharedPreferences sharedPref = getSharedPreferences("UserPref", Context.MODE_PRIVATE);
         long userId = sharedPref.getLong("userId", -1);
@@ -193,7 +193,7 @@ public class Perfil extends AppCompatActivity {
                                 // Si la actualización fue exitosa
                                 Toast.makeText(Perfil.this, "Datos actualizados exitosamente", Toast.LENGTH_SHORT).show();
                                 // Actualizar los datos en SharedPreferences
-                                guardarDatosEnSharedPreferences(estado, userData.getString("contrasenha"), foto);
+                                guardarDatosEnSharedPreferences(estado, userData.getString("contrasenha"));
                             } else {
                                 // Si hubo un error en la actualización
                                 Toast.makeText(Perfil.this, "Error al actualizar los datos", Toast.LENGTH_SHORT).show();
@@ -218,12 +218,11 @@ public class Perfil extends AppCompatActivity {
 
 
 
-    private void guardarDatosEnSharedPreferences(String estado, String contrasena, String foto) {
+    private void guardarDatosEnSharedPreferences(String estado, String contrasena) {
         SharedPreferences sharedPref = getSharedPreferences("UserPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("userEstado", estado);
         editor.putString("userContrasenha", contrasena);
-        editor.putString("userFoto", foto);
         editor.apply();
     }
 }
