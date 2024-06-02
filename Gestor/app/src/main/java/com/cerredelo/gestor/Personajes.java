@@ -64,7 +64,7 @@ public class Personajes extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Agregar lógica para abrir la actividad para crear un nuevo personaje
-                Intent intent = new Intent(Personajes.this, configPersonaje.class);
+                Intent intent = new Intent(Personajes.this, ConfigPersonaje.class);
                 startActivity(intent);
                 finish();
             }
@@ -91,6 +91,7 @@ public class Personajes extends AppCompatActivity {
         personajeControlador.cargarListaPersonajes(userId, new PersonajeControlador.OnListaPersonajesCargadaListener() {
             @Override
             public void onListaPersonajesCargada(List<Personaje> personajes) {
+                Toast.makeText(Personajes.this, personajes.toString(), Toast.LENGTH_SHORT).show();
                 actualizarListView(personajes);
             }
             @Override
@@ -121,7 +122,7 @@ public class Personajes extends AppCompatActivity {
                     public void onClick(View v) {
                         // Lógica para ver el personaje
                         Intent intent = new Intent(Personajes.this, VerPersonaje.class);
-                        intent.putExtra("personajeId",personaje.getPersonajeId());
+                        intent.putExtra("personajeId", personaje.getPersonajeId());
                         startActivity(intent);
                         finish();
                     }
@@ -131,9 +132,9 @@ public class Personajes extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         // Lógica para editar el personaje
-                        Intent intent = new Intent(Personajes.this, configPersonaje.class);
-                        // Pasar el objeto Personaje a la actividad configPersonaje
-                        intent.putExtra("personajeId",personaje.getPersonajeId());
+                        Intent intent = new Intent(Personajes.this, ConfigPersonaje.class);
+                        // Pasar el objeto Personaje a la actividad ConfigPersonaje
+                        intent.putExtra("personajeId", personaje.getPersonajeId());
                         startActivity(intent);
                         finish();
                     }
@@ -158,7 +159,7 @@ public class Personajes extends AppCompatActivity {
     private void mostrarDialogoEliminar(final Personaje personaje) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Eliminar Personaje");
-        builder.setMessage("¿Estás seguro de que quieres eliminar el personaje '" + personaje.getNombre() + "'?");
+        builder.setMessage("¿Estás seguro de que quieres eliminar el personaje '" + personaje.getNombre() + "'? Tambien se eliminaran todas las armas que el personaje tiene asociadas.");
 
         // Agregar el botón "Sí" para confirmar la eliminación
         builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
@@ -197,6 +198,6 @@ public class Personajes extends AppCompatActivity {
             }
         });
     }
-
 }
+
 

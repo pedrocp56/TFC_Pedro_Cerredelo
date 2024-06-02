@@ -1,7 +1,5 @@
 package com.cerredelo.gestor;
 
-import static Clases.ImagenUtils.base64ToBitmap;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,23 +12,19 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.cerredelo.gestor.Personajes;
-import com.cerredelo.gestor.R;
-
-import java.io.Serializable;
-
 import Clases.Personaje;
 import Clases.PersonajeControlador;
 import Clases.Usuario;
 import Clases.UsuarioControlador;
 
-public class configPersonaje extends AppCompatActivity {
+public class ConfigPersonaje extends AppCompatActivity {
 
     // Declaración de EditText
     EditText editNombre, editFuerza, editDestreza, editConstitucion, editInteligencia, editSabiduria, editCarisma, editCompetencia, editFoto;
     TextView textNombreUsuario;
     boolean DatosPrecargados;
     Usuario user;
+    Long userId;
     Personaje personaje;
 
     private UsuarioControlador usuarioControlador;
@@ -71,14 +65,14 @@ public class configPersonaje extends AppCompatActivity {
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(configPersonaje.this,"boton pulsado",Toast.LENGTH_SHORT);
+                Toast.makeText(ConfigPersonaje.this,"boton pulsado",Toast.LENGTH_SHORT);
                 if (DatosPrecargados) {
                     // Actualizar
-                    Toast.makeText(configPersonaje.this,"Actualizar",Toast.LENGTH_SHORT);
+                    Toast.makeText(ConfigPersonaje.this,"Actualizar",Toast.LENGTH_SHORT);
                     actualizarPersonaje();
                 } else {
                     // Crear
-                    Toast.makeText(configPersonaje.this,"Crear",Toast.LENGTH_SHORT);
+                    Toast.makeText(ConfigPersonaje.this,"Crear",Toast.LENGTH_SHORT);
                     crearPersonaje();
                 }
             }
@@ -90,7 +84,7 @@ public class configPersonaje extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Lógica para volver a la vista de Personajes
-                Intent intent = new Intent(configPersonaje.this, Personajes.class);
+                Intent intent = new Intent(ConfigPersonaje.this, Personajes.class);
                 startActivity(intent);
                 finish();
             }
@@ -109,7 +103,7 @@ public class configPersonaje extends AppCompatActivity {
 
             @Override
             public void onError(String mensajeError) {
-                Toast.makeText(configPersonaje.this, mensajeError, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ConfigPersonaje.this, mensajeError, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -127,32 +121,30 @@ public class configPersonaje extends AppCompatActivity {
     }
 
     private void actualizarPersonaje() {
-        Personaje personaje = new Personaje();
-        personaje.setPersonajeId(personaje.getPersonajeId());
-        personaje.setNombre(editNombre.getText().toString());
-        personaje.setUsuario(user);
-        personaje.setFuerza(Integer.parseInt(editFuerza.getText().toString()));
-        personaje.setDestreza(Integer.parseInt(editDestreza.getText().toString()));
-        personaje.setConstitucion(Integer.parseInt(editConstitucion.getText().toString()));
-        personaje.setInteligencia(Integer.parseInt(editInteligencia.getText().toString()));
-        personaje.setSabiduria(Integer.parseInt(editSabiduria.getText().toString()));
-        personaje.setCarisma(Integer.parseInt(editCarisma.getText().toString()));
-        personaje.setBonoCompetencia(Integer.parseInt(editCompetencia.getText().toString()));
+        Personaje p = new Personaje();
+        p.setNombre(editNombre.getText().toString());
+        p.setFuerza(Integer.parseInt(editFuerza.getText().toString()));
+        p.setDestreza(Integer.parseInt(editDestreza.getText().toString()));
+        p.setConstitucion(Integer.parseInt(editConstitucion.getText().toString()));
+        p.setInteligencia(Integer.parseInt(editInteligencia.getText().toString()));
+        p.setSabiduria(Integer.parseInt(editSabiduria.getText().toString()));
+        p.setCarisma(Integer.parseInt(editCarisma.getText().toString()));
+        p.setBonoCompetencia(Integer.parseInt(editCompetencia.getText().toString()));
 
         PersonajeControlador personajeControlador = new PersonajeControlador(this);
-        Toast.makeText(configPersonaje.this, personaje.toString(), Toast.LENGTH_LONG).show();
-        personajeControlador.actualizarPersonaje(personaje.getPersonajeId(), personaje, new PersonajeControlador.OnPersonajeActualizadoListener() {
+        Toast.makeText(ConfigPersonaje.this, p.toString(), Toast.LENGTH_LONG).show();
+        personajeControlador.actualizarPersonaje(personaje.getPersonajeId(),p, new PersonajeControlador.OnPersonajeActualizadoListener() {
             @Override
             public void onPersonajeActualizado(String mensaje) {
-                Toast.makeText(configPersonaje.this, mensaje, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(configPersonaje.this, Personajes.class);
+                Toast.makeText(ConfigPersonaje.this, mensaje, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(ConfigPersonaje.this, Personajes.class);
                 startActivity(intent);
                 finish();
             }
 
             @Override
             public void onError(String mensajeError) {
-                Toast.makeText(configPersonaje.this, mensajeError, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ConfigPersonaje.this, mensajeError, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -161,7 +153,6 @@ public class configPersonaje extends AppCompatActivity {
         Personaje personaje = new Personaje();
         //personaje.setPersonajeId();
         personaje.setNombre(editNombre.getText().toString());
-        personaje.setUsuario(user);
         personaje.setFuerza(Integer.parseInt(editFuerza.getText().toString()));
         personaje.setDestreza(Integer.parseInt(editDestreza.getText().toString()));
         personaje.setConstitucion(Integer.parseInt(editConstitucion.getText().toString()));
@@ -171,18 +162,18 @@ public class configPersonaje extends AppCompatActivity {
         personaje.setBonoCompetencia(Integer.parseInt(editCompetencia.getText().toString()));
 
         PersonajeControlador personajeControlador = new PersonajeControlador(this);
-        personajeControlador.crearPersonaje(personaje, new PersonajeControlador.OnPersonajeCreadoListener() {
+        personajeControlador.crearPersonaje(userId,personaje, new PersonajeControlador.OnPersonajeCreadoListener() {
             @Override
             public void onPersonajeCreado(String mensaje) {
-                Toast.makeText(configPersonaje.this, mensaje, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(configPersonaje.this, Personajes.class);
+                Toast.makeText(ConfigPersonaje.this, mensaje, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(ConfigPersonaje.this, Personajes.class);
                 startActivity(intent);
                 finish();
             }
 
             @Override
             public void onError(String mensajeError) {
-                Toast.makeText(configPersonaje.this, mensajeError, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ConfigPersonaje.this, mensajeError, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -192,14 +183,14 @@ public class configPersonaje extends AppCompatActivity {
         SharedPreferences sharedPref = getSharedPreferences("UserPref", Context.MODE_PRIVATE);
 
         // Recuperar los datos del usuario
-        Long userID = sharedPref.getLong("userId", 0);
+        userId = sharedPref.getLong("userId", 0);
         String userName = sharedPref.getString("userName", "");
 
         // Asignar el nombre de usuario recuperado a la vista (esto se puede hacer inmediatamente)
         textNombreUsuario.setText(userName);
 
         // Buscar el usuario completo en el servidor
-        usuarioControlador.buscarUsuario(userID, new UsuarioControlador.OnUsuarioEncontradoListener() {
+        usuarioControlador.buscarUsuario(userId, new UsuarioControlador.OnUsuarioEncontradoListener() {
             @Override
             public void onUsuarioEncontrado(Usuario usuario) {
                 user = usuario;

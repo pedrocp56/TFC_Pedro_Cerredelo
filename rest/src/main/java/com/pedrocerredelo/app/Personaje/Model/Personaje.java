@@ -120,4 +120,6 @@ public class Personaje {
     public void setFoto(byte[] foto) {
         this.foto = foto;
     }
+
+
 }

@@ -37,8 +37,13 @@ public class ArmaPersonajeController {
     }
 
     @PostMapping(Variables.ARMA_PERSONAJE_SAVE)
-    public ResponseEntity<ArmaPersonaje> addArmaPersonaje(@RequestBody ArmaPersonaje armaPersonaje) {
+    public ResponseEntity<ArmaPersonaje> addArmaPersonaje(
+            @PathVariable Long armaId,
+            @PathVariable Long personajeId,
+            @PathVariable Long usuarioId,
+            @RequestBody ArmaPersonaje armaPersonaje) {
         try {
+            armaPersonaje.setId(new ArmaPersonajePK(armaId, personajeId, usuarioId));
             ArmaPersonaje createdArmaPersonaje = armaPersonajeRepository.save(armaPersonaje);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdArmaPersonaje);
         } catch (Exception e) {
@@ -47,8 +52,12 @@ public class ArmaPersonajeController {
     }
 
     @PutMapping(Variables.ARMA_PERSONAJE_UPDATE)
-    public ResponseEntity<ArmaPersonaje> update(@RequestBody ArmaPersonaje armaPersonaje) {
-        ArmaPersonajePK id = new ArmaPersonajePK(armaPersonaje.getId().getArmaId(), armaPersonaje.getId().getPersonajeId(), armaPersonaje.getId().getUsuarioId());
+    public ResponseEntity<ArmaPersonaje> update(
+            @PathVariable Long armaId,
+            @PathVariable Long personajeId,
+            @PathVariable Long usuarioId,
+            @RequestBody ArmaPersonaje armaPersonaje) {
+        ArmaPersonajePK id = new ArmaPersonajePK(armaId,personajeId,usuarioId);
         Optional<ArmaPersonaje> existingArmaPersonaje = armaPersonajeRepository.findById(id);
         if (existingArmaPersonaje.isPresent()) {
             ArmaPersonaje updatedArmaPersonaje = armaPersonajeRepository.save(armaPersonaje);

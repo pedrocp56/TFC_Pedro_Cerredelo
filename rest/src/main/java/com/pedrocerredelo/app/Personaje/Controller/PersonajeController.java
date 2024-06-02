@@ -46,8 +46,9 @@ public class PersonajeController {
     }
 
     @PostMapping(Variables.PERSONAJE_SAVE)
-    public ResponseEntity<?> guardarPersonaje(@RequestBody Personaje personaje) {
+    public ResponseEntity<?> guardarPersonaje(@PathVariable Long usuarioId,@RequestBody Personaje personaje) {
         try {
+            personaje.setId(new PersonajePK(null,usuarioId));
             personajeRepository.save(personaje);
             return ResponseEntity.ok().body("{\"success\": true}");
         } catch (Exception e) {
@@ -57,13 +58,18 @@ public class PersonajeController {
     }
 
     @PutMapping(Variables.PERSONAJE_UPDATE)
-    public ResponseEntity<Personaje> actualizarPersonaje( @RequestBody Personaje personaje) {
+    public ResponseEntity<Personaje> actualizarPersonaje(@PathVariable Long personajeId, @RequestBody Personaje personaje) {
         try {
-            PersonajePK id = new PersonajePK(personaje.getId().getPersonajeId(), personaje.getId().getUsuarioId());
-            Personaje personajeExistente = personajeRepository.findById(id)
-                    .orElseThrow(() -> new RuntimeException("Personaje no encontrado"));
+            // Buscar el personaje existente en la base de datos
+            Personaje personajeExistente = personajeRepository.findByIdPersonajeId(personajeId);
 
-            // Actualizar los campos del personaje
+            // Verificar si el personaje existe
+            if (personajeExistente == null) {
+                // Devolver un error si el personaje no existe
+                return ResponseEntity.notFound().build();
+            }
+
+            // Actualizar los campos del personaje existente con los valores proporcionados
             personajeExistente.setPersonajeNombre(personaje.getPersonajeNombre());
             personajeExistente.setCaracteristicaFuerza(personaje.getCaracteristicaFuerza());
             personajeExistente.setCaracteristicaDestreza(personaje.getCaracteristicaDestreza());
@@ -81,10 +87,10 @@ public class PersonajeController {
             return ResponseEntity.ok(personajeExistente);
         } catch (Exception e) {
             // Si ocurre algún error, devuelve una respuesta de error con el mensaje correspondiente
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(null); // Aquí podrías devolver un objeto ResponseEntity con un mensaje de error específico si lo deseas
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
 
     @DeleteMapping(Variables.PERSONAJE_DELETE)
     public ResponseEntity<String> eliminarPersonaje(@PathVariable Long usuarioId, @PathVariable Long personajeId) {

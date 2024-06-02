@@ -1,7 +1,6 @@
 package Clases;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -11,8 +10,6 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.cerredelo.gestor.Personajes;
-import com.cerredelo.gestor.configPersonaje;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -68,7 +65,7 @@ public class PersonajeControlador {
     }
 
     public void eliminarPersonaje(final long usuarioId, final long personajeId, final OnPersonajeEliminadoListener listener) {
-        String url = "http://192.168.1.33:8080/Personajes/eliminarPersonaje?usuarioId=" + usuarioId + "&personajeId=" + personajeId;
+        String url = "http://192.168.1.33:8080/Personajes/eliminarPersonaje/" + usuarioId + "/" + personajeId;
 
         // Crear una solicitud DELETE para eliminar el personaje
         StringRequest stringRequest = new StringRequest(Request.Method.DELETE, url,
@@ -96,8 +93,8 @@ public class PersonajeControlador {
         void onError(String mensajeError);
     }
 
-    public void buscarPersonaje(final long usuarioId, final long personajeId, final OnPersonajeEncontradoListener listener) {
-        String url = "http://192.168.1.33:8080/Personajes/buscarPersonaje?usuarioId=" + usuarioId + "&personajeId=" + personajeId;
+    public void buscarPersonaje(final long personajeId, final OnPersonajeEncontradoListener listener) {
+        String url = "http://192.168.1.33:8080/Personajes/buscarPersonajeById/" + personajeId;
 
         // Crear una solicitud GET para buscar el personaje
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -134,14 +131,12 @@ public class PersonajeControlador {
         void onError(String mensajeError);
     }
 
-    public void actualizarPersonaje(final long usuarioId, final long personajeId, final Personaje personaje, final OnPersonajeActualizadoListener listener) {
-        String url = "http://192.168.1.33:8080/Personajes/actualizarPersonaje?usuarioId=" + usuarioId + "&personajeId=" + personajeId;
+    public void actualizarPersonaje(final long personajeId,final Personaje personaje, final OnPersonajeActualizadoListener listener) {
+        String url = "http://192.168.1.33:8080/Personajes/actualizarPersonaje/"+ personajeId;
 
         // Convertir el objeto Personaje a JSON
         JSONObject personajeJson = new JSONObject();
         try {
-            personajeJson.put("personajeId", personaje.getPersonajeId());
-            personajeJson.put("usuarioId", usuarioId);
             personajeJson.put("personajeNombre", personaje.getNombre());
             personajeJson.put("caracteristicaFuerza", personaje.getFuerza());
             personajeJson.put("caracteristicaDestreza", personaje.getDestreza());
@@ -150,7 +145,9 @@ public class PersonajeControlador {
             personajeJson.put("caracteristicaSabiduria", personaje.getSabiduria());
             personajeJson.put("caracteristicaCarisma", personaje.getCarisma());
             personajeJson.put("bonoCompetencia", personaje.getBonoCompetencia());
-            personajeJson.put("foto", personaje.getFoto());
+            if (personaje.getFoto() != null) {
+                //personajeJson.put("foto", new String(personaje.getFoto()));
+            }
         } catch (JSONException e) {
             e.printStackTrace();
             listener.onError("Error al crear JSON para el personaje");
@@ -181,14 +178,12 @@ public class PersonajeControlador {
         void onError(String mensajeError);
     }
 
-    public void crearPersonaje(final Personaje personaje, final OnPersonajeCreadoListener listener) {
-        String url = "http://192.168.1.33:8080/Personajes/guardarPersonaje";
+    public void crearPersonaje(final Long usuarioId,final Personaje personaje, final OnPersonajeCreadoListener listener) {
+        String url = "http://192.168.1.33:8080/Personajes/guardarPersonaje/"+usuarioId;
 
         // Convertir el objeto Personaje a JSON
         JSONObject personajeJson = new JSONObject();
         try {
-            personajeJson.put("personajeId", personaje.getPersonajeId());
-            personajeJson.put("usuarioId", personaje.getUsuarioId());
             personajeJson.put("personajeNombre", personaje.getNombre());
             personajeJson.put("caracteristicaFuerza", personaje.getFuerza());
             personajeJson.put("caracteristicaDestreza", personaje.getDestreza());
@@ -197,7 +192,9 @@ public class PersonajeControlador {
             personajeJson.put("caracteristicaSabiduria", personaje.getSabiduria());
             personajeJson.put("caracteristicaCarisma", personaje.getCarisma());
             personajeJson.put("bonoCompetencia", personaje.getBonoCompetencia());
-            personajeJson.put("foto", personaje.getFoto());
+            if (personaje.getFoto() != null) {
+                //personajeJson.put("foto", new String(personaje.getFoto()));
+            }
         } catch (JSONException e) {
             e.printStackTrace();
             listener.onError("Error al crear JSON para el personaje");
@@ -228,5 +225,6 @@ public class PersonajeControlador {
         void onError(String mensajeError);
     }
 }
+
 
 

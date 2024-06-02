@@ -49,7 +49,7 @@ public class ArmasPersonaje extends AppCompatActivity {
                 personajeId = perId;
             }else{
                 Toast.makeText(ArmasPersonaje.this, "Error personaje no encontrado", Toast.LENGTH_SHORT).show();
-                Intent intent2 = new Intent(ArmasPersonaje.this, VerPersonaje.class);
+                Intent intent2 = new Intent(ArmasPersonaje.this, Personajes.class);
                 startActivity(intent2);
                 finish();
             }
@@ -77,6 +77,7 @@ public class ArmasPersonaje extends AppCompatActivity {
             public void onClick(View v) {
                 // Finalizar esta actividad y volver al perfil del personaje
                 Intent intent = new Intent(ArmasPersonaje.this, VerPersonaje.class);
+                intent.putExtra("personajeId",personajeId);
                 startActivity(intent);
                 finish();
             }

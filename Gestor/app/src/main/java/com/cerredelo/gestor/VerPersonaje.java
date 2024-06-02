@@ -98,7 +98,8 @@ public class VerPersonaje extends AppCompatActivity {
         });
     }
     private void mostrarPersonaje() {
-        txtNombreUsuario.setText(p.getUsuario().getNombre());
+        //cambiar al nombre
+        txtNombreUsuario.setText(String.valueOf(p.getUsuarioId()));
         txtNombre.setText(p.getNombre());
         txtFuerza.setText(String.valueOf(p.getFuerza()));
         txtBonoFuerza.setText(String.valueOf((int)Math.floor((p.getFuerza() - 10) / 2)));

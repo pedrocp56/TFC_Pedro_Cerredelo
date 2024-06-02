@@ -39,7 +39,7 @@
             android:name=".VerPersonaje"
             android:exported="true" />
         <activity
-            android:name=".configPersonaje"
+            android:name=".ConfigPersonaje"
             android:exported="true" />
         <activity
             android:name=".item.item_personaje"

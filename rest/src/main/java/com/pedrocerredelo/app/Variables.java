@@ -38,15 +38,15 @@ public class Variables {
     public static final String PERSONAJE_SEARCH_BY_USER = "/buscarPersonajesPorUsuario/{usuarioId}";
     public static final String PERSONAJE_SEARCH_BY_NAME = "/buscarPersonajeByName";
     public static final String PERSONAJE_SEARCH_BY_ID = "/buscarPersonajeById/{personajeId}";
-    public static final String PERSONAJE_SAVE = "/guardarPersonaje";
-    public static final String PERSONAJE_UPDATE = "/actualizarPersonaje";
+    public static final String PERSONAJE_SAVE = "/guardarPersonaje/{usuarioId}";
+    public static final String PERSONAJE_UPDATE = "/actualizarPersonaje/{personajeId}";
     public static final String PERSONAJE_DELETE = "/eliminarPersonaje/{usuarioId}/{personajeId}";
 
     // Definición de las rutas de la API para las operaciones relacionadas con la relación Arma-Personaje
     public static final String ARMA_PERSONAJE_BASE_PATH = "/ArmaPersonaje";
     public static final String ARMA_PERSONAJE_GET_ALL = "/verArmaPersonajes";
-    public static final String ARMA_PERSONAJE_SAVE = "/guardarArmaPersonaje";
-    public static final String ARMA_PERSONAJE_UPDATE = "/actualizarArmaPersonaje";
+    public static final String ARMA_PERSONAJE_SAVE = "/guardarArmaPersonaje/{armaId}/{personajeId}/{usuarioId}";
+    public static final String ARMA_PERSONAJE_UPDATE = "/actualizarArmaPersonaje/{armaId}/{personajeId}/{usuarioId}";
     public static final String ARMA_PERSONAJE_SEARCH_BY_IDS = "/buscarArma/{armaId}/{personajeId}/{usuarioId}";
     public static final String ARMA_PERSONAJE_SEARCH_BY_PERSONAJE = "/buscarArmaPersonajePorPersonaje/{personajeId}";
     public static final String ARMA_PERSONAJE_DELETE = "/eliminarArmaPersonaje/{armaId}/{personajeId}/{usuarioId}";
