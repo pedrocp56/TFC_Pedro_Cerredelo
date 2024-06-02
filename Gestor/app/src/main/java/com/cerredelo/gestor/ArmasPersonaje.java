@@ -23,12 +23,14 @@ import java.util.List;
 
 import Clases.Arma;
 import Clases.ArmaControlador;
+import Clases.ArmaPersonaje;
 import Clases.ArmaPersonajeControlador;
 
 public class ArmasPersonaje extends AppCompatActivity {
     private ArmaPersonajeControlador armaPersonajeControlador;
     private ListView listViewArmasPersonaje;
     private long personajeId;
+    private String personajeNombre, armaNombre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,26 +46,27 @@ public class ArmasPersonaje extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null) {
             Long perId = intent.getLongExtra("personajeId", 0);
+            personajeNombre = intent.getStringExtra("personajeNombre");
             if (perId != 0) {
                 // Buscar y mostrar los datos del personaje
                 personajeId = perId;
-            }else{
-                Toast.makeText(ArmasPersonaje.this, "Error personaje no encontrado", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(ArmasPersonaje.this, "Error: personaje no encontrado", Toast.LENGTH_SHORT).show();
                 Intent intent2 = new Intent(ArmasPersonaje.this, Personajes.class);
                 startActivity(intent2);
                 finish();
             }
         }
 
-        // Configurar botón para agregar un nueva arma al personaje
+        // Configurar botón para agregar una nueva arma al personaje
         Button btnNuevaArmaPersonaje = findViewById(R.id.btnNuevaArmaPersonaje);
         btnNuevaArmaPersonaje.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Agregar lógica para abrir la actividad para crear una nueva arma para el personaje
+                // Lógica para abrir la actividad para crear una nueva arma para el personaje
                 /*
                 Intent intent = new Intent(ArmasPersonaje.this, NuevaArmaPersonaje.class);
-                intent.putExtra("personajeId",p.getPersonajeId());
+                intent.putExtra("personajeId", personajeId);
                 startActivity(intent);
                 */
                 finish();
@@ -77,7 +80,7 @@ public class ArmasPersonaje extends AppCompatActivity {
             public void onClick(View v) {
                 // Finalizar esta actividad y volver al perfil del personaje
                 Intent intent = new Intent(ArmasPersonaje.this, VerPersonaje.class);
-                intent.putExtra("personajeId",personajeId);
+                intent.putExtra("personajeId", personajeId);
                 startActivity(intent);
                 finish();
             }
@@ -89,10 +92,9 @@ public class ArmasPersonaje extends AppCompatActivity {
 
     // Método para cargar la lista de armas del personaje
     private void cargarListaArmasPersonaje() {
-        /*
         armaPersonajeControlador.cargarListaArmasPersonaje(personajeId, new ArmaPersonajeControlador.OnListaArmasPersonajeCargadaListener() {
             @Override
-            public void onListaArmasPersonajeCargada(List<Arma> armasPersonaje) {
+            public void onListaArmasPersonajeCargada(List<ArmaPersonaje> armasPersonaje) {
                 actualizarListView(armasPersonaje);
             }
 
@@ -101,11 +103,10 @@ public class ArmasPersonaje extends AppCompatActivity {
                 Toast.makeText(ArmasPersonaje.this, mensajeError, Toast.LENGTH_SHORT).show();
             }
         });
-         */
     }
 
-    private void actualizarListView(List<Arma> armasPersonaje) {
-        ArrayAdapter<Arma> adapter = new ArrayAdapter<Arma>(this, android.R.layout.simple_list_item_1, armasPersonaje) {
+    private void actualizarListView(List<ArmaPersonaje> armasPersonaje) {
+        ArrayAdapter<ArmaPersonaje> adapter = new ArrayAdapter<ArmaPersonaje>(this, android.R.layout.simple_list_item_1, armasPersonaje) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 if (convertView == null) {
@@ -117,15 +118,21 @@ public class ArmasPersonaje extends AppCompatActivity {
                 Button btnEditar = convertView.findViewById(R.id.btnEditarArmaPersonaje);
                 Button btnEliminar = convertView.findViewById(R.id.btnEliminarArmaPersonaje);
 
-                final Arma arma = getItem(position);
-                nombreTextView.setText(arma.getNombre());
+                final ArmaPersonaje armaPersonaje = getItem(position);
+                //busacar nombre del arma
+                //no funciona bien
+                buscarArma(armaPersonaje.getArmaId());
+                nombreTextView.setText(armaNombre);
 
                 btnVer.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         // Lógica para ver la información detallada del arma
-                        Intent intent = new Intent(ArmasPersonaje.this, VerArma.class);
-                        intent.putExtra("armaId", arma.getId());
+                        Intent intent = new Intent(ArmasPersonaje.this, VerArmaPersonaje.class);
+                        intent.putExtra("personajeId",personajeId);
+                        intent.putExtra("armaId", armaPersonaje.getArmaId());
+                        intent.putExtra("personajeNombre",personajeNombre);
+                        intent.putExtra("armaNombre",armaNombre);
                         startActivity(intent);
                     }
                 });
@@ -142,7 +149,7 @@ public class ArmasPersonaje extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         // Lógica para eliminar el arma del personaje
-                        mostrarDialogoEliminar(arma);
+                        mostrarDialogoEliminar(armaPersonaje);
                     }
                 });
 
@@ -153,22 +160,39 @@ public class ArmasPersonaje extends AppCompatActivity {
         listViewArmasPersonaje.setAdapter(adapter);
     }
 
+    private void buscarArma(Long armaId) {
+        ArmaControlador armaControlador = new ArmaControlador(this);
+        armaControlador.buscarArma(armaId, new ArmaControlador.OnArmaEncontradaListener() {
+
+            @Override
+            public void onArmaEncontrada(Arma arma) {
+                armaNombre=arma.getNombre();
+            }
+
+            @Override
+            public void onError(String mensajeError) {
+                // Manejar el error si no se puede encontrar el personaje
+                Toast.makeText(ArmasPersonaje.this, mensajeError, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     // Método para mostrar el diálogo de confirmación de eliminación
-    private void mostrarDialogoEliminar(final Arma arma) {
+    private void mostrarDialogoEliminar(final ArmaPersonaje armaPersonaje) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Eliminar Arma del Personaje");
-        builder.setMessage("¿Estás seguro de que quieres eliminar el arma '" + arma.getNombre() + "' del personaje?");
+        //implementar buscar nombre
+        builder.setMessage("¿Estás seguro de que quieres eliminar el arma '" + armaPersonaje.getArmaId() + "' del personaje?");
 
         // Agregar el botón "Sí" para confirmar la eliminación
         builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Lógica para eliminar el arma del personaje
-                eliminarArmaPersonaje(arma);
+                eliminarArmaPersonaje(armaPersonaje);
             }
         });
 
-        // Agregar el botón
         // Agregar el botón "Cancelar" para cancelar la eliminación
         builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
@@ -183,11 +207,10 @@ public class ArmasPersonaje extends AppCompatActivity {
     }
 
     // Método para eliminar el arma del personaje
-    private void eliminarArmaPersonaje(final Arma arma) {
-        /*
-        armaPersonajeControlador.eliminarArmaPersonaje(arma, new ArmaPersonaje.Controlador.OnArmaPersonajeEliminadaListener() {
+    private void eliminarArmaPersonaje(final ArmaPersonaje armaPersonaje) {
+        armaPersonajeControlador.eliminarArmaPersonaje(armaPersonaje.getArmaId(), armaPersonaje.getPersonajeId(), armaPersonaje.getUsuarioId(), new ArmaPersonajeControlador.OnResponseListener() {
             @Override
-            public void onArmaPersonajeEliminada(String mensaje) {
+            public void onSuccess(String mensaje) {
                 Toast.makeText(ArmasPersonaje.this, mensaje, Toast.LENGTH_SHORT).show();
                 cargarListaArmasPersonaje();
             }
@@ -198,6 +221,6 @@ public class ArmasPersonaje extends AppCompatActivity {
                 Toast.makeText(ArmasPersonaje.this, mensajeError, Toast.LENGTH_SHORT).show();
             }
         });
-         */
     }
 }
+

@@ -1,6 +1,8 @@
 package com.cerredelo.gestor;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +25,7 @@ public class VerPersonaje extends AppCompatActivity {
             txtInteligencia, txtBonoInteligencia, txtSabiduria, txtBonoSabiduria, txtCarisma, txtBonoCarisma, txtCompetencia, txtFoto;
 
     Personaje p;
+    String nombreUsuario;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +49,7 @@ public class VerPersonaje extends AppCompatActivity {
         txtCompetencia = findViewById(R.id.txtCompetencia);
         txtFoto = findViewById(R.id.txtFoto);
 
+        cargarDatosUsuario();
         // Recibir el ID del personaje enviado desde la actividad anterior
         Intent intent = getIntent();
         if (intent != null) {
@@ -63,6 +67,7 @@ public class VerPersonaje extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(VerPersonaje.this, ArmasPersonaje.class);
                 intent.putExtra("personajeId",p.getPersonajeId());
+                intent.putExtra("personajeNombre",p.getNombre());
                 startActivity(intent);
                 finish();
             }
@@ -79,6 +84,14 @@ public class VerPersonaje extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void cargarDatosUsuario() {
+        // Obtener el objeto SharedPreferences
+        SharedPreferences sharedPref = getSharedPreferences("UserPref", Context.MODE_PRIVATE);
+        // Recuperar los datos del usuario
+        nombreUsuario = sharedPref.getString("userName", "");
+
     }
 
     private void buscarPersonaje(Long personajeId) {
@@ -99,7 +112,7 @@ public class VerPersonaje extends AppCompatActivity {
     }
     private void mostrarPersonaje() {
         //cambiar al nombre
-        txtNombreUsuario.setText(String.valueOf(p.getUsuarioId()));
+        txtNombreUsuario.setText(nombreUsuario);
         txtNombre.setText(p.getNombre());
         txtFuerza.setText(String.valueOf(p.getFuerza()));
         txtBonoFuerza.setText(String.valueOf((int)Math.floor((p.getFuerza() - 10) / 2)));

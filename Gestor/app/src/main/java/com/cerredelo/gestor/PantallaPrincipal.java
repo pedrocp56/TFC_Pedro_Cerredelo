@@ -5,7 +5,13 @@ import static Clases.ImagenUtils.base64ToBitmap;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -106,17 +112,17 @@ public class PantallaPrincipal extends AppCompatActivity {
         long userId = sharedPref.getLong("userId", -1);
         String userName = sharedPref.getString("userName", "");
         String userEstado = sharedPref.getString("userEstado", "");
-        String userFoto = sharedPref.getString("userFoto", "");
+        String fotoBase64 = sharedPref.getString("userFoto", "");
+        // Decodificar la cadena Base64 a un array de bytes
 
         // Asignar los datos recuperados a las vistas
         userNameTextView.setText(userName);
         ID=userId;
 
-        // Decodificar la imagen de Base64 a Bitmap
-        /*
-        if (!userFoto.isEmpty()) {
-            userIconImageView.setImageBitmap(base64ToBitmap(userFoto));
-        }
-        */
+        // Verificar foto y ponerla
+
+        // Si la cadena Base64 está vacía o no se pudo decodificar correctamente,
+        // mostrar la imagen por defecto en la ImageView
+        userIconImageView.setImageResource(R.drawable.camara);
     }
 }

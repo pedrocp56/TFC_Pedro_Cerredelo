@@ -24,11 +24,20 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".NuevaArmaPersonaje"
+            android:exported="true" />
+        <activity
+            android:name=".EditarArmaPersonaje"
+            android:exported="true" />
+        <activity
+            android:name=".VerArmaPersonaje"
+            android:exported="true" />
+        <activity
             android:name=".ArmasPersonaje"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".item.item_ArmaPersonaje"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".item.item_arma"
             android:exported="true" />

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -134,7 +135,8 @@ public class Login extends AppCompatActivity {
         editor.putString("userName", usuario.getNombre());
         editor.putString("userContrasenha", usuario.getContrasenha());
         editor.putString("userEstado", usuario.getEstado());
-
+        String fotoBase64 = Base64.encodeToString(usuario.getFoto(), Base64.DEFAULT);
+        editor.putString("userFoto", fotoBase64);
         editor.apply();
     }
 

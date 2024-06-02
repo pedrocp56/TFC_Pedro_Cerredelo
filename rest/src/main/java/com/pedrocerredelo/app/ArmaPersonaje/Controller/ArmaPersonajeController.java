@@ -37,17 +37,23 @@ public class ArmaPersonajeController {
     }
 
     @PostMapping(Variables.ARMA_PERSONAJE_SAVE)
-    public ResponseEntity<ArmaPersonaje> addArmaPersonaje(
+    public ResponseEntity<String> addArmaPersonaje(
             @PathVariable Long armaId,
             @PathVariable Long personajeId,
             @PathVariable Long usuarioId,
             @RequestBody ArmaPersonaje armaPersonaje) {
         try {
-            armaPersonaje.setId(new ArmaPersonajePK(armaId, personajeId, usuarioId));
-            ArmaPersonaje createdArmaPersonaje = armaPersonajeRepository.save(armaPersonaje);
-            return ResponseEntity.status(HttpStatus.CREATED).body(createdArmaPersonaje);
+            ArmaPersonajePK id = new ArmaPersonajePK(armaId, personajeId, usuarioId);
+            Optional<ArmaPersonaje> existingArmaPersonaje = armaPersonajeRepository.findById(id);
+            if (existingArmaPersonaje.isPresent()) {
+                return ResponseEntity.status(HttpStatus.CONFLICT).body("El personaje ya tiene esa arma");
+            } else {
+                armaPersonaje.setId(id);
+                armaPersonajeRepository.save(armaPersonaje);
+                return ResponseEntity.status(HttpStatus.CREATED).body("Arma asignada al personaje exitosamente");
+            }
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al asignar el arma al personaje");
         }
     }
 
@@ -57,25 +63,48 @@ public class ArmaPersonajeController {
             @PathVariable Long personajeId,
             @PathVariable Long usuarioId,
             @RequestBody ArmaPersonaje armaPersonaje) {
-        ArmaPersonajePK id = new ArmaPersonajePK(armaId,personajeId,usuarioId);
-        Optional<ArmaPersonaje> existingArmaPersonaje = armaPersonajeRepository.findById(id);
-        if (existingArmaPersonaje.isPresent()) {
-            ArmaPersonaje updatedArmaPersonaje = armaPersonajeRepository.save(armaPersonaje);
-            return ResponseEntity.ok(updatedArmaPersonaje);
-        } else {
-            return ResponseEntity.notFound().build();
+        try {
+            ArmaPersonajePK id = new ArmaPersonajePK(armaId, personajeId, usuarioId);
+            Optional<ArmaPersonaje> existingArmaPersonajeOptional = armaPersonajeRepository.findById(id);
+
+            if (existingArmaPersonajeOptional.isPresent()) {
+                ArmaPersonaje existingArmaPersonaje = existingArmaPersonajeOptional.get();
+
+                // Actualizar los campos necesarios del objeto existente
+                existingArmaPersonaje.setAtaqueTotal(armaPersonaje.getAtaqueTotal());
+                existingArmaPersonaje.setBonificacionAdicional(armaPersonaje.getBonificacionAdicional());
+                existingArmaPersonaje.setCompetencia(armaPersonaje.isCompetencia());
+
+                // Guardar los cambios en la base de datos
+                ArmaPersonaje updatedArmaPersonaje = armaPersonajeRepository.save(existingArmaPersonaje);
+                return ResponseEntity.ok(updatedArmaPersonaje);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 
     @DeleteMapping(Variables.ARMA_PERSONAJE_DELETE)
-    public ResponseEntity<Void> delete(
+    public ResponseEntity<String> delete(
             @PathVariable Long personajeId,
             @PathVariable Long armaId,
             @PathVariable Long usuarioId) {
 
-        ArmaPersonajePK id = new ArmaPersonajePK(armaId, personajeId, usuarioId);
-        armaPersonajeRepository.deleteById(id);
-        return ResponseEntity.noContent().build();
+        try {
+            ArmaPersonajePK id = new ArmaPersonajePK(armaId, personajeId, usuarioId);
+
+            // Verificamos si la entidad existe antes de intentar eliminarla
+            if (armaPersonajeRepository.existsById(id)) {
+                armaPersonajeRepository.deleteById(id);
+                return ResponseEntity.ok("Arma desequipada");
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("La combinación de arma y personaje no existe");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al desequipar el arma del personaje");
+        }
     }
 
     @GetMapping(Variables.ARMA_PERSONAJE_SEARCH_BY_PERSONAJE)
@@ -83,7 +112,4 @@ public class ArmaPersonajeController {
         List<ArmaPersonaje> armaPersonajes = armaPersonajeRepository.findById_PersonajeId(personajeId);
         return ResponseEntity.ok(armaPersonajes);
     }
-
 }
-
-
