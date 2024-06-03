@@ -65,15 +65,14 @@ public class ConfigPersonaje extends AppCompatActivity {
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ConfigPersonaje.this,"boton pulsado",Toast.LENGTH_SHORT);
-                if (DatosPrecargados) {
-                    // Actualizar
-                    Toast.makeText(ConfigPersonaje.this,"Actualizar",Toast.LENGTH_SHORT);
-                    actualizarPersonaje();
-                } else {
-                    // Crear
-                    Toast.makeText(ConfigPersonaje.this,"Crear",Toast.LENGTH_SHORT);
-                    crearPersonaje();
+                if (comprobarDatos()) {
+                    if (DatosPrecargados) {
+                        // Actualizar
+                        actualizarPersonaje();
+                    } else {
+                        // Crear
+                        crearPersonaje();
+                    }
                 }
             }
         });
@@ -153,13 +152,13 @@ public class ConfigPersonaje extends AppCompatActivity {
         Personaje personaje = new Personaje();
         //personaje.setPersonajeId();
         personaje.setNombre(editNombre.getText().toString());
-        personaje.setFuerza(Integer.parseInt(editFuerza.getText().toString()));
-        personaje.setDestreza(Integer.parseInt(editDestreza.getText().toString()));
-        personaje.setConstitucion(Integer.parseInt(editConstitucion.getText().toString()));
-        personaje.setInteligencia(Integer.parseInt(editInteligencia.getText().toString()));
-        personaje.setSabiduria(Integer.parseInt(editSabiduria.getText().toString()));
-        personaje.setCarisma(Integer.parseInt(editCarisma.getText().toString()));
-        personaje.setBonoCompetencia(Integer.parseInt(editCompetencia.getText().toString()));
+        personaje.setFuerza(Integer.parseInt(editFuerza.getText().toString().trim()));
+        personaje.setDestreza(Integer.parseInt(editDestreza.getText().toString().trim()));
+        personaje.setConstitucion(Integer.parseInt(editConstitucion.getText().toString().trim()));
+        personaje.setInteligencia(Integer.parseInt(editInteligencia.getText().toString().trim()));
+        personaje.setSabiduria(Integer.parseInt(editSabiduria.getText().toString().trim()));
+        personaje.setCarisma(Integer.parseInt(editCarisma.getText().toString().trim()));
+        personaje.setBonoCompetencia(Integer.parseInt(editCompetencia.getText().toString().trim()));
 
         PersonajeControlador personajeControlador = new PersonajeControlador(this);
         personajeControlador.crearPersonaje(userId,personaje, new PersonajeControlador.OnPersonajeCreadoListener() {
@@ -204,5 +203,67 @@ public class ConfigPersonaje extends AppCompatActivity {
             }
         });
     }
+    private boolean comprobarDatos() {
+        String nombre = editNombre.getText().toString().trim();
+        String fuerzaStr = editFuerza.getText().toString().trim();
+        String destrezaStr = editDestreza.getText().toString().trim();
+        String constitucionStr = editConstitucion.getText().toString().trim();
+        String inteligenciaStr = editInteligencia.getText().toString().trim();
+        String sabiduriaStr = editSabiduria.getText().toString().trim();
+        String carismaStr = editCarisma.getText().toString().trim();
+        String competenciaStr = editCompetencia.getText().toString().trim();
+
+        if (nombre.isEmpty()) {
+            Toast.makeText(ConfigPersonaje.this, "El nombre no puede estar vacío", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (fuerzaStr.isEmpty() || !isValidRange(fuerzaStr, 1, 30)) {
+            Toast.makeText(ConfigPersonaje.this, "La fuerza debe ser un número entre 1 y 30", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (destrezaStr.isEmpty() || !isValidRange(destrezaStr, 1, 30)) {
+            Toast.makeText(ConfigPersonaje.this, "La destreza debe ser un número entre 1 y 30", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (constitucionStr.isEmpty() || !isValidRange(constitucionStr, 1, 30)) {
+            Toast.makeText(ConfigPersonaje.this, "La constitución debe ser un número entre 1 y 30", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (inteligenciaStr.isEmpty() || !isValidRange(inteligenciaStr, 1, 30)) {
+            Toast.makeText(ConfigPersonaje.this, "La inteligencia debe ser un número entre 1 y 30", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (sabiduriaStr.isEmpty() || !isValidRange(sabiduriaStr, 1, 30)) {
+            Toast.makeText(ConfigPersonaje.this, "La sabiduría debe ser un número entre 1 y 30", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (carismaStr.isEmpty() || !isValidRange(carismaStr, 1, 30)) {
+            Toast.makeText(ConfigPersonaje.this, "El carisma debe ser un número entre 1 y 30", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (competenciaStr.isEmpty() || !isValidRange(competenciaStr, 2, 6)) {
+            Toast.makeText(ConfigPersonaje.this, "La competencia debe ser un número entre 2 y 6", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean isValidRange(String value, int min, int max) {
+        try {
+            int num = Integer.parseInt(value);
+            return num >= min && num <= max;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
 
 }

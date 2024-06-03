@@ -62,41 +62,43 @@ public class EditarArmaPersonaje extends AppCompatActivity {
         btnConfirmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Obtener los datos editados del EditText
-                int ataqueTotal = Integer.parseInt(txtAtaque.getText().toString());
-                int bonificacionAdicional = Integer.parseInt(txtBoni.getText().toString());
-                boolean competencia = chkCompetencia.isChecked();
+                if(comprobarDatos()) {
+                    // Obtener los datos editados del EditText
+                    int ataqueTotal = Integer.parseInt(txtAtaque.getText().toString());
+                    int bonificacionAdicional = Integer.parseInt(txtBoni.getText().toString());
+                    boolean competencia = chkCompetencia.isChecked();
 
-                // Crear un nuevo objeto ArmaPersonaje con los datos editados
-                ArmaPersonaje armaEditado = new ArmaPersonaje();
-                armaEditado.setAtaqueTotal(ataqueTotal);
-                armaEditado.setBonificacionAdicional(bonificacionAdicional);
-                armaEditado.setCompetencia(competencia);
+                    // Crear un nuevo objeto ArmaPersonaje con los datos editados
+                    ArmaPersonaje armaEditado = new ArmaPersonaje();
+                    armaEditado.setAtaqueTotal(ataqueTotal);
+                    armaEditado.setBonificacionAdicional(bonificacionAdicional);
+                    armaEditado.setCompetencia(competencia);
 
-                // Verificar si armaEditado es nulo antes de llamar al método actualizarArmaPersonaje
-                if (armaEditado != null) {
-                    // Actualizar el arma del personaje en el servidor
-                    ArmaPersonajeControlador armaPersonajeControlador = new ArmaPersonajeControlador(EditarArmaPersonaje.this);
-                    armaPersonajeControlador.actualizarArmaPersonaje(armaId, personajeId, usuarioId, armaEditado, new ArmaPersonajeControlador.OnResponseListener() {
-                        @Override
-                        public void onSuccess(String message) {
-                            Toast.makeText(EditarArmaPersonaje.this, message, Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(EditarArmaPersonaje.this, VerArmaPersonaje.class);
-                            intent.putExtra("personajeId", personajeId);
-                            intent.putExtra("armaId", armaId);
-                            intent.putExtra("personajeNombre", personajeNombre);
-                            intent.putExtra("armaNombre", armaNombre);
-                            startActivity(intent);
-                            finish();
-                        }
+                    // Verificar si armaEditado es nulo antes de llamar al método actualizarArmaPersonaje
+                    if (armaEditado != null) {
+                        // Actualizar el arma del personaje en el servidor
+                        ArmaPersonajeControlador armaPersonajeControlador = new ArmaPersonajeControlador(EditarArmaPersonaje.this);
+                        armaPersonajeControlador.actualizarArmaPersonaje(armaId, personajeId, usuarioId, armaEditado, new ArmaPersonajeControlador.OnResponseListener() {
+                            @Override
+                            public void onSuccess(String message) {
+                                Toast.makeText(EditarArmaPersonaje.this, message, Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(EditarArmaPersonaje.this, VerArmaPersonaje.class);
+                                intent.putExtra("personajeId", personajeId);
+                                intent.putExtra("armaId", armaId);
+                                intent.putExtra("personajeNombre", personajeNombre);
+                                intent.putExtra("armaNombre", armaNombre);
+                                startActivity(intent);
+                                finish();
+                            }
 
-                        @Override
-                        public void onError(String error) {
-                            Toast.makeText(EditarArmaPersonaje.this, error, Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                } else {
-                    Toast.makeText(EditarArmaPersonaje.this, "Error: Arma editado es nulo", Toast.LENGTH_SHORT).show();
+                            @Override
+                            public void onError(String error) {
+                                Toast.makeText(EditarArmaPersonaje.this, error, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    } else {
+                        Toast.makeText(EditarArmaPersonaje.this, "Error: Arma editado es nulo", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -148,6 +150,41 @@ public class EditarArmaPersonaje extends AppCompatActivity {
         txtAtaque.setText(String.valueOf(armaper.getAtaqueTotal()));
         txtBoni.setText(String.valueOf(armaper.getBonificacionAdicional()));
         chkCompetencia.setChecked(armaper.isCompetencia());
+    }
+    private boolean comprobarDatos() {
+        String ataqueStr = txtAtaque.getText().toString().trim();
+        String boniStr = txtBoni.getText().toString().trim();
+
+        if (ataqueStr.isEmpty()) {
+            Toast.makeText(EditarArmaPersonaje.this, "El valor de ataque no puede estar vacío", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (!isNumeric(ataqueStr)) {
+            Toast.makeText(EditarArmaPersonaje.this, "El valor de ataque debe ser numérico", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (boniStr.isEmpty()) {
+            Toast.makeText(EditarArmaPersonaje.this, "El valor de bonificación adicional no puede estar vacío", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (!isNumeric(boniStr)) {
+            Toast.makeText(EditarArmaPersonaje.this, "El valor de bonificación adicional debe ser numérico", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean isNumeric(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }
 

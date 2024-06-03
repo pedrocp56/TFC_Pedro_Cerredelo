@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -106,13 +108,12 @@ public class Registro extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = usernameEditText.getText().toString();
-                String password = passwordEditText.getText().toString();
-
-                if (username.isEmpty() || password.isEmpty()) {
-                    Toast.makeText(Registro.this, "Por favor, ingrese un nombre de usuario y una contraseña", Toast.LENGTH_SHORT).show();
-                } else {
+                if (comprobarDatos()) {
+                    String username = usernameEditText.getText().toString();
+                    String password = passwordEditText.getText().toString();
                     crearNuevoUsuario(username, password);
+                } else {
+                    Toast.makeText(Registro.this, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -171,5 +172,35 @@ public class Registro extends AppCompatActivity {
 
         queue.add(request);
     }
+
+    private boolean comprobarDatos() {
+        String username = usernameEditText.getText().toString();
+        String password = passwordEditText.getText().toString();
+
+        // Validar que el username sea un correo electrónico
+        if (!isValidEmail(username)) {
+            Toast.makeText(Registro.this, "Por favor, ingrese un correo electrónico válido", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        // Validar que la contraseña tenga entre 5 y 12 caracteres alfanuméricos
+        if (!isValidPassword(password)) {
+            Toast.makeText(Registro.this, "La contraseña debe tener entre 5 y 13 caracteres alfanuméricos", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
+    }
+
+    // Función para validar si el username es un correo electrónico
+    private boolean isValidEmail(String email) {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+    // Función para validar la contraseña
+    private boolean isValidPassword(String password) {
+        return password.length() >= 5 && password.length() <= 13 && password.matches("[a-zA-Z0-9]+");
+    }
+
 }
 

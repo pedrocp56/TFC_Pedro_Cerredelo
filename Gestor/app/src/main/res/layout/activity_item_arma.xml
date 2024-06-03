@@ -3,7 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:gravity="center_vertical">
+
 
     <!-- Nombre del arma -->
     <TextView
@@ -11,7 +13,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textSize="18sp"/>
+        android:textSize="18sp"
+        android:text="Nombre del arma"/>
 
     <!-- Botón para ver el detalle del arma -->
     <Button

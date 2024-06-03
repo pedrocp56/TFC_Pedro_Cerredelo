@@ -222,7 +222,6 @@ public class Perfil extends AppCompatActivity {
         SharedPreferences sharedPref = getSharedPreferences("UserPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("userEstado", estado);
-        editor.putString("userContrasenha", contrasena);
         editor.apply();
     }
 }

@@ -19,7 +19,7 @@ public class Personaje {
     @Column(name = "Caracteristica_Destreza", nullable = false)
     private int caracteristicaDestreza;
 
-    @Column(name = "Caracteristica_Constitución", nullable = false)
+    @Column(name = "Caracteristica_Constitucion", nullable = false)
     private int caracteristicaConstitucion;
 
     @Column(name = "Caracteristica_Inteligencia", nullable = false)

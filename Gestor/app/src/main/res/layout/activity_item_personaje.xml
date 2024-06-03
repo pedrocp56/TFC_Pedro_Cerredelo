@@ -3,7 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="8dp">
+    android:padding="8dp"
+    android:gravity="center_vertical">
+
 
     <TextView
         android:id="@+id/nombrePersonaje"
@@ -11,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Nombre del Personaje"
-        android:textSize="18sp"/>
+        android:textSize="16dp"/>
 
     <Button
         android:id="@+id/btnVer"

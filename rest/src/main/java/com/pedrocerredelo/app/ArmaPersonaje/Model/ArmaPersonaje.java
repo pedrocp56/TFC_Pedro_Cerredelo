@@ -14,7 +14,7 @@ public class ArmaPersonaje {
     @Column(name = "Ataque_Total", nullable = false)
     private int ataqueTotal;
 
-    @Column(name = "Bonificación_Adicional", nullable = false)
+    @Column(name = "Bonificacion_Adicional", nullable = false)
     private int bonificacionAdicional;
 
     @Column(name = "Competencia", nullable = false)
