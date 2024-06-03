@@ -91,7 +91,6 @@ public class Personajes extends AppCompatActivity {
         personajeControlador.cargarListaPersonajes(userId, new PersonajeControlador.OnListaPersonajesCargadaListener() {
             @Override
             public void onListaPersonajesCargada(List<Personaje> personajes) {
-                Toast.makeText(Personajes.this, personajes.toString(), Toast.LENGTH_SHORT).show();
                 actualizarListView(personajes);
             }
             @Override

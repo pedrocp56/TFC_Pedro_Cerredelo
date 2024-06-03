@@ -50,7 +50,7 @@ public class ArmaPersonajeController {
             } else {
                 armaPersonaje.setId(id);
                 armaPersonajeRepository.save(armaPersonaje);
-                return ResponseEntity.status(HttpStatus.CREATED).body("Arma asignada al personaje exitosamente");
+                return ResponseEntity.ok().body("{\"success\": true}");
             }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al asignar el arma al personaje");

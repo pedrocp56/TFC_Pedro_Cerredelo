@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import android.content.Context;
@@ -30,6 +31,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ArmaPersonajeControlador {
     private RequestQueue queue;
@@ -120,46 +122,58 @@ public class ArmaPersonajeControlador {
     }
 
 
-    public void agregarArmaPersonaje(final long armaId, final long personajeId, final long usuarioId, final ArmaPersonaje armaPersonaje, final OnResponseListener listener) {
-        String url = BASE_URL + "guardarArmaPersonaje/" + armaId + "/" + personajeId + "/" + usuarioId;
-
-        JSONObject postParams = new JSONObject();
-        try {
-            postParams.put("ataqueTotal", armaPersonaje.getAtaqueTotal());
-            postParams.put("bonificacionAdicional", armaPersonaje.getBonificacionAdicional());
-            postParams.put("competencia", armaPersonaje.isCompetencia());
-        } catch (JSONException e) {
-            e.printStackTrace();
-            listener.onError("Error al crear los parámetros del arma-personaje");
-            return;
-        }
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        listener.onSuccess("Arma asignada al personaje exitosamente");
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        listener.onError("Error al asignar el arma al personaje: " + error.getMessage());
-                    }
-                }) {
+    public void crearArmaPersonaje(final long armaId, final long personajeId, final long usuarioId, final ArmaPersonaje armaPersonaje, final OnResponseListener listener) {
+        buscarArmaPorIds(armaId, personajeId, usuarioId, new OnArmaEncontradaListener() {
             @Override
-            public byte[] getBody() {
-                return postParams.toString().getBytes();
+            public void onArmaEncontrada(ArmaPersonaje arma) {
+                // Si se encuentra un arma para el personaje, notificar al listener de error
+                listener.onError("El personaje ya tiene equipada el arma");
             }
 
             @Override
-            public String getBodyContentType() {
-                return "application/json; charset=utf-8";
-            }
-        };
+            public void onError(String mensajeError) {
+                // Si no se encuentra un arma para el personaje, crear el arma
+                String url = BASE_URL + "guardarArmaPersonaje/" + armaId + "/" + personajeId + "/" + usuarioId;
 
-        queue.add(stringRequest);
+                // Convertir el objeto ArmaPersonaje a JSON
+                JSONObject armaPersonajeJson = new JSONObject();
+                try {
+                    armaPersonajeJson.put("ataqueTotal", armaPersonaje.getAtaqueTotal());
+                    armaPersonajeJson.put("bonificacionAdicional", armaPersonaje.getBonificacionAdicional());
+                    armaPersonajeJson.put("competencia", armaPersonaje.isCompetencia());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    listener.onError("Error al crear los parámetros del arma-personaje");
+                    return;
+                }
+
+                // Crear la solicitud de JSON
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                        Request.Method.POST,
+                        url,
+                        armaPersonajeJson,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                listener.onSuccess("Arma equipada exitosamente");
+
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                // Manejar el error de la solicitud HTTP
+                                listener.onError(error.getMessage());
+                            }
+                        }
+                );
+
+                // Añadir la solicitud a la cola de solicitudes
+                queue.add(jsonObjectRequest);
+            }
+        });
     }
+
 
     public void actualizarArmaPersonaje(final long armaId, final long personajeId, final long usuarioId, final ArmaPersonaje armaPersonaje, final OnResponseListener listener) {
         String url = BASE_URL + "actualizarArmaPersonaje/" + armaId + "/" + personajeId + "/" + usuarioId;
@@ -175,31 +189,21 @@ public class ArmaPersonajeControlador {
             return;
         }
 
-        StringRequest stringRequest = new StringRequest(Request.Method.PUT, url,
-                new Response.Listener<String>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, url, postParams,
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(String response) {
-                        listener.onSuccess("Arma actualizada exitosamente");
+                    public void onResponse(JSONObject response) {
+                        listener.onSuccess(response.toString());
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        listener.onError("Error al actualizar el arma del personaje: " + error.getMessage());
+                        listener.onError(error.getMessage());
                     }
-                }) {
-            @Override
-            public byte[] getBody() {
-                return postParams.toString().getBytes();
-            }
+                });
 
-            @Override
-            public String getBodyContentType() {
-                return "application/json; charset=utf-8";
-            }
-        };
-
-        queue.add(stringRequest);
+        queue.add(jsonObjectRequest);
     }
 
     public void eliminarArmaPersonaje(final long armaId, final long personajeId, final long usuarioId, final OnResponseListener listener) {

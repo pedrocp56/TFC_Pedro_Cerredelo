@@ -27,6 +27,9 @@ public class ArmaPersonaje implements Serializable {
         this.competencia = competencia;
     }
 
+    public ArmaPersonaje() {
+    }
+
     public ArmaPersonaje(JSONObject obj) throws JSONException {
         JSONObject idObject = obj.getJSONObject("id");
         this.armaId = idObject.getLong("armaId");

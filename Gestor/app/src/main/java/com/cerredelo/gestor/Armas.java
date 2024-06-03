@@ -57,7 +57,6 @@ public class Armas extends AppCompatActivity {
         armaControlador.cargarListaArmas( new ArmaControlador.OnListaArmasCargadaListener() {
             @Override
             public void onListaArmasCargada(List<Arma> armas) {
-                Toast.makeText(Armas.this, armas.toString(), Toast.LENGTH_SHORT).show();
                 Log.d("Response", armas.toString());
                 actualizarListView(armas);
             }

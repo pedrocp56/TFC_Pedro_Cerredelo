@@ -3,9 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:id="@+id/main">
 
-    <!-- Nombre del arma -->
+    <!-- Nombre del personaje -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -53,6 +54,7 @@
 
     </LinearLayout>
 
+    <!-- Ataque total -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -73,7 +75,6 @@
             android:layout_weight="1"
             android:text="Base"
             android:textAlignment="center" />
-
 
     </LinearLayout>
 
@@ -130,22 +131,24 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="8dp">
-    <Button
-        android:id="@+id/btnVolver"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Volver"
-        android:layout_gravity="center"
-        android:layout_marginEnd="8dp"/>
-    <Button
-        android:id="@+id/btnEditar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Editar"
-        android:layout_gravity="center"
-        android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/btnVolver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Volver"
+            android:layout_gravity="center"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/btnEditar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Editar"
+            android:layout_gravity="center"
+            android:layout_marginEnd="8dp"/>
     </LinearLayout>
 
 </LinearLayout>
