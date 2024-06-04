@@ -14,8 +14,13 @@ import javax.persistence.Embeddable;
  *
  * @author pedro
  */
+
 @Embeddable
-public class PersonajePK implements Serializable {
+public class Arma_PersonajePK implements Serializable {
+
+    @Basic(optional = false)
+    @Column(name = "Arma_ID")
+    private Integer armaID;
 
     @Basic(optional = false)
     @Column(name = "Usuario_ID")
@@ -26,6 +31,23 @@ public class PersonajePK implements Serializable {
     private Integer personajeId;
 
     // Constructor, getters y setters
+    public Arma_PersonajePK() {
+    }
+
+    public Arma_PersonajePK(Integer armaID, Integer usuarioID, Integer personajeId) {
+        this.armaID = armaID;
+        this.usuarioID = usuarioID;
+        this.personajeId = personajeId;
+    }
+
+    public Integer getArmaID() {
+        return armaID;
+    }
+
+    public void setArmaID(Integer armaID) {
+        this.armaID = armaID;
+    }
+
     public Integer getUsuarioID() {
         return usuarioID;
     }
@@ -42,17 +64,10 @@ public class PersonajePK implements Serializable {
         this.personajeId = personajeId;
     }
 
-    public PersonajePK(Integer usuarioID, Integer personajeId) {
-        this.usuarioID = usuarioID;
-        this.personajeId = personajeId;
-    }
-
-    public PersonajePK() {
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
+        hash += (int) armaID;
         hash += (int) usuarioID;
         hash += (int) personajeId;
         return hash;
@@ -69,7 +84,10 @@ public class PersonajePK implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final PersonajePK other = (PersonajePK) obj;
+        final Arma_PersonajePK other = (Arma_PersonajePK) obj;
+        if (!Objects.equals(this.armaID, other.armaID)) {
+            return false;
+        }
         if (!Objects.equals(this.usuarioID, other.usuarioID)) {
             return false;
         }
@@ -78,7 +96,6 @@ public class PersonajePK implements Serializable {
 
     @Override
     public String toString() {
-        return "PersonajePK{" + "usuarioID=" + usuarioID + ", personajeID=" + personajeId + '}';
+        return "Arma_PersonajePK{" + "armaID=" + armaID + ", usuarioID=" + usuarioID + ", personajeId=" + personajeId + '}';
     }
-
 }

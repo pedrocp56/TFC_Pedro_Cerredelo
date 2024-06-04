@@ -5,10 +5,13 @@
 package modelo.vo;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -49,7 +52,10 @@ public class Arma implements Serializable {
     private String caracteristicas;
 
     @Column(name = "Foto")
-    private String foto;
+    private byte[] foto;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "Arma_Personaje")
+    private List<Arma_Personaje> armaPersonajeList;
 
     // Getters y setters
     public Integer getId() {
@@ -116,12 +122,20 @@ public class Arma implements Serializable {
         this.caracteristicas = caracteristicas;
     }
 
-    public String getFoto() {
+    public byte[] getFoto() {
         return foto;
     }
 
-    public void setFoto(String foto) {
+    public void setFoto(byte[] foto) {
         this.foto = foto;
+    }
+
+    public List<Arma_Personaje> getArmaPersonajeList() {
+        return armaPersonajeList;
+    }
+
+    public void setArmaPersonajeList(List<Arma_Personaje> armaPersonajeList) {
+        this.armaPersonajeList = armaPersonajeList;
     }
 
     @Override
@@ -145,10 +159,13 @@ public class Arma implements Serializable {
 
     @Override
     public String toString() {
-        return "Arma{" + "id=" + id + ", nombre=" + nombre + ", ataque=" + ataque + ", da\u00f1o=" + danho + ", tipo=" + tipo + ", arrojadiza=" + arrojadiza + ", car=" + car + ", caracteristicas=" + caracteristicas + ", foto=" + foto + '}';
+        return nombre;
     }
 
-    public Arma(Integer id, String nombre, Integer ataque, Integer danho, String tipo, Boolean arrojadiza, String car, String caracteristicas, String foto) {
+    public Arma() {
+    }
+    
+    public Arma(Integer id, String nombre, Integer ataque, Integer danho, String tipo, Boolean arrojadiza, String car, String caracteristicas, byte[] foto) {
         this.id = id;
         this.nombre = nombre;
         this.ataque = ataque;

@@ -2,7 +2,6 @@ package controlador.factory;
 
 import modelo.dao.ArmaDAO;
 import modelo.dao.ArmaPersonajeDAO;
-import modelo.dao.CampañaDAO;
 import modelo.dao.PersonajeDAO;
 import modelo.dao.UsuarioDAO;
 import org.hibernate.Session;
@@ -25,6 +24,7 @@ public class HibernateUtil {
     }
 
     public static SessionFactory getSessionFactory() {
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         return sessionFactory;
     }
 
@@ -60,10 +60,6 @@ public class HibernateUtil {
 
     public static ArmaPersonajeDAO getArmaPersonajeDAO() {
         return new ArmaPersonajeDAO();
-    }
-
-    public static CampañaDAO getCampañaDAO() {
-        return new CampañaDAO();
     }
 
     public static PersonajeDAO getPersonajeDAO() {

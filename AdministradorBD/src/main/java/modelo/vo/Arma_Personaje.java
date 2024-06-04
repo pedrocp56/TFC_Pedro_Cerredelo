@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -18,72 +19,63 @@ import javax.persistence.Table;
  *
  * @author pedro
  */
+import java.io.Serializable;
+import javax.persistence.*;
+
 @Entity
 @Table(name = "Arma_Personaje")
 public class Arma_Personaje implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @Basic(optional = false)
-    @Column(name = "Arma_ID")
-    private Integer armaID;
-
-    @Id
-    @Basic(optional = false)
-    @Column(name = "Usuario_ID")
-    private Integer usuarioID;
-
-    @Id
-    @Basic(optional = false)
-    @Column(name = "Campanha_ID")
-    private Integer campanhaID;
+    @EmbeddedId
+    protected Arma_PersonajePK armaPersonajePK;
 
     @Column(name = "Ataque_Total")
     private Integer ataqueTotal;
 
+    @Basic(optional = false)
     @Column(name = "Bonificación_Adicional")
     private Integer bonificaciónAdicional;
 
+    @Basic(optional = false)
     @Column(name = "Competencia")
     private Boolean competencia;
 
-    @JoinColumn(name = "Arma_ID", referencedColumnName = "ID", insertable = false, updatable = false)
     @ManyToOne(optional = false)
+    @JoinColumn(name = "Arma_ID", referencedColumnName = "ID", insertable = false, updatable = false)
     private Arma arma;
 
-    @JoinColumn(name = "Usuario_ID", referencedColumnName = "ID", insertable = false, updatable = false)
     @ManyToOne(optional = false)
+    @JoinColumn(name = "Usuario_ID", referencedColumnName = "ID", insertable = false, updatable = false)
     private Usuario usuario;
 
-    @JoinColumn(name = "Campanha_ID", referencedColumnName = "ID", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private Campanha campanha;
+    @JoinColumn(name = "Personaje_ID", referencedColumnName = "ID", insertable = false, updatable = false)
+    private Personaje personaje;
 
-    // Getters y setters
-
-    public Integer getArmaID() {
-        return armaID;
+    // Constructor, getters y setters
+    public Arma_Personaje() {
     }
 
-    public void setArmaID(Integer armaID) {
-        this.armaID = armaID;
+    public Arma_Personaje(Arma_PersonajePK armaPersonajePK, Integer ataqueTotal, Integer bonificaciónAdicional, Boolean competencia) {
+        this.armaPersonajePK = armaPersonajePK;
+        this.ataqueTotal = ataqueTotal;
+        this.bonificaciónAdicional = bonificaciónAdicional;
+        this.competencia = competencia;
     }
 
-    public Integer getUsuarioID() {
-        return usuarioID;
+    @Override
+    public String toString() {
+        return "Arma_Personaje{" + "armaPersonajePK=" + armaPersonajePK + ", ataqueTotal=" + ataqueTotal + ", bonificaci\u00f3nAdicional=" + bonificaciónAdicional + ", competencia=" + competencia + ", arma=" + arma + ", usuario=" + usuario + ", personaje=" + personaje + '}';
     }
 
-    public void setUsuarioID(Integer usuarioID) {
-        this.usuarioID = usuarioID;
+    public Arma_PersonajePK getArmaPersonajePK() {
+        return armaPersonajePK;
     }
 
-    public Integer getCampanhaID() {
-        return campanhaID;
-    }
-
-    public void setCampanhaID(Integer campanhaID) {
-        this.campanhaID = campanhaID;
+    public void setArmaPersonajePK(Arma_PersonajePK armaPersonajePK) {
+        this.armaPersonajePK = armaPersonajePK;
     }
 
     public Integer getAtaqueTotal() {
@@ -126,57 +118,12 @@ public class Arma_Personaje implements Serializable {
         this.usuario = usuario;
     }
 
-    public Campanha getCampanha() {
-        return campanha;
+    public Personaje getPersonaje() {
+        return personaje;
     }
 
-    public void setCampanha(Campanha campanha) {
-        this.campanha = campanha;
+    public void setPersonaje(Personaje personaje) {
+        this.personaje = personaje;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Arma_Personaje other = (Arma_Personaje) obj;
-        if (!Objects.equals(this.armaID, other.armaID)) {
-            return false;
-        }
-        if (!Objects.equals(this.usuarioID, other.usuarioID)) {
-            return false;
-        }
-        return Objects.equals(this.campanhaID, other.campanhaID);
-    }
-
-    @Override
-    public String toString() {
-        return "ArmaPersonaje{" + "armaID=" + armaID + ", usuarioID=" + usuarioID + ", campa\u00f1aID=" + campanhaID + ", ataqueTotal=" + ataqueTotal + ", bonificaci\u00f3nAdicional=" + bonificaciónAdicional + ", competencia=" + competencia + ", arma=" + arma + ", usuario=" + usuario + ", campa\u00f1a=" + campanha + '}';
-    }
-
-    public Arma_Personaje(Integer armaID, Integer usuarioID, Integer campanhaID, Integer ataqueTotal, Integer bonificaciónAdicional, Boolean competencia, Arma arma, Usuario usuario, Campanha campanha) {
-        this.armaID = armaID;
-        this.usuarioID = usuarioID;
-        this.campanhaID = campanhaID;
-        this.ataqueTotal = ataqueTotal;
-        this.bonificaciónAdicional = bonificaciónAdicional;
-        this.competencia = competencia;
-        this.arma = arma;
-        this.usuario = usuario;
-        this.campanha = campanha;
-    }
-    
-    
 }
+

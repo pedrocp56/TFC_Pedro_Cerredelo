@@ -4,68 +4,77 @@
  */
 package modelo.vo;
 
-import java.io.Serializable;
+import com.mysql.cj.jdbc.Blob;
 import java.util.Objects;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
  *
  * @author pedro
  */
+import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "Personaje")
 public class Personaje implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @EmbeddedId
     protected PersonajePK personajePK;
-    
+
     @Basic(optional = false)
     @Column(name = "Personaje_Nombre")
     private String personajeNombre;
-    
+
+    @Basic(optional = false)
     @Column(name = "Caracteristica_Fuerza")
     private Integer caracteristicaFuerza;
-    
+
+    @Basic(optional = false)
     @Column(name = "Caracteristica_Destreza")
     private Integer caracteristicaDestreza;
-    
-    @Column(name = "Caracteristica_Constitución")
-    private Integer caracteristicaConstitución;
-    
+
+    @Basic(optional = false)
+    @Column(name = "Caracteristica_Constitucion")
+    private Integer caracteristicaConstitucion;
+
+    @Basic(optional = false)
     @Column(name = "Caracteristica_Inteligencia")
     private Integer caracteristicaInteligencia;
-    
+
+    @Basic(optional = false)
     @Column(name = "Caracteristica_Sabiduria")
     private Integer caracteristicaSabiduria;
-    
+
+    @Basic(optional = false)
     @Column(name = "Caracteristica_Carisma")
     private Integer caracteristicaCarisma;
-    
+
+    @Basic(optional = false)
     @Column(name = "Bono_Competencia")
     private Integer bonoCompetencia;
-    
+
     @Column(name = "Foto")
-    private String foto;
-    
+    private byte[] foto;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personaje")
+    private List<Arma_Personaje> armaPersonajeList;
+
+    @ManyToOne(optional = false)
     @JoinColumn(name = "Usuario_ID", referencedColumnName = "ID", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
     private Usuario usuario;
-    
-    @JoinColumn(name = "Campanha_ID", referencedColumnName = "ID", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Campanha campanha;
 
     // Getters y setters
-
     public PersonajePK getPersonajePK() {
         return personajePK;
     }
@@ -98,12 +107,12 @@ public class Personaje implements Serializable {
         this.caracteristicaDestreza = caracteristicaDestreza;
     }
 
-    public Integer getCaracteristicaConstitución() {
-        return caracteristicaConstitución;
+    public Integer getCaracteristicaConstitucion() {
+        return caracteristicaConstitucion;
     }
 
-    public void setCaracteristicaConstitución(Integer caracteristicaConstitución) {
-        this.caracteristicaConstitución = caracteristicaConstitución;
+    public void setCaracteristicaConstitucion(Integer caracteristicaConstitucion) {
+        this.caracteristicaConstitucion = caracteristicaConstitucion;
     }
 
     public Integer getCaracteristicaInteligencia() {
@@ -138,11 +147,11 @@ public class Personaje implements Serializable {
         this.bonoCompetencia = bonoCompetencia;
     }
 
-    public String getFoto() {
+    public byte[] getFoto() {
         return foto;
     }
 
-    public void setFoto(String foto) {
+    public void setFoto(byte[] foto) {
         this.foto = foto;
     }
 
@@ -154,12 +163,12 @@ public class Personaje implements Serializable {
         this.usuario = usuario;
     }
 
-    public Campanha getCampanha() {
-        return campanha;
+    public List<Arma_Personaje> getArmaPersonajeList() {
+        return armaPersonajeList;
     }
 
-    public void setCampanha(Campanha campanha) {
-        this.campanha = campanha;
+    public void setArmaPersonajeList(List<Arma_Personaje> armaPersonajeList) {
+        this.armaPersonajeList = armaPersonajeList;
     }
 
     @Override
@@ -170,13 +179,7 @@ public class Personaje implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
+        if (!(obj instanceof Personaje)) {
             return false;
         }
         final Personaje other = (Personaje) obj;
@@ -195,7 +198,7 @@ public class Personaje implements Serializable {
         if (!Objects.equals(this.caracteristicaDestreza, other.caracteristicaDestreza)) {
             return false;
         }
-        if (!Objects.equals(this.caracteristicaConstitución, other.caracteristicaConstitución)) {
+        if (!Objects.equals(this.caracteristicaConstitucion, other.caracteristicaConstitucion)) {
             return false;
         }
         if (!Objects.equals(this.caracteristicaInteligencia, other.caracteristicaInteligencia)) {
@@ -213,28 +216,30 @@ public class Personaje implements Serializable {
         if (!Objects.equals(this.usuario, other.usuario)) {
             return false;
         }
-        return Objects.equals(this.campanha, other.campanha);
+        return true;
     }
 
     @Override
     public String toString() {
-        return "Personaje{" + "personajePK=" + personajePK + ", personajeNombre=" + personajeNombre + ", caracteristicaFuerza=" + caracteristicaFuerza + ", caracteristicaDestreza=" + caracteristicaDestreza + ", caracteristicaConstituci\u00f3n=" + caracteristicaConstitución + ", caracteristicaInteligencia=" + caracteristicaInteligencia + ", caracteristicaSabiduria=" + caracteristicaSabiduria + ", caracteristicaCarisma=" + caracteristicaCarisma + ", bonoCompetencia=" + bonoCompetencia + ", foto=" + foto + ", usuario=" + usuario + ", campa\u00f1a=" + campanha + '}';
+        return personajeNombre;
     }
 
-    public Personaje(PersonajePK personajePK, String personajeNombre, Integer caracteristicaFuerza, Integer caracteristicaDestreza, Integer caracteristicaConstitución, Integer caracteristicaInteligencia, Integer caracteristicaSabiduria, Integer caracteristicaCarisma, Integer bonoCompetencia, String foto, Usuario usuario, Campanha campanha) {
+    public Personaje() {
+    }
+
+    public Personaje(PersonajePK personajePK, String personajeNombre, Integer caracteristicaFuerza, Integer caracteristicaDestreza, Integer caracteristicaConstitucion, Integer caracteristicaInteligencia, Integer caracteristicaSabiduria, Integer caracteristicaCarisma, Integer bonoCompetencia, byte[] foto, Usuario usuario) {
         this.personajePK = personajePK;
         this.personajeNombre = personajeNombre;
         this.caracteristicaFuerza = caracteristicaFuerza;
         this.caracteristicaDestreza = caracteristicaDestreza;
-        this.caracteristicaConstitución = caracteristicaConstitución;
+        this.caracteristicaConstitucion = caracteristicaConstitucion;
         this.caracteristicaInteligencia = caracteristicaInteligencia;
         this.caracteristicaSabiduria = caracteristicaSabiduria;
         this.caracteristicaCarisma = caracteristicaCarisma;
         this.bonoCompetencia = bonoCompetencia;
-        this.foto = foto;
+        this.foto = null;
+        //this.foto = foto;
         this.usuario = usuario;
-        this.campanha = campanha;
     }
-    
-}
 
+}

@@ -48,22 +48,6 @@ public class Inicio extends javax.swing.JFrame {
         btUsuarioEliminar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         txtUsuarioFoto = new javax.swing.JTextField();
-        panelCampaña = new javax.swing.JPanel();
-        txtCampañaID = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        txtCampañaNombre = new javax.swing.JTextField();
-        btCampañaGuardar = new javax.swing.JButton();
-        btCampañaEliminar = new javax.swing.JButton();
-        jLabel20 = new javax.swing.JLabel();
-        txtCampañaFoto = new javax.swing.JTextField();
-        jLabel21 = new javax.swing.JLabel();
-        cbCampañaUser = new javax.swing.JComboBox<>();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        txtCampañaDescripcion = new javax.swing.JTextArea();
-        jDateCampaña = new com.toedter.calendar.JDateChooser();
         panelArma = new javax.swing.JPanel();
         txtArmaID = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
@@ -85,8 +69,7 @@ public class Inicio extends javax.swing.JFrame {
         txtArmaDaño = new javax.swing.JTextField();
         checkArmaArrojadiza = new javax.swing.JCheckBox();
         cbArmaCar = new javax.swing.JComboBox<>();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        listArmaTipo = new javax.swing.JList<>();
+        cbArmaTipo = new javax.swing.JComboBox<>();
         panelPersonaje = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
@@ -99,7 +82,6 @@ public class Inicio extends javax.swing.JFrame {
         txtPersonajeFuerza = new javax.swing.JTextField();
         jLabel40 = new javax.swing.JLabel();
         cbPersonajeUser = new javax.swing.JComboBox<>();
-        cbPersonajeCampaña = new javax.swing.JComboBox<>();
         jLabel41 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
@@ -110,6 +92,12 @@ public class Inicio extends javax.swing.JFrame {
         txtPersonajeInteligencia = new javax.swing.JTextField();
         txtPersonajeSabiduria = new javax.swing.JTextField();
         txtPersonajeCarisma = new javax.swing.JTextField();
+        panelVistas = new javax.swing.JPanel();
+        btVistaUsers = new javax.swing.JButton();
+        btVistaCampañas = new javax.swing.JButton();
+        btVistaPersonajes = new javax.swing.JButton();
+        btVistaArmas = new javax.swing.JButton();
+        btVistaArmasPer = new javax.swing.JButton();
         panelArmaPersonaje = new javax.swing.JPanel();
         jLabel38 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
@@ -124,12 +112,6 @@ public class Inicio extends javax.swing.JFrame {
         jLabel46 = new javax.swing.JLabel();
         jLabel51 = new javax.swing.JLabel();
         cbArmaPerArma = new javax.swing.JComboBox<>();
-        panelVistas = new javax.swing.JPanel();
-        btVistaUsers = new javax.swing.JButton();
-        btVistaCampañas = new javax.swing.JButton();
-        btVistaPersonajes = new javax.swing.JButton();
-        btVistaArmas = new javax.swing.JButton();
-        btVistaArmasPer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -245,123 +227,6 @@ public class Inicio extends javax.swing.JFrame {
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
-        panelCampaña.setBorder(javax.swing.BorderFactory.createTitledBorder("Campaña"));
-        panelCampaña.setToolTipText("");
-
-        jLabel16.setText("ID");
-
-        jLabel17.setText("Nombre");
-
-        jLabel18.setText("Descripcion");
-
-        jLabel19.setText("Fecha");
-
-        btCampañaGuardar.setText("Guardar");
-        btCampañaGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCampañaGuardarActionPerformed(evt);
-            }
-        });
-
-        btCampañaEliminar.setText("Eliminar");
-        btCampañaEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCampañaEliminarActionPerformed(evt);
-            }
-        });
-
-        jLabel20.setText("Foto");
-
-        jLabel21.setText("Usuario");
-
-        cbCampañaUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        txtCampañaDescripcion.setColumns(20);
-        txtCampañaDescripcion.setRows(5);
-        jScrollPane4.setViewportView(txtCampañaDescripcion);
-
-        javax.swing.GroupLayout panelCampañaLayout = new javax.swing.GroupLayout(panelCampaña);
-        panelCampaña.setLayout(panelCampañaLayout);
-        panelCampañaLayout.setHorizontalGroup(
-            panelCampañaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCampañaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelCampañaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelCampañaLayout.createSequentialGroup()
-                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDateCampaña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(panelCampañaLayout.createSequentialGroup()
-                        .addGroup(panelCampañaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(panelCampañaLayout.createSequentialGroup()
-                                .addComponent(btCampañaGuardar)
-                                .addGap(117, 117, 117)
-                                .addComponent(btCampañaEliminar))
-                            .addGroup(panelCampañaLayout.createSequentialGroup()
-                                .addGroup(panelCampañaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panelCampañaLayout.createSequentialGroup()
-                                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtCampañaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(panelCampañaLayout.createSequentialGroup()
-                                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtCampañaID, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(panelCampañaLayout.createSequentialGroup()
-                                        .addGroup(panelCampañaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(panelCampañaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(cbCampañaUser, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(txtCampañaFoto, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE))))
-                                .addGap(89, 89, 89))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelCampañaLayout.createSequentialGroup()
-                                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
-
-        panelCampañaLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel16, jLabel17, jLabel18, jLabel19, jLabel20, jLabel21});
-
-        panelCampañaLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cbCampañaUser, jDateCampaña, txtCampañaFoto, txtCampañaID, txtCampañaNombre});
-
-        panelCampañaLayout.setVerticalGroup(
-            panelCampañaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCampañaLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(panelCampañaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCampañaID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16))
-                .addGap(18, 18, 18)
-                .addGroup(panelCampañaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(txtCampañaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelCampañaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel18)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelCampañaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel19)
-                    .addComponent(jDateCampaña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelCampañaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel20)
-                    .addComponent(txtCampañaFoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelCampañaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel21)
-                    .addComponent(cbCampañaUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelCampañaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btCampañaGuardar)
-                    .addComponent(btCampañaEliminar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         panelArma.setBorder(javax.swing.BorderFactory.createTitledBorder("Arma"));
         panelArma.setToolTipText("");
 
@@ -403,12 +268,7 @@ public class Inicio extends javax.swing.JFrame {
 
         cbArmaCar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fuerza", "Destreza", "Constitucion", "Inteligencia", "Sabiduria", "Carisma" }));
 
-        listArmaTipo.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane5.setViewportView(listArmaTipo);
+        cbArmaTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout panelArmaLayout = new javax.swing.GroupLayout(panelArma);
         panelArma.setLayout(panelArmaLayout);
@@ -430,14 +290,6 @@ public class Inicio extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtArmaAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelArmaLayout.createSequentialGroup()
-                        .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtArmaDaño, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelArmaLayout.createSequentialGroup()
-                        .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelArmaLayout.createSequentialGroup()
                         .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(checkArmaArrojadiza, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -455,7 +307,16 @@ public class Inicio extends javax.swing.JFrame {
                         .addGap(59, 59, 59)
                         .addComponent(btArmaGuardar)
                         .addGap(61, 61, 61)
-                        .addComponent(btArmaEliminar)))
+                        .addComponent(btArmaEliminar))
+                    .addGroup(panelArmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(panelArmaLayout.createSequentialGroup()
+                            .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(cbArmaTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelArmaLayout.createSequentialGroup()
+                            .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtArmaDaño, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -483,9 +344,9 @@ public class Inicio extends javax.swing.JFrame {
                     .addComponent(jLabel25)
                     .addComponent(txtArmaDaño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(panelArmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelArmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel27)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbArmaTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelArmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel28)
@@ -534,11 +395,7 @@ public class Inicio extends javax.swing.JFrame {
 
         jLabel35.setText("Foto");
 
-        jLabel40.setText("Campaña");
-
         cbPersonajeUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        cbPersonajeCampaña.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel41.setText("Destreza");
 
@@ -560,17 +417,14 @@ public class Inicio extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelPersonajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelPersonajeLayout.createSequentialGroup()
-                        .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPersonajeNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelPersonajeLayout.createSequentialGroup()
                         .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbPersonajeUser, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelPersonajeLayout.createSequentialGroup()
-                        .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbPersonajeCampaña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtPersonajeNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelPersonajeLayout.createSequentialGroup()
                         .addGroup(panelPersonajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -600,7 +454,7 @@ public class Inicio extends javax.swing.JFrame {
 
         panelPersonajeLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel31, jLabel32, jLabel33, jLabel34, jLabel35, jLabel36, jLabel37, jLabel40, jLabel41, jLabel42});
 
-        panelPersonajeLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cbPersonajeCampaña, cbPersonajeUser, txtPersonajeCarisma, txtPersonajeConstitucion, txtPersonajeDestreza, txtPersonajeFoto, txtPersonajeFuerza, txtPersonajeInteligencia, txtPersonajeNombre, txtPersonajeSabiduria});
+        panelPersonajeLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cbPersonajeUser, txtPersonajeCarisma, txtPersonajeConstitucion, txtPersonajeDestreza, txtPersonajeFoto, txtPersonajeFuerza, txtPersonajeInteligencia, txtPersonajeNombre, txtPersonajeSabiduria});
 
         panelPersonajeLayout.setVerticalGroup(
             panelPersonajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -609,10 +463,6 @@ public class Inicio extends javax.swing.JFrame {
                 .addGroup(panelPersonajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel31)
                     .addComponent(cbPersonajeUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelPersonajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel40)
-                    .addComponent(cbPersonajeCampaña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelPersonajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel32)
@@ -649,7 +499,84 @@ public class Inicio extends javax.swing.JFrame {
                 .addGroup(panelPersonajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btPersonajeGuardar)
                     .addComponent(btPersonajeEliminar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel40)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        panelVistas.setBorder(javax.swing.BorderFactory.createTitledBorder("Vistas todos"));
+
+        btVistaUsers.setText("Usuarios");
+        btVistaUsers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btVistaUsersActionPerformed(evt);
+            }
+        });
+
+        btVistaCampañas.setText("Campañas");
+        btVistaCampañas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btVistaCampañasActionPerformed(evt);
+            }
+        });
+
+        btVistaPersonajes.setText("Personajes");
+        btVistaPersonajes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btVistaPersonajesActionPerformed(evt);
+            }
+        });
+
+        btVistaArmas.setText("Armas");
+        btVistaArmas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btVistaArmasActionPerformed(evt);
+            }
+        });
+
+        btVistaArmasPer.setText("Armas_Personajes");
+        btVistaArmasPer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btVistaArmasPerActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelVistasLayout = new javax.swing.GroupLayout(panelVistas);
+        panelVistas.setLayout(panelVistasLayout);
+        panelVistasLayout.setHorizontalGroup(
+            panelVistasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelVistasLayout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addGroup(panelVistasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btVistaCampañas)
+                    .addComponent(btVistaUsers)
+                    .addComponent(btVistaPersonajes))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                .addGroup(panelVistasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btVistaArmas)
+                    .addComponent(btVistaArmasPer))
+                .addGap(43, 43, 43))
+        );
+
+        panelVistasLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btVistaArmas, btVistaArmasPer, btVistaCampañas, btVistaPersonajes, btVistaUsers});
+
+        panelVistasLayout.setVerticalGroup(
+            panelVistasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelVistasLayout.createSequentialGroup()
+                .addGroup(panelVistasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelVistasLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btVistaUsers)
+                        .addGap(18, 18, 18)
+                        .addComponent(btVistaCampañas)
+                        .addGap(18, 18, 18)
+                        .addComponent(btVistaPersonajes))
+                    .addGroup(panelVistasLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(btVistaArmas)
+                        .addGap(18, 18, 18)
+                        .addComponent(btVistaArmasPer)))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
 
         panelArmaPersonaje.setBorder(javax.swing.BorderFactory.createTitledBorder("Arma Personaje"));
@@ -761,81 +688,6 @@ public class Inicio extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        panelVistas.setBorder(javax.swing.BorderFactory.createTitledBorder("Vistas todos"));
-
-        btVistaUsers.setText("Usuarios");
-        btVistaUsers.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btVistaUsersActionPerformed(evt);
-            }
-        });
-
-        btVistaCampañas.setText("Campañas");
-        btVistaCampañas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btVistaCampañasActionPerformed(evt);
-            }
-        });
-
-        btVistaPersonajes.setText("Personajes");
-        btVistaPersonajes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btVistaPersonajesActionPerformed(evt);
-            }
-        });
-
-        btVistaArmas.setText("Armas");
-        btVistaArmas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btVistaArmasActionPerformed(evt);
-            }
-        });
-
-        btVistaArmasPer.setText("Armas_Personajes");
-        btVistaArmasPer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btVistaArmasPerActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelVistasLayout = new javax.swing.GroupLayout(panelVistas);
-        panelVistas.setLayout(panelVistasLayout);
-        panelVistasLayout.setHorizontalGroup(
-            panelVistasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelVistasLayout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addGroup(panelVistasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btVistaCampañas)
-                    .addComponent(btVistaUsers)
-                    .addComponent(btVistaPersonajes))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
-                .addGroup(panelVistasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btVistaArmas)
-                    .addComponent(btVistaArmasPer))
-                .addGap(43, 43, 43))
-        );
-
-        panelVistasLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btVistaArmas, btVistaArmasPer, btVistaCampañas, btVistaPersonajes, btVistaUsers});
-
-        panelVistasLayout.setVerticalGroup(
-            panelVistasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelVistasLayout.createSequentialGroup()
-                .addGroup(panelVistasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelVistasLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btVistaUsers)
-                        .addGap(18, 18, 18)
-                        .addComponent(btVistaCampañas)
-                        .addGap(18, 18, 18)
-                        .addComponent(btVistaPersonajes))
-                    .addGroup(panelVistasLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(btVistaArmas)
-                        .addGap(18, 18, 18)
-                        .addComponent(btVistaArmasPer)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -843,34 +695,31 @@ public class Inicio extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelArmaPersonaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panelCampaña, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelVistas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(panelPersonaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(panelUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(panelPersonaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panelVistas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(panelArma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(panelArmaPersonaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelArmaPersonaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelArma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(panelUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panelPersonaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(panelUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(panelArmaPersonaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(panelPersonaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(panelCampaña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(panelVistas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addComponent(panelArma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(panelVistas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         pack();
@@ -891,14 +740,6 @@ public class Inicio extends javax.swing.JFrame {
     private void btUsuarioEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUsuarioEliminarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btUsuarioEliminarActionPerformed
-
-    private void btCampañaGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCampañaGuardarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btCampañaGuardarActionPerformed
-
-    private void btCampañaEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCampañaEliminarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btCampañaEliminarActionPerformed
 
     private void btPersonajeGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPersonajeGuardarActionPerformed
         // TODO add your handling code here:
@@ -960,12 +801,12 @@ public class Inicio extends javax.swing.JFrame {
         return cbArmaPerUsuario;
     }
 
-    public JComboBox<String> getCbCampañaUser() {
-        return cbCampañaUser;
+    public JComboBox<String> getCbArmaTipo() {
+        return cbArmaTipo;
     }
 
-    public JComboBox<String> getCbPersonajeCampaña() {
-        return cbPersonajeCampaña;
+    public void setCbArmaTipo(JComboBox<String> cbArmaTipo) {
+        this.cbArmaTipo = cbArmaTipo;
     }
 
     public JComboBox<String> getCbPersonajeUser() {
@@ -976,9 +817,6 @@ public class Inicio extends javax.swing.JFrame {
         return checkArmaArrojadiza;
     }
 
-    public JDateChooser getjDateCampaña() {
-        return jDateCampaña;
-    }
 
     public JTextField getTxtArmaAtaque() {
         return txtArmaAtaque;
@@ -1010,22 +848,6 @@ public class Inicio extends javax.swing.JFrame {
 
     public JTextField getTxtArmaPerCompetencia() {
         return txtArmaPerCompetencia;
-    }
-
-    public JTextArea getTxtCampañaDescripcion() {
-        return txtCampañaDescripcion;
-    }
-
-    public JTextField getTxtCampañaFoto() {
-        return txtCampañaFoto;
-    }
-
-    public JTextField getTxtCampañaID() {
-        return txtCampañaID;
-    }
-
-    public JTextField getTxtCampañaNombre() {
-        return txtCampañaNombre;
     }
 
     public JTextField getTxtPersonajeCarisma() {
@@ -1120,16 +942,10 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton btArmaGuardar;
     private javax.swing.JButton btArmaPerEliminar;
     private javax.swing.JButton btArmaPerGuardar;
-    private javax.swing.JButton btCampañaEliminar;
-    private javax.swing.JButton btCampañaGuardar;
     private javax.swing.JButton btPersonajeEliminar;
     private javax.swing.JButton btPersonajeGuardar;
     private javax.swing.JButton btUsuarioEliminar;
-    private javax.swing.JButton btUsuarioEliminar1;
-    private javax.swing.JButton btUsuarioEliminar2;
     private javax.swing.JButton btUsuarioGuardar;
-    private javax.swing.JButton btUsuarioGuardar1;
-    private javax.swing.JButton btUsuarioGuardar2;
     private javax.swing.JButton btVistaArmas;
     private javax.swing.JButton btVistaArmasPer;
     private javax.swing.JButton btVistaCampañas;
@@ -1139,25 +955,11 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbArmaPerArma;
     private javax.swing.JComboBox<String> cbArmaPerCampaña;
     private javax.swing.JComboBox<String> cbArmaPerUsuario;
-    private javax.swing.JComboBox<String> cbCampañaUser;
-    private javax.swing.JComboBox<String> cbPersonajeCampaña;
+    private javax.swing.JComboBox<String> cbArmaTipo;
     private javax.swing.JComboBox<String> cbPersonajeUser;
     private javax.swing.JCheckBox checkArmaArrojadiza;
-    private com.toedter.calendar.JDateChooser jDateCampaña;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
@@ -1186,24 +988,12 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel51;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JList<String> listArmaTipo;
     private javax.swing.JPanel panelArma;
     private javax.swing.JPanel panelArmaPersonaje;
-    private javax.swing.JPanel panelCampaña;
     private javax.swing.JPanel panelPersonaje;
     private javax.swing.JPanel panelUser;
-    private javax.swing.JPanel panelUser1;
-    private javax.swing.JPanel panelUser2;
     private javax.swing.JPanel panelVistas;
     private javax.swing.JTextField txtArmaAtaque;
     private javax.swing.JTextArea txtArmaCaracteristicas;
@@ -1213,10 +1003,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JTextField txtArmaNombre;
     private javax.swing.JTextField txtArmaPerBonificador;
     private javax.swing.JTextField txtArmaPerCompetencia;
-    private javax.swing.JTextArea txtCampañaDescripcion;
-    private javax.swing.JTextField txtCampañaFoto;
-    private javax.swing.JTextField txtCampañaID;
-    private javax.swing.JTextField txtCampañaNombre;
     private javax.swing.JTextField txtPersonajeCarisma;
     private javax.swing.JTextField txtPersonajeConstitucion;
     private javax.swing.JTextField txtPersonajeDestreza;
@@ -1226,19 +1012,9 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JTextField txtPersonajeNombre;
     private javax.swing.JTextField txtPersonajeSabiduria;
     private javax.swing.JTextField txtUsuarioContraseña;
-    private javax.swing.JTextField txtUsuarioContraseña1;
-    private javax.swing.JTextField txtUsuarioContraseña2;
     private javax.swing.JTextArea txtUsuarioEstado;
-    private javax.swing.JTextArea txtUsuarioEstado1;
-    private javax.swing.JTextArea txtUsuarioEstado2;
     private javax.swing.JTextField txtUsuarioFoto;
-    private javax.swing.JTextField txtUsuarioFoto1;
-    private javax.swing.JTextField txtUsuarioFoto2;
     private javax.swing.JTextField txtUsuarioID;
-    private javax.swing.JTextField txtUsuarioID1;
-    private javax.swing.JTextField txtUsuarioID2;
     private javax.swing.JTextField txtUsuarioNombre;
-    private javax.swing.JTextField txtUsuarioNombre1;
-    private javax.swing.JTextField txtUsuarioNombre2;
     // End of variables declaration//GEN-END:variables
 }

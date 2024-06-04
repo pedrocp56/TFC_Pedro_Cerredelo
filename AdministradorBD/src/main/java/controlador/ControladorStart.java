@@ -12,17 +12,17 @@ import modelo.dao.ArmaPersonajeDAO;
 import modelo.dao.PersonajeDAO;
 import modelo.dao.UsuarioDAO;
 import org.hibernate.Session;
-import vista.Inicio;
+import vista.Start;
 
 /**
  *
  * @author pedro
  */
-public class ControladorInicio {
+public class ControladorStart {
 
     public static Session session;
 
-    public static Inicio ventana = new Inicio();
+    public static Start ventana = new Start();
     public static ArmaDAO armaDAO;
     public static ArmaPersonajeDAO armaPerDAO;
     public static PersonajeDAO perDAO;
@@ -46,4 +46,6 @@ public class ControladorInicio {
     public static void cerrarSession() {
         session.close();
     }
+    
+    
 }

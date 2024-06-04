@@ -4,10 +4,13 @@
  */
 package modelo.vo;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -38,12 +41,16 @@ public class Usuario implements Serializable {
     private String estado;
     
     @Column(name = "Foto")
-    private String foto;
+    private byte[] foto;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personaje")
+    private List<Personaje> personajeList;
+
 
     public Usuario() {
     }
 
-    public Usuario(Integer id, String nombre, String contrasenha, String estado, String foto) {
+    public Usuario(Integer id, String nombre, String contrasenha, String estado, byte[] foto) {
         this.id = id;
         this.nombre = nombre;
         this.contrasenha = contrasenha;
@@ -83,12 +90,20 @@ public class Usuario implements Serializable {
         this.estado = estado;
     }
 
-    public String getFoto() {
+    public byte[] getFoto() {
         return foto;
     }
 
-    public void setFoto(String foto) {
+    public void setFoto(byte[] foto) {
         this.foto = foto;
+    }
+
+    public List<Personaje> getPersonajeList() {
+        return personajeList;
+    }
+
+    public void setPersonajeList(List<Personaje> personajeList) {
+        this.personajeList = personajeList;
     }
 
     @Override
@@ -112,6 +127,6 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", contrasenha=" + contrasenha + ", estado=" + estado + ", foto=" + foto + '}';
+        return nombre;
     }
 }
