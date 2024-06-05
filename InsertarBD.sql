@@ -22,11 +22,12 @@ VALUES
 -- Insertar armas
 INSERT INTO Arma (Nombre, Ataque, Danho, Tipo, Arrojadiza, Car, Caracteristicas, Foto)
 VALUES
-    ('Espada larga', 8, '1d8', 'Corte', FALSE, 'Fuerza', 'Versatil', NULL),
-    ('Arco largo', 6, '1d10', 'Perforante', FALSE, NULL, 'Destreza, A dos manos', NULL),
+    ('Espada larga', 8, '1d8', 'Cortante', FALSE, 'Fuerza', 'Versatil', NULL),
+    ('Arco largo', 6, '1d10', 'Perforante', FALSE, 'Destreza', 'Destreza, A dos manos', NULL),
     ('Daga', 4, '1d4', 'Perforante', TRUE, 'Destreza', 'Arrojadiza, Ligera', NULL),
     ('Baston', 4, '1d6', 'Contundente', FALSE, 'Constitucion', 'Versatil', NULL),
-    ('Hacha de batalla', 8, '1d8', 'Corte', FALSE, 'A una mano', 'Versatil', NULL);
+    ('Hacha de batalla', 8, '1d8', 'Cortante', FALSE, 'Fuerza', 'Versatil', NULL);
+
 
 -- Insertar armas para los personajes
 INSERT INTO Arma_Personaje (Arma_ID, Personaje_ID, Usuario_ID, Ataque_Total, Bonificacion_Adicional, Competencia)

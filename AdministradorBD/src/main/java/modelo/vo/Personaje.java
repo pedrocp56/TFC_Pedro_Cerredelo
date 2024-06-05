@@ -22,6 +22,7 @@ import javax.persistence.Table;
  */
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.JoinColumns;
 
 @Entity
 @Table(name = "Personaje")
@@ -67,11 +68,9 @@ public class Personaje implements Serializable {
     @Column(name = "Foto")
     private byte[] foto;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personaje")
-    private List<Arma_Personaje> armaPersonajeList;
-
     @ManyToOne(optional = false)
-    @JoinColumn(name = "Usuario_ID", referencedColumnName = "ID", insertable = false, updatable = false)
+    @JoinColumns({
+        @JoinColumn(name = "Usuario_ID", referencedColumnName = "ID", insertable = false, updatable = false)})
     private Usuario usuario;
 
     // Getters y setters
@@ -163,6 +162,7 @@ public class Personaje implements Serializable {
         this.usuario = usuario;
     }
 
+    /*
     public List<Arma_Personaje> getArmaPersonajeList() {
         return armaPersonajeList;
     }
@@ -170,7 +170,7 @@ public class Personaje implements Serializable {
     public void setArmaPersonajeList(List<Arma_Personaje> armaPersonajeList) {
         this.armaPersonajeList = armaPersonajeList;
     }
-
+     */
     @Override
     public int hashCode() {
         int hash = 3;

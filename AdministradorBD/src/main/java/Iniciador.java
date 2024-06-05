@@ -9,6 +9,8 @@
 public class Iniciador {
 
     public static void main(String[] args) {
-        controlador.ControladorUsuario.iniciar();
+         controlador.ControladorStart.iniciar();
+        //controlador.ControladorPersonaje.iniciar();
+        //controlador.ControladorArmaPersonaje.iniciar();
     }
 }

@@ -4,9 +4,15 @@
  */
 package vista;
 
+import controlador.ControladorArmaPersonaje;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import modelo.vo.Arma;
+import modelo.vo.Personaje;
 
 /**
  *
@@ -19,6 +25,7 @@ public class VistaArmaPersonaje extends javax.swing.JFrame {
      */
     public VistaArmaPersonaje() {
         initComponents();
+        ControladorArmaPersonaje.iniciarSession();
     }
 
     /**
@@ -39,19 +46,35 @@ public class VistaArmaPersonaje extends javax.swing.JFrame {
         txtArmaPerBonificador = new javax.swing.JTextField();
         btArmaPerGuardar = new javax.swing.JButton();
         btArmaPerEliminar = new javax.swing.JButton();
-        txtArmaPerCompetencia = new javax.swing.JTextField();
-        cbArmaPerUsuario = new javax.swing.JComboBox<>();
+        cbArmaPerPersonaje = new javax.swing.JComboBox<>();
         btArmasPersonajes = new javax.swing.JButton();
+        cbCompetencia = new javax.swing.JCheckBox();
+        jLabel1 = new javax.swing.JLabel();
+        txtAtaque = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbArmaPersonaje = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
-        jLabel38.setText("Usuario");
+        jLabel38.setText("Personaje");
 
         jLabel51.setText("Arma");
 
         jLabel39.setText("Bonificador Adicional");
 
-        cbArmaPerArma.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbArmaPerArma.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbArmaPerArmaItemStateChanged(evt);
+            }
+        });
 
         jLabel43.setText("Competencia");
 
@@ -69,7 +92,11 @@ public class VistaArmaPersonaje extends javax.swing.JFrame {
             }
         });
 
-        cbArmaPerUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbArmaPerPersonaje.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbArmaPerPersonajeItemStateChanged(evt);
+            }
+        });
 
         btArmasPersonajes.setText("Ver todas");
         btArmasPersonajes.addActionListener(new java.awt.event.ActionListener() {
@@ -77,6 +104,10 @@ public class VistaArmaPersonaje extends javax.swing.JFrame {
                 btArmasPersonajesActionPerformed(evt);
             }
         });
+
+        jLabel1.setText("Ataque total");
+
+        txtAtaque.setText("0");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -94,28 +125,32 @@ public class VistaArmaPersonaje extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtArmaPerCompetencia, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel51, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cbArmaPerArma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel39)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtArmaPerBonificador, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbArmaPerUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(cbArmaPerPersonaje, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbCompetencia, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel39)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtArmaPerBonificador, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel38, jLabel39, jLabel43, jLabel51});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel38, jLabel39, jLabel43, jLabel51});
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cbArmaPerArma, cbArmaPerUsuario, txtArmaPerBonificador, txtArmaPerCompetencia});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cbArmaPerArma, cbArmaPerPersonaje, cbCompetencia, txtArmaPerBonificador});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,26 +158,55 @@ public class VistaArmaPersonaje extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel38)
-                    .addComponent(cbArmaPerUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbArmaPerPersonaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel51)
                     .addComponent(cbArmaPerArma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtAtaque))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel39)
                     .addComponent(txtArmaPerBonificador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel43)
-                    .addComponent(txtArmaPerCompetencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbCompetencia))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btArmaPerGuardar)
                     .addComponent(btArmaPerEliminar)
                     .addComponent(btArmasPersonajes))
-                .addGap(12, 12, 12))
+                .addContainerGap())
         );
+
+        tbArmaPersonaje.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Personaje", "Arma", "Ataque", "Bonificador", "Competencia"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tbArmaPersonaje);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -151,14 +215,18 @@ public class VistaArmaPersonaje extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(258, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -166,85 +234,86 @@ public class VistaArmaPersonaje extends javax.swing.JFrame {
 
     private void btArmaPerGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btArmaPerGuardarActionPerformed
         // TODO add your handling code here:
+        ControladorArmaPersonaje.guardarArmaPersonaje();
+        ControladorArmaPersonaje.cargarDatosArmaPersonaje();
     }//GEN-LAST:event_btArmaPerGuardarActionPerformed
 
     private void btArmaPerEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btArmaPerEliminarActionPerformed
         // TODO add your handling code here:
+        ControladorArmaPersonaje.borrarArmaPersonaje();
     }//GEN-LAST:event_btArmaPerEliminarActionPerformed
 
     private void btArmasPersonajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btArmasPersonajesActionPerformed
         // TODO add your handling code here:
+        ControladorArmaPersonaje.mostrarArmasPersonajes();
     }//GEN-LAST:event_btArmasPersonajesActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        ControladorArmaPersonaje.cargarCb();
+        ControladorArmaPersonaje.mostrarArmasPersonajes();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        ControladorArmaPersonaje.cerrarSession();
+    }//GEN-LAST:event_formWindowClosed
+
+    private void cbArmaPerPersonajeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbArmaPerPersonajeItemStateChanged
+        // TODO add your handling code here:
+        ControladorArmaPersonaje.cargarDatosArmaPersonaje();
+    }//GEN-LAST:event_cbArmaPerPersonajeItemStateChanged
+
+    private void cbArmaPerArmaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbArmaPerArmaItemStateChanged
+        // TODO add your handling code here:
+        ControladorArmaPersonaje.cargarDatosArmaPersonaje();
+    }//GEN-LAST:event_cbArmaPerArmaItemStateChanged
 
     public JButton getBtArmasPersonajes() {
         return btArmasPersonajes;
     }
 
-    public JComboBox<String> getCbArmaPerArma() {
+    public JComboBox<Arma> getCbArmaPerArma() {
         return cbArmaPerArma;
     }
 
-    public JComboBox<String> getCbArmaPerUsuario() {
-        return cbArmaPerUsuario;
+    public JComboBox<Personaje> getCbArmaPerPersonaje() {
+        return cbArmaPerPersonaje;
     }
 
     public JTextField getTxtArmaPerBonificador() {
         return txtArmaPerBonificador;
     }
 
-    public JTextField getTxtArmaPerCompetencia() {
-        return txtArmaPerCompetencia;
+    public JCheckBox getCbCompetencia() {
+        return cbCompetencia;
     }
 
-    
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VistaArmaPersonaje.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VistaArmaPersonaje.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VistaArmaPersonaje.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VistaArmaPersonaje.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VistaArmaPersonaje().setVisible(true);
-            }
-        });
+    public JTable getTbArmaPersonaje() {
+        return tbArmaPersonaje;
     }
+
+    public JLabel getTxtAtaque() {
+        return txtAtaque;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btArmaPerEliminar;
     private javax.swing.JButton btArmaPerGuardar;
     private javax.swing.JButton btArmasPersonajes;
-    private javax.swing.JComboBox<String> cbArmaPerArma;
-    private javax.swing.JComboBox<String> cbArmaPerUsuario;
+    private javax.swing.JComboBox<Arma> cbArmaPerArma;
+    private javax.swing.JComboBox<Personaje> cbArmaPerPersonaje;
+    private javax.swing.JCheckBox cbCompetencia;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel51;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tbArmaPersonaje;
     private javax.swing.JTextField txtArmaPerBonificador;
-    private javax.swing.JTextField txtArmaPerCompetencia;
+    private javax.swing.JLabel txtAtaque;
     // End of variables declaration//GEN-END:variables
 }

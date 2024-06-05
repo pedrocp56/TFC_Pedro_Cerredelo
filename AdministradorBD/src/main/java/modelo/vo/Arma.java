@@ -10,6 +10,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -25,9 +27,10 @@ public class Arma implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
-    private Integer id;
+    private Integer ID;
 
     @Basic(optional = false)
     @Column(name = "Nombre", unique = true)
@@ -36,8 +39,9 @@ public class Arma implements Serializable {
     @Column(name = "Ataque")
     private Integer ataque;
 
+    // Cambiar el tipo de dato de 'danho' a 'String'
     @Column(name = "Danho")
-    private Integer danho;
+    private String danho;
 
     @Column(name = "Tipo")
     private String tipo;
@@ -54,16 +58,14 @@ public class Arma implements Serializable {
     @Column(name = "Foto")
     private byte[] foto;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "Arma_Personaje")
-    private List<Arma_Personaje> armaPersonajeList;
-
     // Getters y setters
+
     public Integer getId() {
-        return id;
+        return ID;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer ID) {
+        this.ID = ID;
     }
 
     public String getNombre() {
@@ -82,11 +84,11 @@ public class Arma implements Serializable {
         this.ataque = ataque;
     }
 
-    public Integer getDanho() {
+    public String getDanho() {
         return danho;
     }
 
-    public void setDanho(Integer danho) {
+    public void setDanho(String danho) {
         this.danho = danho;
     }
 
@@ -130,6 +132,7 @@ public class Arma implements Serializable {
         this.foto = foto;
     }
 
+    /*
     public List<Arma_Personaje> getArmaPersonajeList() {
         return armaPersonajeList;
     }
@@ -137,11 +140,11 @@ public class Arma implements Serializable {
     public void setArmaPersonajeList(List<Arma_Personaje> armaPersonajeList) {
         this.armaPersonajeList = armaPersonajeList;
     }
-
+     */
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (ID != null ? ID.hashCode() : 0);
         return hash;
     }
 
@@ -151,7 +154,7 @@ public class Arma implements Serializable {
             return false;
         }
         Arma other = (Arma) obj;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.ID == null && other.ID != null) || (this.ID != null && !this.ID.equals(other.ID))) {
             return false;
         }
         return true;
@@ -164,9 +167,9 @@ public class Arma implements Serializable {
 
     public Arma() {
     }
-    
-    public Arma(Integer id, String nombre, Integer ataque, Integer danho, String tipo, Boolean arrojadiza, String car, String caracteristicas, byte[] foto) {
-        this.id = id;
+
+    public Arma(Integer ID, String nombre, Integer ataque, String danho, String tipo, Boolean arrojadiza, String car, String caracteristicas, byte[] foto) {
+        this.ID = ID;
         this.nombre = nombre;
         this.ataque = ataque;
         this.danho = danho;

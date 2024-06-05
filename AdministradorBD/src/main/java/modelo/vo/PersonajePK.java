@@ -23,7 +23,7 @@ public class PersonajePK implements Serializable {
 
     @Basic(optional = false)
     @Column(name = "Personaje_ID")
-    private Integer personajeId;
+    private Integer personajeID;
 
     // Constructor, getters y setters
     public Integer getUsuarioID() {
@@ -34,17 +34,17 @@ public class PersonajePK implements Serializable {
         this.usuarioID = usuarioID;
     }
 
-    public Integer getPersonajeId() {
-        return personajeId;
+    public Integer getPersonajeID() {
+        return personajeID;
     }
 
-    public void setPersonajeId(Integer personajeId) {
-        this.personajeId = personajeId;
+    public void setPersonajeID(Integer personajeID) {
+        this.personajeID = personajeID;
     }
 
-    public PersonajePK(Integer usuarioID, Integer personajeId) {
+    public PersonajePK(Integer usuarioID, Integer personajeID) {
         this.usuarioID = usuarioID;
-        this.personajeId = personajeId;
+        this.personajeID = personajeID;
     }
 
     public PersonajePK() {
@@ -54,7 +54,7 @@ public class PersonajePK implements Serializable {
     public int hashCode() {
         int hash = 0;
         hash += (int) usuarioID;
-        hash += (int) personajeId;
+        hash += (int) personajeID;
         return hash;
     }
 
@@ -73,12 +73,12 @@ public class PersonajePK implements Serializable {
         if (!Objects.equals(this.usuarioID, other.usuarioID)) {
             return false;
         }
-        return Objects.equals(this.personajeId, other.personajeId);
+        return Objects.equals(this.personajeID, other.personajeID);
     }
 
     @Override
     public String toString() {
-        return "PersonajePK{" + "usuarioID=" + usuarioID + ", personajeID=" + personajeId + '}';
+        return "PersonajePK{" + "usuarioID=" + usuarioID + ", personajeID=" + personajeID + '}';
     }
 
 }

@@ -27,17 +27,17 @@ public class Arma_PersonajePK implements Serializable {
     private Integer usuarioID;
 
     @Basic(optional = false)
-    @Column(name = "Personaje_ID")
-    private Integer personajeId;
+    @Column(name = "personaje_ID")
+    private Integer personajeID;
 
     // Constructor, getters y setters
     public Arma_PersonajePK() {
     }
 
-    public Arma_PersonajePK(Integer armaID, Integer usuarioID, Integer personajeId) {
+    public Arma_PersonajePK(Integer armaID, Integer usuarioID, Integer personajeID) {
         this.armaID = armaID;
         this.usuarioID = usuarioID;
-        this.personajeId = personajeId;
+        this.personajeID = personajeID;
     }
 
     public Integer getArmaID() {
@@ -56,12 +56,12 @@ public class Arma_PersonajePK implements Serializable {
         this.usuarioID = usuarioID;
     }
 
-    public Integer getPersonajeId() {
-        return personajeId;
+    public Integer getPersonajeID() {
+        return personajeID;
     }
 
-    public void setPersonajeId(Integer personajeId) {
-        this.personajeId = personajeId;
+    public void setPersonajeID(Integer personajeID) {
+        this.personajeID = personajeID;
     }
 
     @Override
@@ -69,7 +69,7 @@ public class Arma_PersonajePK implements Serializable {
         int hash = 0;
         hash += (int) armaID;
         hash += (int) usuarioID;
-        hash += (int) personajeId;
+        hash += (int) personajeID;
         return hash;
     }
 
@@ -91,11 +91,11 @@ public class Arma_PersonajePK implements Serializable {
         if (!Objects.equals(this.usuarioID, other.usuarioID)) {
             return false;
         }
-        return Objects.equals(this.personajeId, other.personajeId);
+        return Objects.equals(this.personajeID, other.personajeID);
     }
 
     @Override
     public String toString() {
-        return "Arma_PersonajePK{" + "armaID=" + armaID + ", usuarioID=" + usuarioID + ", personajeId=" + personajeId + '}';
+        return "Arma_PersonajePK{" + "armaID=" + armaID + ", usuarioID=" + usuarioID + ", personajeId=" + personajeID + '}';
     }
 }

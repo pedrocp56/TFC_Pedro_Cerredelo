@@ -24,7 +24,6 @@ public class HibernateUtil {
     }
 
     public static SessionFactory getSessionFactory() {
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         return sessionFactory;
     }
 

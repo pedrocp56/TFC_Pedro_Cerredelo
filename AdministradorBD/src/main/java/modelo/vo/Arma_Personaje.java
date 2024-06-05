@@ -35,7 +35,7 @@ public class Arma_Personaje implements Serializable {
     private Integer ataqueTotal;
 
     @Basic(optional = false)
-    @Column(name = "Bonificación_Adicional")
+    @Column(name = "Bonificacion_Adicional")
     private Integer bonificaciónAdicional;
 
     @Basic(optional = false)
@@ -47,11 +47,9 @@ public class Arma_Personaje implements Serializable {
     private Arma arma;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "Usuario_ID", referencedColumnName = "ID", insertable = false, updatable = false)
-    private Usuario usuario;
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "Personaje_ID", referencedColumnName = "ID", insertable = false, updatable = false)
+    @JoinColumns({
+        @JoinColumn(name = "Usuario_ID", referencedColumnName = "Usuario_ID", insertable = false, updatable = false),
+        @JoinColumn(name = "Personaje_ID", referencedColumnName = "Personaje_ID", insertable = false, updatable = false)})
     private Personaje personaje;
 
     // Constructor, getters y setters
@@ -67,7 +65,7 @@ public class Arma_Personaje implements Serializable {
 
     @Override
     public String toString() {
-        return "Arma_Personaje{" + "armaPersonajePK=" + armaPersonajePK + ", ataqueTotal=" + ataqueTotal + ", bonificaci\u00f3nAdicional=" + bonificaciónAdicional + ", competencia=" + competencia + ", arma=" + arma + ", usuario=" + usuario + ", personaje=" + personaje + '}';
+        return "Arma_Personaje{" + "armaPersonajePK=" + armaPersonajePK + ", ataqueTotal=" + ataqueTotal + ", bonificaci\u00f3nAdicional=" + bonificaciónAdicional + ", competencia=" + competencia + ", arma=" + arma + ", personaje=" + personaje + '}';
     }
 
     public Arma_PersonajePK getArmaPersonajePK() {
@@ -110,14 +108,6 @@ public class Arma_Personaje implements Serializable {
         this.arma = arma;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
     public Personaje getPersonaje() {
         return personaje;
     }
@@ -126,4 +116,3 @@ public class Arma_Personaje implements Serializable {
         this.personaje = personaje;
     }
 }
-

@@ -4,8 +4,10 @@
  */
 package vista;
 
+import controlador.ControladorArma;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -20,6 +22,7 @@ public class VistaArma extends javax.swing.JFrame {
      */
     public VistaArma() {
         initComponents();
+        ControladorArma.iniciarSession();
     }
 
     /**
@@ -54,10 +57,26 @@ public class VistaArma extends javax.swing.JFrame {
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         btArmas = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbArma = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Armas"));
+
+        txtArmaID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtArmaIDActionPerformed(evt);
+            }
+        });
 
         jLabel22.setText("ID");
 
@@ -211,6 +230,31 @@ public class VistaArma extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        tbArma.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Nombre", "Ataque", "Daño", "Tipo", "Arrojadiza", "Caracteristica"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tbArma);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -218,14 +262,18 @@ public class VistaArma extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(409, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -233,15 +281,34 @@ public class VistaArma extends javax.swing.JFrame {
 
     private void btArmaGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btArmaGuardarActionPerformed
         // TODO add your handling code here:
+        ControladorArma.guardarArma();
     }//GEN-LAST:event_btArmaGuardarActionPerformed
 
     private void btArmaEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btArmaEliminarActionPerformed
         // TODO add your handling code here:
+        ControladorArma.eliminarArma();
     }//GEN-LAST:event_btArmaEliminarActionPerformed
 
     private void btArmasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btArmasActionPerformed
         // TODO add your handling code here:
+        ControladorArma.mostrarArmas();
     }//GEN-LAST:event_btArmasActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        ControladorArma.cargarCb();
+        ControladorArma.mostrarArmas();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        ControladorArma.cerrarSession();
+    }//GEN-LAST:event_formWindowClosed
+
+    private void txtArmaIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtArmaIDActionPerformed
+        // TODO add your handling code here:
+        ControladorArma.cargarDatos();
+    }//GEN-LAST:event_txtArmaIDActionPerformed
 
     public JComboBox<String> getCbArmaCar() {
         return cbArmaCar;
@@ -279,42 +346,12 @@ public class VistaArma extends javax.swing.JFrame {
         return txtArmaNombre;
     }
 
-    
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VistaArma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VistaArma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VistaArma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VistaArma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VistaArma().setVisible(true);
-            }
-        });
+    public JTable getTbArma() {
+        return tbArma;
     }
+    
+    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btArmaEliminar;
@@ -333,7 +370,9 @@ public class VistaArma extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JTable tbArma;
     private javax.swing.JTextField txtArmaAtaque;
     private javax.swing.JTextArea txtArmaCaracteristicas;
     private javax.swing.JTextField txtArmaDaño;

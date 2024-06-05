@@ -3,12 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package modelo.vo;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -17,41 +20,41 @@ import javax.persistence.Table;
  *
  * @author pedro
  */
-
 @Entity
 @Table(name = "Usuario")
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
-    private Integer id;
-    
+    private Integer ID;
+
     @Basic(optional = false)
     @Column(name = "Nombre", unique = true)
     private String nombre;
-    
+
     @Basic(optional = false)
     @Column(name = "Contrasenha")
     private String contrasenha;
-    
+
     @Column(name = "Estado")
     private String estado;
-    
+
     @Column(name = "Foto")
     private byte[] foto;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personaje")
-    private List<Personaje> personajeList;
 
+    // Elimina esta lista ya que no es necesaria
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    private List<Personaje> personajeList;
 
     public Usuario() {
     }
 
-    public Usuario(Integer id, String nombre, String contrasenha, String estado, byte[] foto) {
-        this.id = id;
+    public Usuario(Integer ID, String nombre, String contrasenha, String estado, byte[] foto) {
+        this.ID = ID;
         this.nombre = nombre;
         this.contrasenha = contrasenha;
         this.estado = estado;
@@ -59,11 +62,11 @@ public class Usuario implements Serializable {
     }
 
     public Integer getId() {
-        return id;
+        return ID;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer ID) {
+        this.ID = ID;
     }
 
     public String getNombre() {
@@ -109,7 +112,7 @@ public class Usuario implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (ID != null ? ID.hashCode() : 0);
         return hash;
     }
 
@@ -119,7 +122,7 @@ public class Usuario implements Serializable {
             return false;
         }
         Usuario other = (Usuario) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.ID == null && other.ID != null) || (this.ID != null && !this.ID.equals(other.ID))) {
             return false;
         }
         return true;
