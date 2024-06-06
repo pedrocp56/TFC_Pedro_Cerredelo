@@ -12,6 +12,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cerredelo.gestor.Armas;
+import com.cerredelo.gestor.Login;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,9 +21,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import Helper.Variables;
+
 public class ArmaControlador {
 
     private RequestQueue queue;
+    private static final String URL_Arma= Login.IP+"Armas/";
 
     public ArmaControlador(Context context) {
         // Inicializar la cola de solicitudes Volley en el constructor
@@ -30,7 +34,7 @@ public class ArmaControlador {
     }
 
     public void cargarListaArmas(final ArmaControlador.OnListaArmasCargadaListener listener) {
-        String url = "http://192.168.1.33:8080/Armas/verArmas";
+        String url = URL_Arma+"verArmas";
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
@@ -70,7 +74,7 @@ public class ArmaControlador {
 
 
     public void buscarArma(final Long armaId, final ArmaControlador.OnArmaEncontradaListener listener) {
-        String url = "http://192.168.1.33:8080/Armas/buscarArma/" + armaId;
+        String url = URL_Arma+"buscarArma/" + armaId;
 
         // Crear una solicitud GET para buscar el personaje
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,

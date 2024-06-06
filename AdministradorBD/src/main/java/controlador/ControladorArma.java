@@ -69,7 +69,18 @@ public class ControladorArma {
     }
 
     public static void mostrarArmas() {
-        armaDAO.cargarTb(session, modelotbArma);
+        try {
+            //java.lang.IllegalStateException: Session/EntityManager is closed
+            HibernateUtil.beginTx(session);
+            armaDAO.cargarTb(session, modelotbArma);
+            HibernateUtil.commitTx(session);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Error de formato");
+            HibernateUtil.rollbackTx(session);
+        } catch (Exception ex) {
+            HibernateUtil.rollbackTx(session);
+            Logger.getLogger(ControladorArma.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public static void guardarArma() {
@@ -105,12 +116,14 @@ public class ControladorArma {
             } else if (aNombre != null) {
                 JOptionPane.showMessageDialog(null, "Ya existe el arma " + aNombre.getId().toString() + " con ese nombre");
             }
-            session.getTransaction().commit();
+            //cambiar a hibernate Util
+            HibernateUtil.commitTx(session);
+            //HibernateUtil.commitTx(session);
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Error de formato");
-            session.getTransaction().rollback();
+            HibernateUtil.rollbackTx(session);
         } catch (Exception ex) {
-            session.getTransaction().rollback();
+            HibernateUtil.rollbackTx(session);
             Logger.getLogger(ControladorArma.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -130,13 +143,13 @@ public class ControladorArma {
                 JOptionPane.showMessageDialog(null, "Arma borrada");
                 limpiarDatos();
             }
-            session.getTransaction().commit();
+            HibernateUtil.commitTx(session);
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Error de formato");
-            session.getTransaction().rollback();
+            HibernateUtil.rollbackTx(session);
             ventana.getTxtArmaID().grabFocus();
         } catch (Exception ex) {
-            session.getTransaction().rollback();
+            HibernateUtil.rollbackTx(session);
             Logger.getLogger(ControladorArma.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -162,13 +175,13 @@ public class ControladorArma {
                 ventana.getTxtArmaCaracteristicas().setText(a.getCaracteristicas());
                 ventana.getTxtArmaFoto().setText("");
             }
-            session.getTransaction().commit();
+            HibernateUtil.commitTx(session);
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Error de formato");
-            session.getTransaction().rollback();
+            HibernateUtil.rollbackTx(session);
             ventana.getTxtArmaID().grabFocus();
         } catch (Exception ex) {
-            session.getTransaction().rollback();
+            HibernateUtil.rollbackTx(session);
             Logger.getLogger(ControladorUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

@@ -14,10 +14,11 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">16dp</item>
-        <item name="android:layout_marginBottom">16dp</item>
         <item name="android:background">@drawable/edit_text_background</item>
         <item name="hintTextColor">@color/hintTextColor</item>
         <item name="android:textColor">@color/textColor</item>
+        <item name="android:textAlignment">center</item>
+
     </style>
 
     <!-- Style for Buttons -->
@@ -25,9 +26,49 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">16dp</item>
-        <item name="android:layout_marginBottom">16dp</item>
         <item name="android:backgroundTint">@color/buttonColor</item>
         <item name="android:textColor">@color/buttonTextColor</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textAlignment">center</item>
     </style>
+
+    <style name="TextViewStyleNegrita">
+        <!-- Tamaño del texto en sp (puntos de escala) -->
+        <item name="android:textSize">20sp</item>
+        <!-- Color del texto, puede ser un color sólido o un recurso de color definido en colors.xml -->
+        <item name="android:textColor">@color/black</item>
+        <!-- Estilo del texto, puede ser normal, negrita, cursiva, etc. -->
+        <item name="android:textStyle">bold</item>
+        <!-- Alineación del texto dentro del TextView (izquierda, derecha, centro, etc.) -->
+        <item name="android:gravity">left</item>
+        <!-- Relleno interno del TextView, espacio entre el borde y el contenido del TextView -->
+        <item name="android:padding">0dp</item>
+        <!-- Alineación vertical del texto dentro del TextView -->
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <style name="TextViewStyle">
+        <!-- Tamaño del texto en sp (puntos de escala) -->
+        <item name="android:textSize">20sp</item>
+        <!-- Color del texto, puede ser un color sólido o un recurso de color definido en colors.xml -->
+        <item name="android:textColor">@color/black</item>
+        <!-- Alineación del texto dentro del TextView (izquierda, derecha, centro, etc.) -->
+        <item name="android:gravity">center</item>
+        <!-- Relleno interno del TextView, espacio entre el borde y el contenido del TextView -->
+        <item name="android:padding">0dp</item>
+        <!-- Alineación vertical del texto dentro del TextView -->
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <style name="SpinnerStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:spinnerMode">dropdown</item>
+        <item name="android:gravity">start|center_vertical</item>
+        <item name="android:popupBackground">@color/white</item>
+    </style>
+
+
 
 </resources>

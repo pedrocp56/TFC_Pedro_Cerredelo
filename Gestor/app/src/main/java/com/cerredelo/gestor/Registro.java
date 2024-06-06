@@ -43,6 +43,7 @@ import java.io.ByteArrayOutputStream;
 
 import Clases.ImagenUtils;
 import Clases.Usuario;
+import Helper.Variables;
 
 public class Registro extends AppCompatActivity {
 
@@ -125,12 +126,13 @@ public class Registro extends AppCompatActivity {
                 // Navegar a la actividad de inicio de sesión
                 Intent intent = new Intent(Registro.this, Login.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
 
     private void crearNuevoUsuario(String username, String password) {
-        String registerUrl = "http://192.168.1.33:8080/Usuarios/guardarUsuario";
+        String registerUrl =  Login.IP+"Usuarios/guardarUsuario";
         JSONObject userData = new JSONObject();
         try {
             userData.put("nombre", username);
@@ -153,6 +155,7 @@ public class Registro extends AppCompatActivity {
                                 Toast.makeText(Registro.this, "Usuario registrado exitosamente", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(Registro.this, Login.class);
                                 startActivity(intent);
+                                finish();
                             } else {
                                 Toast.makeText(Registro.this, "Fallo al registrar el usuario", Toast.LENGTH_SHORT).show();
                             }

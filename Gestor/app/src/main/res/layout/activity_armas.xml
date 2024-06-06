@@ -4,18 +4,20 @@
     android:layout_height="match_parent">
 
     <!-- Botón para volver -->
+
+    <!-- Lista de armas -->
     <Button
         android:id="@+id/btnVolver"
-        android:layout_width="wrap_content"
+        style="@style/ButtonStyle"
+        android:layout_width="125dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="17dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Volver"
-        android:drawablePadding="8dp"/>
+        android:text="Volver" />
 
-    <!-- Lista de armas -->
     <ListView
         android:id="@+id/listaArmas"
         android:layout_width="match_parent"

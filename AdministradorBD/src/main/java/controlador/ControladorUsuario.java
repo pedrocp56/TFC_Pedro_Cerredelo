@@ -60,13 +60,13 @@ public class ControladorUsuario {
                 ventana.getTxtUsuarioEstado().setText(u.getEstado());
                 //ventana.getTxtUsuarioFoto().setText(u.getFoto());
             }
-            session.getTransaction().commit();
+            HibernateUtil.commitTx(session);
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Error de formato");
-            session.getTransaction().rollback();
+            HibernateUtil.rollbackTx(session);
             ventana.getTxtUsuarioID().grabFocus();
         } catch (Exception ex) {
-            session.getTransaction().rollback();
+            HibernateUtil.rollbackTx(session);
             Logger.getLogger(ControladorUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -101,13 +101,13 @@ public class ControladorUsuario {
             } else if (uNombre != null) {
                 JOptionPane.showMessageDialog(null, "Ya existe el usuario " + uNombre.getId().toString() + " con ese nombre");
             }
-            session.getTransaction().commit();
+            HibernateUtil.commitTx(session);
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Error de formato");
-            session.getTransaction().rollback();
+            HibernateUtil.rollbackTx(session);
             ventana.getTxtUsuarioID().grabFocus();
         } catch (Exception ex) {
-            session.getTransaction().rollback();
+            HibernateUtil.rollbackTx(session);
             Logger.getLogger(ControladorUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -127,13 +127,13 @@ public class ControladorUsuario {
                 JOptionPane.showMessageDialog(null, "Usuario borrado");
                 limpiarDatos();
             }
-            session.getTransaction().commit();
+            HibernateUtil.commitTx(session);
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Error de formato");
-            session.getTransaction().rollback();
+            HibernateUtil.rollbackTx(session);
             ventana.getTxtUsuarioID().grabFocus();
         } catch (Exception ex) {
-            session.getTransaction().rollback();
+            HibernateUtil.rollbackTx(session);
             Logger.getLogger(ControladorUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

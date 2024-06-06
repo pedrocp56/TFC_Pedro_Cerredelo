@@ -13,24 +13,27 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Nombre del Personaje"
-        android:textSize="16dp"/>
+        style="@style/TextViewStyleNegrita"/>
 
     <Button
         android:id="@+id/btnVer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ver"/>
+        android:text="Ver"
+        style="@style/ButtonStyle"/>
 
     <Button
         android:id="@+id/btnEditar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Editar"/>
+        android:text="Editar"
+        style="@style/ButtonStyle"/>
 
     <Button
         android:id="@+id/btnEliminar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Eliminar"/>
+        android:text="Eliminar"
+        style="@style/ButtonStyle"/>
 </LinearLayout>
 

@@ -302,7 +302,7 @@ public class VistaArma extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
-        ControladorArma.cerrarSession();
+        //ControladorArma.cerrarSession();
     }//GEN-LAST:event_formWindowClosed
 
     private void txtArmaIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtArmaIDActionPerformed

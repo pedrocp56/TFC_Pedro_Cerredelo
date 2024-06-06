@@ -14,19 +14,19 @@
         android:layout_marginTop="8dp">
 
         <TextView
-            android:layout_width="300px"
+            style="@style/TextViewStyleNegrita"
+            android:layout_width="98dp"
             android:layout_height="wrap_content"
-            android:text="Nombre del arma:"
-            android:textStyle="bold"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:text="Nombre del arma:" />
 
         <TextView
             android:id="@+id/txtNombre"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="Nombre"
-            android:textAlignment="center"/>
+            style="@style/TextViewStyle"/>
 
     </LinearLayout>
 
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Ataque:"
-            android:textStyle="bold" />
+            style="@style/TextViewStyleNegrita" />
 
         <TextView
             android:id="@+id/txtAtaque"
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Base"
-            android:textAlignment="center" />
+            style="@style/TextViewStyle" />
 
 
     </LinearLayout>
@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Daño:"
-            android:textStyle="bold" />
+            style="@style/TextViewStyleNegrita" />
 
         <TextView
             android:id="@+id/txtDanho"
@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Danho"
-            android:textAlignment="center" />
+            style="@style/TextViewStyle" />
 
     </LinearLayout>
 
@@ -90,7 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Tipo:"
-            android:textStyle="bold" />
+            style="@style/TextViewStyleNegrita" />
 
         <TextView
             android:id="@+id/txtTipo"
@@ -98,7 +98,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Tipo"
-            android:textAlignment="center" />
+            style="@style/TextViewStyle" />
 
 
     </LinearLayout>
@@ -114,7 +114,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Arrojadiza:"
-            android:textStyle="bold" />
+            style="@style/TextViewStyleNegrita" />
 
         <TextView
             android:id="@+id/txtArrojadiza"
@@ -122,7 +122,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Arrojadiza"
-            android:textAlignment="center" />
+            style="@style/TextViewStyle" />
 
 
     </LinearLayout>
@@ -138,7 +138,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Caracteristica:"
-            android:textStyle="bold" />
+            style="@style/TextViewStyleNegrita" />
 
         <TextView
             android:id="@+id/txtCaracteristica"
@@ -146,7 +146,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Caracteristica"
-            android:textAlignment="center" />
+            style="@style/TextViewStyle" />
 
 
     </LinearLayout>
@@ -162,7 +162,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Caracteristicas:"
-            android:textStyle="bold" />
+            style="@style/TextViewStyleNegrita" />
 
         <TextView
             android:id="@+id/txtCaracteristicas"
@@ -170,7 +170,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Caracteristicas"
-            android:textAlignment="center" />
+            style="@style/TextViewStyle" />
     </LinearLayout>
     <!-- Foto -->
     <LinearLayout
@@ -181,11 +181,11 @@
 
         <TextView
             android:id="@+id/textFoto"
-            android:layout_width="200px"
+            style="@style/TextViewStyleNegrita"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="URL de la foto:"
-            android:textStyle="bold"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:text="URL de la foto:" />
 
         <TextView
             android:id="@+id/txtFoto"
@@ -193,7 +193,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="URL"
-            android:textAlignment="center"/>
+            style="@style/TextViewStyle"/>
 
     </LinearLayout>
 
@@ -203,7 +203,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Volver"
-        android:layout_gravity="center"
-        android:layout_marginEnd="8dp"/>
+        style="@style/ButtonStyle"
+        android:layout_gravity="center"/>
 
 </LinearLayout>

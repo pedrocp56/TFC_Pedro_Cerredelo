@@ -13,14 +13,16 @@
         style="@style/EditTextStyle"
         android:hint="Nombre de Usuario"
         android:text="b@gmail.com"
-        android:inputType="text" />
+        android:inputType="text"
+        android:layout_marginBottom="5dp"/>
 
     <EditText
         android:id="@+id/password"
         style="@style/EditTextStyle"
         android:hint="Contraseña"
         android:text="123"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:layout_marginBottom="5dp"/>
 
     <Button
         android:id="@+id/login_button"
@@ -31,5 +33,12 @@
         android:id="@+id/register_button"
         style="@style/ButtonStyle"
         android:text="Registrarse" />
+
+    <Button
+        android:id="@+id/config_button"
+        style="@style/ButtonStyle"
+        android:text="Configuración" />
+
 </LinearLayout>
+
 

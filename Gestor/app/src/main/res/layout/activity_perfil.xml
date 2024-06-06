@@ -10,36 +10,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nombre de Usuario"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:textColor="@color/black" />
+        style="@style/TextViewStyleNegrita"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Estado del personaje"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
+        style="@style/TextViewStyleNegrita"
         android:layout_marginTop="16dp" />
     <EditText
         android:id="@+id/etPerfilEstado"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Estado"
-        android:textSize="16sp"
-        android:padding="8dp"
-        android:background="@drawable/edit_text_background"
-        android:drawablePadding="8dp"
-        android:layout_marginTop="16dp" />
+        style="@style/EditTextStyle"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Foto de Perfil"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
+        style="@style/TextViewStyleNegrita"
         android:layout_marginTop="16dp" />
 
     <ImageView
@@ -56,20 +46,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cambiar Foto"
-        android:textSize="16sp"
-        android:textColor="@color/white"
-        android:paddingStart="24dp"
-        android:paddingEnd="24dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp" />
+        style="@style/ButtonStyle"
+        android:layout_gravity="center"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nueva Contraseña"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
+        style="@style/TextViewStyleNegrita"
         android:layout_marginTop="16dp" />
 
     <EditText
@@ -77,11 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Nueva Contraseña"
-        android:textSize="16sp"
-        android:padding="8dp"
-        android:background="@drawable/edit_text_background"
-        android:drawablePadding="8dp"
-        android:inputType="textPassword"
+        style="@style/EditTextStyle"
         android:layout_marginTop="8dp" />
 
     <EditText
@@ -89,10 +69,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Confirmar Nueva Contraseña"
-        android:textSize="16sp"
-        android:padding="8dp"
-        android:background="@drawable/edit_text_background"
-        android:drawablePadding="8dp"
+        style="@style/EditTextStyle"
         android:inputType="textPassword"
         android:layout_marginTop="8dp" />
 
@@ -101,23 +78,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Guardar Cambios"
-        android:textSize="16sp"
-        android:textColor="@color/white"
-        android:paddingStart="24dp"
-        android:paddingEnd="24dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp" />
+        style="@style/ButtonStyle"
+        android:layout_gravity="center" />
 
     <Button
         android:id="@+id/btnVolver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Volver"
-        android:textSize="16sp"
-        android:textColor="@color/white"
-        android:paddingStart="24dp"
-        android:paddingEnd="24dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp" />
+        style="@style/ButtonStyle"
+        android:layout_gravity="center"/>
 </LinearLayout>
 

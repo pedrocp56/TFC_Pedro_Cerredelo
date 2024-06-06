@@ -29,9 +29,9 @@ import Clases.PersonajeControlador;
 
 public class EditarArmaPersonaje extends AppCompatActivity {
 
-    private EditText txtAtaque, txtBoni;
+    private EditText  txtBoni;
     private CheckBox chkCompetencia;
-    private TextView txtNombrePersonaje,txtNombreArma;
+    private TextView txtAtaque,txtNombrePersonaje,txtNombreArma;
     Long personajeId, armaId, usuarioId;
     String personajeNombre, armaNombre;
     Arma arma;
@@ -73,7 +73,7 @@ public class EditarArmaPersonaje extends AppCompatActivity {
             public void onClick(View v) {
                 if(comprobarDatos()) {
                     // Obtener los datos editados del EditText
-                    int ataqueTotal = Integer.parseInt(txtAtaque.getText().toString().trim());
+                    int ataqueTotal = calcularAtaque();
                     int bonificacionAdicional = Integer.parseInt(txtBoni.getText().toString().trim());
                     boolean competencia = chkCompetencia.isChecked();
 
@@ -115,7 +115,7 @@ public class EditarArmaPersonaje extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // Ejecutar mostrarAtaque cuando el estado del CheckBox cambie
-                mostrarAtaque();
+                calcularAtaque();
             }
         });
 
@@ -128,7 +128,7 @@ public class EditarArmaPersonaje extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 // Ejecutar mostrarAtaque cuando el texto cambie
-                mostrarAtaque();
+                calcularAtaque();
             }
 
             @Override
@@ -186,21 +186,10 @@ public class EditarArmaPersonaje extends AppCompatActivity {
         txtAtaque.setText(String.valueOf(armaper.getAtaqueTotal()));
         txtBoni.setText(String.valueOf(armaper.getBonificacionAdicional()));
         chkCompetencia.setChecked(armaper.isCompetencia());
-        mostrarAtaque();
+        calcularAtaque();
     }
     private boolean comprobarDatos() {
-        String ataqueStr = txtAtaque.getText().toString().trim();
         String boniStr = txtBoni.getText().toString().trim();
-
-        if (ataqueStr.isEmpty()) {
-            Toast.makeText(EditarArmaPersonaje.this, "El valor de ataque no puede estar vacío", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        if (!isNumeric(ataqueStr)) {
-            Toast.makeText(EditarArmaPersonaje.this, "El valor de ataque debe ser numérico", Toast.LENGTH_SHORT).show();
-            return false;
-        }
 
         if (boniStr.isEmpty()) {
             Toast.makeText(EditarArmaPersonaje.this, "El valor de bonificación adicional no puede estar vacío", Toast.LENGTH_SHORT).show();
@@ -255,9 +244,9 @@ public class EditarArmaPersonaje extends AppCompatActivity {
             }
         });
     }
-    private void mostrarAtaque() {
+    private int calcularAtaque() {
         if (personaje == null || arma == null) {
-            return; // Salir si los datos no están cargados
+            return 0; // Salir si los datos no están cargados
         }
         int ataqueT = 0;
         switch (arma.getCar()) {
@@ -293,6 +282,7 @@ public class EditarArmaPersonaje extends AppCompatActivity {
             ataqueT+=Integer.parseInt(txtBoni.getText().toString().trim());
         }
         txtAtaque.setText(String.valueOf(ataqueT));
+        return  ataqueT;
     }
 
 }

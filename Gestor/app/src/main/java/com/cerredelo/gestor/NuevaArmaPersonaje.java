@@ -4,13 +4,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -33,12 +37,14 @@ import Clases.PersonajeControlador;
 
 public class NuevaArmaPersonaje extends AppCompatActivity {
 
-    private EditText txtAtaque, txtBoni;
+    private EditText  txtBoni;
     private CheckBox chkCompetencia;
-    private TextView txtNombrePersonaje;
+    private TextView txtAtaque,txtNombrePersonaje;
     Long personajeId, usuarioId;
     String personajeNombre;
     Spinner spinnerArmas;
+    Arma arma;
+    Personaje personaje;
 
 
     @Override
@@ -53,6 +59,20 @@ public class NuevaArmaPersonaje extends AppCompatActivity {
         chkCompetencia = findViewById(R.id.chkCompetencia);
         txtNombrePersonaje = findViewById(R.id.txtNombrePersonaje);
         spinnerArmas = findViewById(R.id.spinnerArmas);
+        spinnerArmas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // Aquí se llama a la lógica para calcular el ataque cuando se selecciona un arma
+                Arma armaSeleccionada = (Arma) parent.getItemAtPosition(position);
+                buscarArma(armaSeleccionada.getId());
+                calcularAtaque();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Método llamado cuando no se ha seleccionado ningún elemento
+            }
+        });
 
         // Configurar el botón "Volver"
         Button btnVolver = findViewById(R.id.btnVolver);
@@ -79,6 +99,33 @@ public class NuevaArmaPersonaje extends AppCompatActivity {
                 }
             }
         });
+        chkCompetencia.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // Ejecutar mostrarAtaque cuando el estado del CheckBox cambie
+                calcularAtaque();
+            }
+        });
+
+        txtBoni.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // No se necesita implementar
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // Ejecutar mostrarAtaque cuando el texto cambie
+                calcularAtaque();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // No se necesita implementar
+            }
+        });
+
+
 
         // Obtener los datos del Intent
         Intent intent = getIntent();
@@ -86,11 +133,16 @@ public class NuevaArmaPersonaje extends AppCompatActivity {
             personajeId = intent.getLongExtra("personajeId", 0);
             personajeNombre = intent.getStringExtra("personajeNombre");
             txtNombrePersonaje.setText(personajeNombre);
+            buscarPersonaje(personajeId);
         }
         cargarDatosUsuario();
 
         // Obtener la lista de armas
         obtenerListaArmas();
+
+        //recuperamos la primera arma para la primera ejecucion
+        txtBoni.setText("0");
+        calcularAtaque();
     }
 
     private void obtenerListaArmas() {
@@ -212,5 +264,77 @@ public class NuevaArmaPersonaje extends AppCompatActivity {
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    private void buscarArma(Long armaId) {
+        ArmaControlador armaControlador = new ArmaControlador(this);
+        armaControlador.buscarArma(armaId, new ArmaControlador.OnArmaEncontradaListener() {
+
+            @Override
+            public void onArmaEncontrada(Arma arm) {
+                arma = arm;
+            }
+
+            @Override
+            public void onError(String mensajeError) {
+                // Manejar el error si no se puede encontrar el personaje
+                Toast.makeText(NuevaArmaPersonaje.this, mensajeError, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    private void buscarPersonaje(Long personajeId) {
+        PersonajeControlador personajeControlador = new PersonajeControlador(this);
+        personajeControlador.buscarPersonaje(personajeId, new PersonajeControlador.OnPersonajeEncontradoListener() {
+            @Override
+            public void onPersonajeEncontrado(Personaje p) {
+                personaje=p;
+            }
+
+            @Override
+            public void onError(String mensajeError) {
+                // Manejar el error si no se puede encontrar el personaje
+                Toast.makeText(NuevaArmaPersonaje.this, mensajeError, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    private int calcularAtaque() {
+        if (personaje == null || arma == null) {
+            return 0; // Salir si los datos no están cargados
+        }
+        int ataqueT = 0;
+        switch (arma.getCar()) {
+            case "Fuerza":
+                ataqueT = (int) Math.floor((personaje.getFuerza() - 10) / 2);
+                break;
+            case "Destreza":
+                ataqueT = (int) Math.floor((personaje.getDestreza() - 10) / 2);
+                break;
+            case "Constitucion":
+                ataqueT = (int) Math.floor((personaje.getConstitucion() - 10) / 2);
+                break;
+            case "Inteligencia":
+                ataqueT = (int) Math.floor((personaje.getInteligencia() - 10) / 2);
+                break;
+            case "Sabiduria":
+                ataqueT = (int) Math.floor((personaje.getSabiduria() - 10) / 2);
+                break;
+            case "Carisma":
+                ataqueT = (int) Math.floor((personaje.getCarisma() - 10) / 2);
+                break;
+            default:
+                // Manejo de caso por defecto si el atributo no coincide con ninguno
+                ataqueT = 0;
+                break;
+        }
+        ataqueT+= arma.getAtaque();
+
+        if(chkCompetencia.isChecked()){
+            ataqueT+=personaje.getBonoCompetencia();
+        }
+        if(!txtBoni.getText().toString().isEmpty()){
+            ataqueT+=Integer.parseInt(txtBoni.getText().toString().trim());
+        }
+        txtAtaque.setText(String.valueOf(ataqueT));
+        return  ataqueT;
     }
 }

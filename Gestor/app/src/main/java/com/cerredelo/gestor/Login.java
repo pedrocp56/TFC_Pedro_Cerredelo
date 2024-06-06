@@ -29,24 +29,31 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import Clases.Usuario;
+import Helper.Variables;
 
 public class Login extends AppCompatActivity {
 
     private EditText usernameEditText;
     private EditText passwordEditText;
-    private Button loginButton;
+    private Button loginButton, configButton;
     private Button registerButton;
     private RequestQueue queue;
+
+    public static String IP;
+    public static String idioma;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        cargarPreferences();
+
         usernameEditText = findViewById(R.id.username);
         passwordEditText = findViewById(R.id.password);
         loginButton = findViewById(R.id.login_button);
         registerButton = findViewById(R.id.register_button);
+        configButton = findViewById(R.id.config_button);
         queue = Volley.newRequestQueue(this);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -67,13 +74,31 @@ public class Login extends AppCompatActivity {
                 // Navegar a la actividad de registro
                 Intent intent = new Intent(Login.this, Registro.class);
                 startActivity(intent);
+                finish();
             }
         });
+
+
+        configButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navegar a la actividad de ConfigInicial
+                Intent intent2 = new Intent(Login.this, ConfigInicial.class);
+                startActivity(intent2);
+                finish();
+            }
+        });
+
+    }
+    private void cargarPreferences() {
+        SharedPreferences sharedPreferences = getSharedPreferences("ConfigPreferences", Context.MODE_PRIVATE);
+        idioma = sharedPreferences.getString("Idioma", "Español");
+        IP = sharedPreferences.getString("IP", "http://192.168.56.1:8080/");
     }
 
     private void loginUser(String username, String password) {
         // URL del endpoint de tu API para verificar las credenciales del usuario
-        String loginUrl = "http://192.168.1.33:8080/Usuarios/Login/" + username + "/" + password;
+        String loginUrl = IP+ "Usuarios/Login/" + username + "/" + password;
 
         // Crear la solicitud JSON para realizar la verificación de las credenciales del usuario
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, loginUrl, null,
@@ -89,8 +114,8 @@ public class Login extends AppCompatActivity {
                                 Usuario login = new Usuario(response);
                                 // Guardar los datos del usuario en SharedPreferences
                                 saveUserData(login);
-                                Intent intent = new Intent(Login.this, PantallaPrincipal.class);
-                                startActivity(intent);
+                                Intent intent3 = new Intent(Login.this, PantallaPrincipal.class);
+                                startActivity(intent3);
                                 finish(); // Cierra la actividad de inicio de sesión para evitar que el usuario regrese con el botón "Atrás"
                             }
                         } catch (JSONException e) {

@@ -36,6 +36,7 @@ import org.json.JSONObject;
 
 import Clases.ImagenUtils;
 import Clases.Usuario;
+import Helper.Variables;
 
 public class Perfil extends AppCompatActivity {
 
@@ -159,7 +160,7 @@ public class Perfil extends AppCompatActivity {
         long userId = sharedPref.getLong("userId", -1);
 
         // Construir la URL de actualización del usuario con su ID
-        String updateUrl = "http://192.168.1.33:8080/Usuarios/actualizarUsuario/" + userId;
+        String updateUrl =  Variables.IP+"Usuarios/actualizarUsuario/" + userId;
 
         // Crear un objeto JSONObject que contendrá los datos actualizados del usuario
         JSONObject userData = new JSONObject();

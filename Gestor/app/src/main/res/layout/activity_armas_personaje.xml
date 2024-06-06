@@ -8,7 +8,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
 
         <!-- Botón para volver -->
         <Button
@@ -16,17 +19,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Volver"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"/>
+            style="@style/ButtonStyle"
+            android:layout_marginRight="5dp"/>
 
         <!-- Botón para agregar un nueva arma al personaje -->
         <Button
             android:id="@+id/btnNuevaArmaPersonaje"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nuevo arma para el personaje"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp" />
+            android:text="Nueva arma para el personaje"
+            style="@style/ButtonStyle"/>
 
     </LinearLayout>
 
@@ -36,6 +38,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"/>
 
 </LinearLayout>

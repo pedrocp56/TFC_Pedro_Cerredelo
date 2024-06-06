@@ -14,20 +14,20 @@
 
         <TextView
             android:id="@+id/textUsuario"
-            android:layout_width="wrap_content"
+            style="@style/TextViewStyleNegrita"
+            android:layout_width="75dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Usuario:"
-            android:textStyle="bold"
-            android:layout_weight="1"/>
+            />
 
         <TextView
             android:id="@+id/textNombreUsuario"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="Nombre Usuario"
-            android:textStyle="bold"
             android:layout_weight="1"
-            android:textAlignment="center"/>
+            style="@style/TextViewStyle"/>
 
     </LinearLayout>
 
@@ -40,11 +40,11 @@
 
         <TextView
             android:id="@+id/textNombre"
-            android:layout_width="300px"
+            android:layout_width="125dp"
             android:layout_height="wrap_content"
             android:text="Nombre del personaje:"
-            android:textStyle="bold"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            style="@style/TextViewStyleNegrita"/>
 
         <EditText
             android:id="@+id/editNombre"
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:hint="Ingrese el nombre"
-            android:textAlignment="center"/>
+            style="@style/EditTextStyle"/>
 
     </LinearLayout>
 
@@ -65,19 +65,19 @@
 
         <TextView
             android:id="@+id/textFuerza"
-            android:layout_width="200px"
+            android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:text="Fuerza:"
-            android:textStyle="bold"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            style="@style/TextViewStyleNegrita"/>
 
         <EditText
             android:id="@+id/editFuerza"
-            android:layout_width="200px"
+            style="@style/EditTextStyle"
+            android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:hint="Ingrese la fuerza"
-            android:textAlignment="center"/>
+            android:hint="Ingrese la fuerza" />
 
     </LinearLayout>
 
@@ -90,19 +90,19 @@
 
         <TextView
             android:id="@+id/textDestreza"
-            android:layout_width="200px"
+            android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:text="Destreza:"
-            android:textStyle="bold"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            style="@style/TextViewStyleNegrita"/>
 
         <EditText
             android:id="@+id/editDestreza"
-            android:layout_width="200px"
+            android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:hint="Ingrese la Destreza"
-            android:textAlignment="center"/>
+            style="@style/EditTextStyle"/>
 
     </LinearLayout>
     <!-- Constitucion -->
@@ -114,19 +114,19 @@
 
         <TextView
             android:id="@+id/textConstitucion"
-            android:layout_width="200px"
+            android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:text="Constitucion:"
-            android:textStyle="bold"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            style="@style/TextViewStyleNegrita"/>
 
         <EditText
             android:id="@+id/editConstitucion"
-            android:layout_width="200px"
+            android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:hint="Ingrese la Constitucion"
-            android:textAlignment="center"/>
+            style="@style/EditTextStyle"/>
 
     </LinearLayout>
     <!-- Inteligencia -->
@@ -138,19 +138,19 @@
 
         <TextView
             android:id="@+id/textInteligencia"
-            android:layout_width="200px"
+            android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:text="Inteligencia:"
-            android:textStyle="bold"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            style="@style/TextViewStyleNegrita"/>
 
         <EditText
             android:id="@+id/editInteligencia"
-            android:layout_width="200px"
+            android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:hint="Ingrese la Inteligencia"
-            android:textAlignment="center"/>
+            style="@style/EditTextStyle"/>
 
     </LinearLayout>
     <!-- Sabiduria -->
@@ -162,19 +162,20 @@
 
         <TextView
             android:id="@+id/textSabiduria"
-            android:layout_width="200px"
+            android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:text="Sabiduria:"
-            android:textStyle="bold"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            style="@style/TextViewStyleNegrita"/>
 
         <EditText
             android:id="@+id/editSabiduria"
-            android:layout_width="200px"
+            android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:hint="Ingrese la Sabiduria"
-            android:textAlignment="center"/>
+            style="@style/EditTextStyle"
+            />
 
     </LinearLayout>
     <!-- Carisma -->
@@ -186,19 +187,19 @@
 
         <TextView
             android:id="@+id/textCarisma"
-            android:layout_width="200px"
+            android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:text="Carisma:"
-            android:textStyle="bold"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            style="@style/TextViewStyleNegrita"/>
 
         <EditText
             android:id="@+id/editCarisma"
-            android:layout_width="200px"
+            android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:hint="Ingrese la Carisma"
-            android:textAlignment="center"/>
+            style="@style/EditTextStyle"/>
 
     </LinearLayout>
     <!-- Competencia -->
@@ -210,19 +211,19 @@
 
         <TextView
             android:id="@+id/textCompetencia"
-            android:layout_width="200px"
+            android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:text="Competencia:"
-            android:textStyle="bold"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            style="@style/TextViewStyleNegrita"/>
 
         <EditText
             android:id="@+id/editCompetencia"
-            android:layout_width="200px"
+            android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:hint="Ingrese la Competencia"
-            android:textAlignment="center"/>
+            style="@style/EditTextStyle"/>
 
     </LinearLayout>
     <!-- Foto -->
@@ -234,19 +235,19 @@
 
         <TextView
             android:id="@+id/textFoto"
-            android:layout_width="200px"
+            android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:text="URL de la foto:"
-            android:textStyle="bold"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            style="@style/TextViewStyleNegrita"/>
 
         <EditText
             android:id="@+id/editFoto"
-            android:layout_width="200px"
+            android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:hint="Ingrese la URL"
-            android:textAlignment="center"/>
+            style="@style/EditTextStyle"/>
 
     </LinearLayout>
 
@@ -256,7 +257,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp">
+        android:layout_marginTop="2dp">
 
         <Button
             android:id="@+id/btnVolver"
@@ -264,7 +265,8 @@
             android:layout_height="wrap_content"
             android:text="Volver"
             android:layout_weight="1"
-            android:layout_marginEnd="8dp"/>
+            android:layout_marginEnd="8dp"
+            style="@style/ButtonStyle"/>
 
         <Button
             android:id="@+id/btnConfirmar"
@@ -272,7 +274,8 @@
             android:layout_height="wrap_content"
             android:text="Confirmar"
             android:layout_weight="1"
-            android:layout_marginStart="8dp"/>
+            android:layout_marginStart="8dp"
+            style="@style/ButtonStyle"/>
 
     </LinearLayout>
 

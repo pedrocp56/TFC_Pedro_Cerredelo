@@ -4,6 +4,10 @@
  */
 package vista;
 
+import controlador.ControladorStart;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author pedro
@@ -33,7 +37,8 @@ public class Start extends javax.swing.JFrame {
         btArma = new javax.swing.JButton();
         btArmaPersonaje = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        btInfoGeneral = new javax.swing.JButton();
+        btInfoArmas = new javax.swing.JButton();
+        btInfoUsuarios = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
 
@@ -98,10 +103,17 @@ public class Start extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Informes"));
 
-        btInfoGeneral.setText("Informe General");
-        btInfoGeneral.addActionListener(new java.awt.event.ActionListener() {
+        btInfoArmas.setText("Informe Armas mas fuertes por personaje");
+        btInfoArmas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btInfoGeneralActionPerformed(evt);
+                btInfoArmasActionPerformed(evt);
+            }
+        });
+
+        btInfoUsuarios.setText("Informe Usuarios conteo Personajes");
+        btInfoUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btInfoUsuariosActionPerformed(evt);
             }
         });
 
@@ -110,15 +122,20 @@ public class Start extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(btInfoGeneral)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(btInfoArmas)
+                .addGap(18, 18, 18)
+                .addComponent(btInfoUsuarios)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(btInfoGeneral)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btInfoArmas)
+                    .addComponent(btInfoUsuarios))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -127,31 +144,35 @@ public class Start extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btInfoGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInfoGeneralActionPerformed
-        // TODO add your handling code here:
-        //informe sobre cantidad de usuarios, usuarios con al menos un personaje// personajes, personajes promedio por usuario// armas, armas sin personaje, 5 armas mas populares
-    }//GEN-LAST:event_btInfoGeneralActionPerformed
+    private void btInfoArmasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInfoArmasActionPerformed
+        try {
+            // TODO add your handling code here:
+            ControladorStart.generarReporteArmas();
+            //informe sobre cantidad de usuarios, usuarios con al menos un personaje// personajes, personajes promedio por usuario// armas, armas sin personaje, 5 armas mas populares
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btInfoArmasActionPerformed
 
     private void btUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUsuarioActionPerformed
         // TODO add your handling code here:
@@ -173,11 +194,25 @@ public class Start extends javax.swing.JFrame {
         controlador.ControladorArmaPersonaje.iniciar();
     }//GEN-LAST:event_btArmaPersonajeActionPerformed
 
+    private void btInfoUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInfoUsuariosActionPerformed
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            ControladorStart.generarReporteUsuarios();
+            //informe sobre cantidad de usuarios, usuarios con al menos un personaje// personajes, personajes promedio por usuario// armas, armas sin personaje, 5 armas mas populares
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btInfoUsuariosActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btArma;
     private javax.swing.JButton btArmaPersonaje;
-    private javax.swing.JButton btInfoGeneral;
+    private javax.swing.JButton btInfoArmas;
+    private javax.swing.JButton btInfoUsuarios;
     private javax.swing.JButton btPersonaje;
     private javax.swing.JButton btUsuario;
     private javax.swing.JPanel jPanel1;

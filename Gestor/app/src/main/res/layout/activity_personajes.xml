@@ -3,33 +3,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Botón para volver -->
-    <Button
-        android:id="@+id/btnVolverPantallaPrincipal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Volver"
-        android:drawablePadding="8dp"/>
 
-    <!-- Botón para agregar un nuevo personaje -->
-    <Button
-        android:id="@+id/btnNuevoPersonaje"
-        android:layout_width="wrap_content"
+    <!-- Fila para los botones -->
+    <LinearLayout
+        android:id="@+id/botones"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nuevo Personaje"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"/>
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
+
+        <!-- Botón para volver -->
+        <Button
+            android:id="@+id/btnVolverPantallaPrincipal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Volver"
+            style="@style/ButtonStyle"
+            android:layout_marginRight="5dp"/>
+
+        <!-- Botón para agregar un nuevo personaj -->
+        <Button
+            android:id="@+id/btnNuevoPersonaje"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nuevo Personaje"
+            style="@style/ButtonStyle"/>
+
+    </LinearLayout>
 
     <!-- Lista de personajes -->
     <ListView
         android:id="@+id/listaPersonajes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/btnNuevoPersonaje"
+        android:layout_below="@id/botones"
         android:layout_marginTop="16dp"/>
 </RelativeLayout>

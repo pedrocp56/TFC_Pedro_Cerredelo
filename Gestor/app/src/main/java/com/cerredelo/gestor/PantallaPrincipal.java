@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,6 +28,7 @@ public class PantallaPrincipal extends AppCompatActivity {
     private ImageView userIconImageView;
     private Spinner dropdownMenu;
     private Long ID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,22 +50,29 @@ public class PantallaPrincipal extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // Manejar la selección del elemento del menú aquí
-                switch (position) {
-                    case 0:
-                        // Ajustes: agregar la lógica necesaria para abrir la pantalla de ajustes
-                        break;
-                    case 1:
-                        // Perfil: agregar la lógica necesaria para abrir la pantalla de perfil
-                        Intent intent = new Intent(PantallaPrincipal.this, Perfil.class);
-                        startActivity(intent);
-                        finish();
-                        break;
-                    case 2:
-                        // Cerrar Sesión: agregar la lógica necesaria para cerrar la sesión
-                        cerrarSesion();
-                        break;
+                    switch (position) {
+                        case 0:
+                            break;
+                        case 1:
+                            Toast.makeText(PantallaPrincipal.this, "Mondongo", Toast.LENGTH_SHORT).show();
+                            // Ajustes: agregar la lógica necesaria para abrir la pantalla de ajustes
+                            Intent intent = new Intent(PantallaPrincipal.this, Ajustes.class);
+                            startActivity(intent);
+                            finish();
+                            break;
+                        case 2:
+                            // Perfil: agregar la lógica necesaria para abrir la pantalla de perfil
+                            Intent intent2 = new Intent(PantallaPrincipal.this, Perfil.class);
+                            startActivity(intent2);
+                            finish();
+                            break;
+                        case 3:
+                            // Cerrar Sesión: agregar la lógica necesaria para cerrar la sesión
+                            cerrarSesion();
+                            break;
+                    }
                 }
-            }
+
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {

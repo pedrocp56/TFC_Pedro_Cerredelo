@@ -7,42 +7,31 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
-import android.content.Context;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.cerredelo.gestor.Login;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.Context;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
+import Helper.Variables;
 
 public class ArmaPersonajeControlador {
     private RequestQueue queue;
-    private static final String BASE_URL = "http://192.168.1.33:8080/ArmaPersonaje/";
+    private static final String URL_ArmaPersonaje = Login.IP+"ArmaPersonaje/";
 
     public ArmaPersonajeControlador(Context context) {
         queue = Volley.newRequestQueue(context.getApplicationContext());
     }
 
     public void cargarListaArmasPersonaje(long personajeId, final OnListaArmasPersonajeCargadaListener listener) {
-        String url = BASE_URL+"buscarArmaPersonajePorPersonaje/" + personajeId;
+        String url = URL_ArmaPersonaje +"buscarArmaPersonajePorPersonaje/" + personajeId;
 
         // Crear una solicitud GET para obtener la lista de armas del personaje
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
@@ -84,7 +73,7 @@ public class ArmaPersonajeControlador {
     }
 
     public void buscarArmaPorIds(long armaId, long personajeId, long usuarioId, final OnArmaEncontradaListener listener) {
-        String url = BASE_URL+"buscarArma/" + armaId + "/" + personajeId + "/" + usuarioId;
+        String url = URL_ArmaPersonaje +"buscarArma/" + armaId + "/" + personajeId + "/" + usuarioId;
 
         // Crear una solicitud GET para buscar el arma por sus IDs
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -133,7 +122,7 @@ public class ArmaPersonajeControlador {
             @Override
             public void onError(String mensajeError) {
                 // Si no se encuentra un arma para el personaje, crear el arma
-                String url = BASE_URL + "guardarArmaPersonaje/" + armaId + "/" + personajeId + "/" + usuarioId;
+                String url = URL_ArmaPersonaje + "guardarArmaPersonaje/" + armaId + "/" + personajeId + "/" + usuarioId;
 
                 // Convertir el objeto ArmaPersonaje a JSON
                 JSONObject armaPersonajeJson = new JSONObject();
@@ -176,7 +165,7 @@ public class ArmaPersonajeControlador {
 
 
     public void actualizarArmaPersonaje(final long armaId, final long personajeId, final long usuarioId, final ArmaPersonaje armaPersonaje, final OnResponseListener listener) {
-        String url = BASE_URL + "actualizarArmaPersonaje/" + armaId + "/" + personajeId + "/" + usuarioId;
+        String url = URL_ArmaPersonaje + "actualizarArmaPersonaje/" + armaId + "/" + personajeId + "/" + usuarioId;
 
         JSONObject postParams = new JSONObject();
         try {
@@ -207,7 +196,7 @@ public class ArmaPersonajeControlador {
     }
 
     public void eliminarArmaPersonaje(final long armaId, final long personajeId, final long usuarioId, final OnResponseListener listener) {
-        String url = BASE_URL + "eliminarArmaPersonaje/" + armaId + "/" + personajeId + "/" + usuarioId;
+        String url = URL_ArmaPersonaje + "eliminarArmaPersonaje/" + armaId + "/" + personajeId + "/" + usuarioId;
 
         StringRequest stringRequest = new StringRequest(Request.Method.DELETE, url,
                 new Response.Listener<String>() {

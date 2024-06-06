@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ConfigInicial"
+    android:padding="16dp">
+
+    <!-- TextView for Language Selection -->
+    <TextView
+        android:id="@+id/languageLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Seleccione el idioma"
+        style="@style/TextViewStyleNegrita"/>
+
+    <!-- Spinner for Language Selection -->
+    <Spinner
+        android:id="@+id/languageSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        style="@style/SpinnerStyle"/>
+
+    <!-- TextView for IP Input -->
+    <TextView
+        android:id="@+id/ipLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ingrese la IP"
+        style="@style/TextViewStyleNegrita"
+        android:layout_marginTop="16dp" />
+
+    <!-- EditText for IP Input -->
+    <EditText
+        android:id="@+id/ipInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="http://192.168.56.1:8080/"
+        android:layout_marginTop="8dp"
+        android:inputType="text"
+        style="@style/EditTextStyle"/>
+
+    <!-- Button to Confirm -->
+    <Button
+        android:id="@+id/confirmButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Confirmar"
+        android:layout_marginTop="16dp"
+        style="@style/ButtonStyle"/>
+
+    <!-- Button to Go Back -->
+    <Button
+        android:id="@+id/volverButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Volver"
+        android:layout_marginTop="16dp"
+        style="@style/ButtonStyle"/>
+</LinearLayout>
+

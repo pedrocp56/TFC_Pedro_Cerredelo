@@ -8,19 +8,24 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.cerredelo.gestor.Login;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import Helper.Variables;
+
 public class UsuarioControlador {
     private RequestQueue queue;
+    private static final String URL_Usuario = Login.IP+"Usuarios/";
+
 
     public UsuarioControlador(Context context) {
         // Inicializar la cola de solicitudes Volley en el constructor
         queue = Volley.newRequestQueue(context.getApplicationContext());
     }
     public void buscarUsuario(final Long usuarioID, final OnUsuarioEncontradoListener listener) {
-        String url = "http://192.168.1.33:8080/Usuarios/buscarUsuario/" + usuarioID;
+        String url = URL_Usuario+"buscarUsuario/" + usuarioID;
 
         // Crear una solicitud GET para buscar el usuario
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,

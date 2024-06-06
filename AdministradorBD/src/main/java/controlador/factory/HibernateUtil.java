@@ -1,5 +1,6 @@
 package controlador.factory;
 
+import Aux.Variables;
 import modelo.dao.ArmaDAO;
 import modelo.dao.ArmaPersonajeDAO;
 import modelo.dao.PersonajeDAO;
@@ -15,7 +16,20 @@ public class HibernateUtil {
 
     static {
         try {
-            sessionFactory = new Configuration().configure().buildSessionFactory();
+            // Crear una instancia de Variables
+            Variables variables = new Variables();
+
+            // Configurar Hibernate programáticamente
+            Configuration configuration = new Configuration();
+            configuration.configure(); // Cargar configuración desde hibernate.cfg.xml
+
+            // Sobrescribir propiedades con valores de Variables
+            configuration.setProperty("hibernate.connection.url", "jdbc:mysql://" + variables.IP + variables.nombreBD + "?zeroDateTimeBehavior=CONVERT_TO_NULL");
+            configuration.setProperty("hibernate.connection.username", variables.usuario);
+            configuration.setProperty("hibernate.connection.password", variables.contraseña);
+            configuration.setProperty("hibernate.default_schema", variables.nombreBD);
+
+            sessionFactory = configuration.buildSessionFactory();
 
         } catch (Throwable ex) {
             System.err.println("Session Factory could not be created." + ex);
@@ -31,7 +45,6 @@ public class HibernateUtil {
      * *************** PARA GESTIONAR LAS TRANSACCIONES **************
      */
     public static Transaction beginTx(Session s) {
-
         if (s.getTransaction() == null || !s.getTransaction().isActive()) {
             return s.beginTransaction();
         }
@@ -51,7 +64,8 @@ public class HibernateUtil {
     }
 
     /**
-     * ********************** INCORPORA LOS MÉTODOS PARA CREAR LOS OBJETOS DAO *******
+     * ********************** INCORPORA LOS MÉTODOS PARA CREAR LOS OBJETOS DAO
+     * *******
      */
     public static ArmaDAO getArmaDAO() {
         return new ArmaDAO();

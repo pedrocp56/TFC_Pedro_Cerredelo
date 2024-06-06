@@ -24,6 +24,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".Ajustes"
+            android:exported="false" />
+        <activity
+            android:name=".ConfigInicial"
+            android:exported="true" />
+        <activity
             android:name=".NuevaArmaPersonaje"
             android:exported="true" />
         <activity

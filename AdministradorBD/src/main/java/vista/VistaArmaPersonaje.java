@@ -55,7 +55,15 @@ public class VistaArmaPersonaje extends javax.swing.JFrame {
         tbArmaPersonaje = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowStateListener(new java.awt.event.WindowStateListener() {
+            public void windowStateChanged(java.awt.event.WindowEvent evt) {
+                formWindowStateChanged(evt);
+            }
+        });
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
             }
@@ -256,7 +264,7 @@ public class VistaArmaPersonaje extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
-        ControladorArmaPersonaje.cerrarSession();
+        //ControladorArmaPersonaje.cerrarSession();
     }//GEN-LAST:event_formWindowClosed
 
     private void cbArmaPerPersonajeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbArmaPerPersonajeItemStateChanged
@@ -268,6 +276,14 @@ public class VistaArmaPersonaje extends javax.swing.JFrame {
         // TODO add your handling code here:
         ControladorArmaPersonaje.cargarDatosArmaPersonaje();
     }//GEN-LAST:event_cbArmaPerArmaItemStateChanged
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowActivated
+
+    private void formWindowStateChanged(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowStateChanged
+        // TODO add your handling code here:        
+    }//GEN-LAST:event_formWindowStateChanged
 
     public JButton getBtArmasPersonajes() {
         return btArmasPersonajes;

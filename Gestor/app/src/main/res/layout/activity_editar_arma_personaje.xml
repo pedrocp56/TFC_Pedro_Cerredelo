@@ -14,19 +14,19 @@
         android:layout_marginTop="8dp">
 
         <TextView
-            android:layout_width="300px"
+            style="@style/TextViewStyleNegrita"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nombre del Personaje:"
-            android:textStyle="bold"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:text="Nombre del Personaje:" />
 
         <TextView
             android:id="@+id/txtNombrePersonaje"
-            android:layout_width="wrap_content"
+            android:layout_width="165dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="Nombre"
-            android:textAlignment="center"/>
+            style="@style/TextViewStyle"/>
 
     </LinearLayout>
 
@@ -38,19 +38,19 @@
         android:layout_marginTop="8dp">
 
         <TextView
-            android:layout_width="300px"
+            style="@style/TextViewStyleNegrita"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nombre del arma:"
-            android:textStyle="bold"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:text="Nombre del arma:" />
 
         <TextView
             android:id="@+id/txtNombreArma"
-            android:layout_width="wrap_content"
+            style="@style/TextViewStyle"
+            android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Nombre"
-            android:textAlignment="center"/>
+            android:text="Nombre" />
 
     </LinearLayout>
 
@@ -62,19 +62,19 @@
         android:layout_marginTop="8dp">
 
         <TextView
-            android:layout_width="0dp"
+            style="@style/TextViewStyleNegrita"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Ataque total:"
-            android:textStyle="bold" />
+            android:text="Ataque total:" />
 
-        <EditText
+        <TextView
             android:id="@+id/txtAtaque"
-            android:layout_width="0dp"
+            android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Ataque"
-            android:textAlignment="center" />
+            android:text="Ataque"
+            style="@style/TextViewStyle"/>
 
     </LinearLayout>
 
@@ -86,11 +86,11 @@
         android:layout_marginTop="8dp">
 
         <TextView
-            android:layout_width="0dp"
+            style="@style/TextViewStyleNegrita"
+            android:layout_width="39dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Bonificador adicional:"
-            android:textStyle="bold" />
+            android:text="Bonificador adicional:" />
 
         <EditText
             android:id="@+id/txtBoni"
@@ -98,7 +98,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="Bonificador"
-            android:textAlignment="center" />
+            style="@style/EditTextStyle"/>
 
     </LinearLayout>
 
@@ -110,11 +110,11 @@
         android:layout_marginTop="8dp">
 
         <TextView
-            android:layout_width="0dp"
+            style="@style/TextViewStyleNegrita"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Competencia:"
-            android:textStyle="bold" />
+            android:text="Competencia:" />
 
         <CheckBox
             android:id="@+id/chkCompetencia"
@@ -137,8 +137,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Volver"
-            android:layout_gravity="center"
-            android:layout_marginEnd="8dp"/>
+            style="@style/ButtonStyle"/>
 
         <Button
             android:id="@+id/btnConfirmar"
@@ -146,8 +145,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Confirmar"
-            android:layout_gravity="center"
-            android:layout_marginEnd="8dp"/>
+            style="@style/ButtonStyle"/>
     </LinearLayout>
 
 </LinearLayout>

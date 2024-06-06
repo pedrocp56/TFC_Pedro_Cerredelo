@@ -1,8 +1,19 @@
 <resources>
+    <!-- Nombre de la aplicación -->
     <string name="app_name">Gestor</string>
+
+    <!-- Opciones de perfil -->
     <string-array name="opcionesPerfil">
+        <item></item>
         <item>Ajustes</item>
         <item>Perfil</item>
         <item>Cerrar Sesión</item>
     </string-array>
+
+    <!-- Opciones de idiomas -->
+    <string-array name="idiomas">
+        <item>Español</item>
+        <item>Gallego</item>
+    </string-array>
 </resources>
+

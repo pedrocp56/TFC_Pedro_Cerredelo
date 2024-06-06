@@ -318,7 +318,7 @@ public class VistaPersonaje extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
-        ControladorPersonaje.cerrarSession();
+        //ControladorPersonaje.cerrarSession();
     }//GEN-LAST:event_formWindowClosed
 
     private void txtPersonajeIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPersonajeIDActionPerformed

@@ -85,12 +85,12 @@ public class ControladorArmaPersonaje {
                 armaPerDAO.modificarArmaPersonaje(session, ap, ataque, Integer.parseInt(ventana.getTxtArmaPerBonificador().getText()), ventana.getCbCompetencia().isSelected());
                 JOptionPane.showMessageDialog(null, p.getPersonajeNombre() + " cambia su " + a.getNombre());
             }
-            session.getTransaction().commit();
+            HibernateUtil.commitTx(session);
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Error de formato");
-            session.getTransaction().rollback();
+            HibernateUtil.rollbackTx(session);
         } catch (Exception ex) {
-            session.getTransaction().rollback();
+            HibernateUtil.rollbackTx(session);
             Logger.getLogger(ControladorArma.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -111,12 +111,12 @@ public class ControladorArmaPersonaje {
                 JOptionPane.showMessageDialog(null, p.getPersonajeNombre() + " se desequipa " + a.getNombre());
                 limpiarDatos();
             }
-            session.getTransaction().commit();
+            HibernateUtil.commitTx(session);
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Error de formato");
-            session.getTransaction().rollback();
+            HibernateUtil.rollbackTx(session);
         } catch (Exception ex) {
-            session.getTransaction().rollback();
+            HibernateUtil.rollbackTx(session);
             Logger.getLogger(ControladorArma.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -147,12 +147,12 @@ public class ControladorArmaPersonaje {
                 ventana.getTxtArmaPerBonificador().setText(ap.getBonificaciónAdicional().toString());
                 ventana.getCbCompetencia().setSelected(ap.getCompetencia());
             }
-            session.getTransaction().commit();
+            HibernateUtil.commitTx(session);
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Error de formato");
-            session.getTransaction().rollback();
+            HibernateUtil.rollbackTx(session);
         } catch (Exception ex) {
-            session.getTransaction().rollback();
+            HibernateUtil.rollbackTx(session);
             Logger
                     .getLogger(ControladorArmaPersonaje.class
                             .getName()).log(Level.SEVERE, null, ex);

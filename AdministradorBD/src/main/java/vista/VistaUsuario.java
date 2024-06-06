@@ -241,11 +241,12 @@ public class VistaUsuario extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         ControladorUsuario.cargarDatosUsuario();
+        ControladorUsuario.mostrarUsuarios();
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
-        ControladorUsuario.cerrarSession();
+        //ControladorUsuario.cerrarSession();
     }//GEN-LAST:event_formWindowClosed
 
     private void txtUsuarioIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioIDActionPerformed

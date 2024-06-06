@@ -26,11 +26,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Clases.Usuario;
+import Helper.Variables;
 
 public class MainActivity extends AppCompatActivity {
 
     RequestQueue queue;
-    String baseUrl = "http://192.168.1.33:8080/Usuarios/verUsuarios";
+    String baseUrl =  Variables.IP+"Usuarios/verUsuarios";
 
     List<String> usuarios = new ArrayList<String>();
     ListView listUsuarios;

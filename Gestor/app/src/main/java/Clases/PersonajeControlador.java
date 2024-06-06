@@ -10,6 +10,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.cerredelo.gestor.Login;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,9 +19,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import Helper.Variables;
+
 public class PersonajeControlador {
 
     private RequestQueue queue;
+    private static final String URL_Personaje = Login.IP+"Personajes/";
+
 
     public PersonajeControlador(Context context) {
         // Inicializar la cola de solicitudes Volley en el constructor
@@ -28,7 +33,7 @@ public class PersonajeControlador {
     }
 
     public void cargarListaPersonajes(Long userID, final OnListaPersonajesCargadaListener listener) {
-        String url = "http://192.168.1.33:8080/Personajes/buscarPersonajesPorUsuario/" + userID;
+        String url = URL_Personaje+"buscarPersonajesPorUsuario/" + userID;
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
@@ -65,7 +70,7 @@ public class PersonajeControlador {
     }
 
     public void eliminarPersonaje(final long usuarioId, final long personajeId, final OnPersonajeEliminadoListener listener) {
-        String url = "http://192.168.1.33:8080/Personajes/eliminarPersonaje/" + usuarioId + "/" + personajeId;
+        String url = URL_Personaje+"eliminarPersonaje/" + usuarioId + "/" + personajeId;
 
         // Crear una solicitud DELETE para eliminar el personaje
         StringRequest stringRequest = new StringRequest(Request.Method.DELETE, url,
@@ -94,7 +99,7 @@ public class PersonajeControlador {
     }
 
     public void buscarPersonaje(final long personajeId, final OnPersonajeEncontradoListener listener) {
-        String url = "http://192.168.1.33:8080/Personajes/buscarPersonajeById/" + personajeId;
+        String url = URL_Personaje+"buscarPersonajeById/" + personajeId;
 
         // Crear una solicitud GET para buscar el personaje
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -132,7 +137,7 @@ public class PersonajeControlador {
     }
 
     public void actualizarPersonaje(final long personajeId,final Personaje personaje, final OnPersonajeActualizadoListener listener) {
-        String url = "http://192.168.1.33:8080/Personajes/actualizarPersonaje/"+ personajeId;
+        String url = URL_Personaje+"actualizarPersonaje/"+ personajeId;
 
         // Convertir el objeto Personaje a JSON
         JSONObject personajeJson = new JSONObject();
@@ -179,7 +184,7 @@ public class PersonajeControlador {
     }
 
     public void crearPersonaje(final Long usuarioId,final Personaje personaje, final OnPersonajeCreadoListener listener) {
-        String url = "http://192.168.1.33:8080/Personajes/guardarPersonaje/"+usuarioId;
+        String url = URL_Personaje+"guardarPersonaje/"+usuarioId;
 
         // Convertir el objeto Personaje a JSON
         JSONObject personajeJson = new JSONObject();
