@@ -1,2 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <!-- Nombre de la aplicación -->
+    <string name="app_name">Gestor</string>
+
+    <!-- Opciones de perfil -->
+    <string-array name="opcionesPerfil">
+        <item></item>
+        <item>Axustes</item>
+        <item>Perfil</item>
+        <item>Pechar sesión</item>
+    </string-array>
+
+    <!-- Opciones de idiomas -->
+    <string-array name="idiomas">
+        <item>Español</item>
+        <item>Galego</item>
+    </string-array>
+    <string name="notification_message_registro">" rexistrado exitosamente"</string>
+    <string name="notification_title_registro">Rexistro</string>
+</resources>

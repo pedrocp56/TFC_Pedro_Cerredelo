@@ -15,5 +15,9 @@
         <item>Español</item>
         <item>Gallego</item>
     </string-array>
+    <string name="notification_message_registro">" registrado exitosamente"</string>
+    <string name="notification_title_registro">Registro</string>
+
+
 </resources>
 

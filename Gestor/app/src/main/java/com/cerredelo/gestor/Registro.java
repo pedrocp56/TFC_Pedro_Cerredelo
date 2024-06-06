@@ -152,7 +152,8 @@ public class Registro extends AppCompatActivity {
                         try {
                             boolean success = response.getBoolean("success");
                             if (success) {
-                                Toast.makeText(Registro.this, "Usuario registrado exitosamente", Toast.LENGTH_SHORT).show();
+                                Notificacion noti = new Notificacion();
+                                noti.mostrarNotificacion(Registro.this, getString(R.string.notification_title_registro), usernameEditText.getText().toString()+getString(R.string.notification_message_registro));
                                 Intent intent = new Intent(Registro.this, Login.class);
                                 startActivity(intent);
                                 finish();
