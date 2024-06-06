@@ -176,22 +176,22 @@ public class Start extends javax.swing.JFrame {
 
     private void btUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUsuarioActionPerformed
         // TODO add your handling code here:
-        controlador.ControladorUsuario.iniciar();
+        controlador.ControladorStart.iniciarUsuario();
     }//GEN-LAST:event_btUsuarioActionPerformed
 
     private void btPersonajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPersonajeActionPerformed
         // TODO add your handling code here:
-        controlador.ControladorPersonaje.iniciar();
+        controlador.ControladorStart.iniciarPersonaje();
     }//GEN-LAST:event_btPersonajeActionPerformed
 
     private void btArmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btArmaActionPerformed
         // TODO add your handling code here:
-        controlador.ControladorArma.iniciar();
+        controlador.ControladorStart.iniciarArma();
     }//GEN-LAST:event_btArmaActionPerformed
 
     private void btArmaPersonajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btArmaPersonajeActionPerformed
         // TODO add your handling code here:
-        controlador.ControladorArmaPersonaje.iniciar();
+        controlador.ControladorStart.iniciarArmaPersonaje();
     }//GEN-LAST:event_btArmaPersonajeActionPerformed
 
     private void btInfoUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInfoUsuariosActionPerformed

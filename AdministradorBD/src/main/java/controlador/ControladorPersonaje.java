@@ -18,6 +18,7 @@ import modelo.vo.PersonajePK;
 import modelo.vo.Usuario;
 import org.hibernate.Session;
 import vista.VistaPersonaje;
+import vista.vPersonaje;
 
 /**
  *
@@ -26,18 +27,18 @@ import vista.VistaPersonaje;
 public class ControladorPersonaje {
 
     public static Session session;
-    public static VistaPersonaje ventana = new VistaPersonaje();
+    public static vPersonaje ventana;
     public static PersonajeDAO perDAO;
     public static UsuarioDAO userDAO;
     public static DefaultComboBoxModel modelcbUsuario = new DefaultComboBoxModel();
     public static DefaultTableModel modelotbPersonaje = new DefaultTableModel();
 
-    public static void iniciar() {
-        ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        ventana.setVisible(true);
-        ventana.setLocationRelativeTo(null);
+    public static void iniciar(JFrame start) {
+        ventana = new vPersonaje(start, true);
         ventana.getCbPersonajeUser().setModel(modelcbUsuario);
         modelotbPersonaje = (DefaultTableModel) ventana.getTbPersonaje().getModel();
+        ventana.setLocationRelativeTo(null);
+        ventana.setVisible(true);
     }
 
     public static void iniciarSession() {

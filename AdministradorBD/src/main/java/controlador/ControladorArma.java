@@ -22,6 +22,7 @@ import modelo.vo.Arma;
 import org.hibernate.Session;
 import vista.Start;
 import vista.VistaArma;
+import vista.vArma;
 
 /**
  *
@@ -31,19 +32,19 @@ public class ControladorArma {
 
     public static Session session;
 
-    public static VistaArma ventana = new VistaArma();
+    public static vArma ventana;
     public static ArmaDAO armaDAO;
     public static DefaultComboBoxModel modelcbTipo = new DefaultComboBoxModel();
     public static DefaultComboBoxModel modelocbCar = new DefaultComboBoxModel();
     public static DefaultTableModel modelotbArma = new DefaultTableModel();
 
-    public static void iniciar() {
-        ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        ventana.setVisible(true);
-        ventana.setLocationRelativeTo(null);
+    public static void iniciar(JFrame start) {
+        ventana = new vArma(start, true);
         ventana.getCbArmaTipo().setModel(modelcbTipo);
         ventana.getCbArmaCar().setModel(modelocbCar);
         modelotbArma = (DefaultTableModel) ventana.getTbArma().getModel();
+        ventana.setLocationRelativeTo(null);
+        ventana.setVisible(true);
     }
 
     public static void iniciarSession() {

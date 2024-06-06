@@ -14,6 +14,7 @@ import modelo.dao.UsuarioDAO;
 import modelo.vo.Usuario;
 import org.hibernate.Session;
 import vista.VistaUsuario;
+import vista.vUsuario;
 
 /**
  *
@@ -23,15 +24,15 @@ public class ControladorUsuario {
 
     public static Session session;
 
-    public static VistaUsuario ventana = new VistaUsuario();
+    public static vUsuario ventana;
     public static UsuarioDAO userDAO;
     public static DefaultTableModel modelotbUsuario = new DefaultTableModel();
 
-    public static void iniciar() {
-        ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        ventana.setVisible(true);
-        ventana.setLocationRelativeTo(null);
+    public static void iniciar(JFrame start) {
+        ventana = new vUsuario(start, true);
         modelotbUsuario = (DefaultTableModel) ventana.getTbUsuario().getModel();
+        ventana.setLocationRelativeTo(null);
+        ventana.setVisible(true);
     }
 
     public static void iniciarSession() {

@@ -44,8 +44,8 @@ public class ControladorStart {
     public static DefaultTableModel modelotbCoches = new DefaultTableModel();
 
     public static void iniciar() {
-        ventana.setVisible(true);
         ventana.setLocationRelativeTo(null);
+        ventana.setVisible(true);
     }
 
     public static void iniciarSession() {
@@ -59,6 +59,20 @@ public class ControladorStart {
     public static void cerrarSession() {
         session.close();
     }
+
+    public static void iniciarUsuario() {
+        controlador.ControladorUsuario.iniciar(ventana);
+    }
+    public static void iniciarPersonaje() {
+        controlador.ControladorPersonaje.iniciar(ventana);
+    }
+    public static void iniciarArma() {
+        controlador.ControladorArma.iniciar(ventana);
+    }
+    public static void iniciarArmaPersonaje() {
+        controlador.ControladorArmaPersonaje.iniciar(ventana);
+    }
+    
 
     public static void generarReporteArmas() throws ClassNotFoundException, InstantiationException {
         String baseDatos = "jdbc:mysql://" + v.IP + v.nombreBD;

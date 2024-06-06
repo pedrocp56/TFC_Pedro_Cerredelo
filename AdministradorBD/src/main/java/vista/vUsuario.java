@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package vista;
 
@@ -13,12 +13,13 @@ import javax.swing.JTextField;
  *
  * @author pedro
  */
-public class VistaUsuario extends javax.swing.JFrame {
+public class vUsuario extends javax.swing.JDialog {
 
     /**
-     * Creates new form Usuario
+     * Creates new form vUsuario
      */
-    public VistaUsuario() {
+    public vUsuario(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
         ControladorUsuario.iniciarSession();
     }
@@ -50,12 +51,7 @@ public class VistaUsuario extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tbUsuario = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                formFocusGained(evt);
-            }
-        });
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -121,12 +117,11 @@ public class VistaUsuario extends javax.swing.JFrame {
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtUsuarioID, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                            .addComponent(txtUsuarioID)
                             .addComponent(txtUsuarioNombre)
                             .addComponent(txtUsuarioContraseña)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -139,11 +134,6 @@ public class VistaUsuario extends javax.swing.JFrame {
                             .addComponent(txtUsuarioFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtUsuarioContraseña, txtUsuarioFoto, txtUsuarioID, txtUsuarioNombre});
-
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3, jLabel4, jLabel5});
-
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -228,6 +218,11 @@ public class VistaUsuario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtUsuarioIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioIDActionPerformed
+        // TODO add your handling code here:
+        ControladorUsuario.cargarDatosUsuario();
+    }//GEN-LAST:event_txtUsuarioIDActionPerformed
+
     private void btUsuarioGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUsuarioGuardarActionPerformed
         // TODO add your handling code here:
         ControladorUsuario.guardarUsuario();
@@ -254,16 +249,9 @@ public class VistaUsuario extends javax.swing.JFrame {
         ControladorUsuario.cerrarSession();
     }//GEN-LAST:event_formWindowClosed
 
-    private void txtUsuarioIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioIDActionPerformed
-        // TODO add your handling code here:
-        ControladorUsuario.cargarDatosUsuario();
-    }//GEN-LAST:event_txtUsuarioIDActionPerformed
-
-    private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
-        // TODO add your handling code here:
-        ControladorUsuario.cargarDatosUsuario();
-        ControladorUsuario.mostrarUsuarios();
-    }//GEN-LAST:event_formFocusGained
+    public JTable getTbUsuario() {
+        return tbUsuario;
+    }
 
     public JTextField getTxtUsuarioContraseña() {
         return txtUsuarioContraseña;
@@ -285,9 +273,6 @@ public class VistaUsuario extends javax.swing.JFrame {
         return txtUsuarioNombre;
     }
 
-    public JTable getTbUsuario() {
-        return tbUsuario;
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btUsuarioEliminar;

@@ -1,11 +1,10 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package vista;
 
 import controlador.ControladorArmaPersonaje;
-import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -18,12 +17,13 @@ import modelo.vo.Personaje;
  *
  * @author pedro
  */
-public class VistaArmaPersonaje extends javax.swing.JFrame {
+public class vArmaPersonaje extends javax.swing.JDialog {
 
     /**
-     * Creates new form VistaArmaPersonaje
+     * Creates new form vArmaPersonaje
      */
-    public VistaArmaPersonaje() {
+    public vArmaPersonaje(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
         ControladorArmaPersonaje.iniciarSession();
     }
@@ -37,6 +37,8 @@ public class VistaArmaPersonaje extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbArmaPersonaje = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel38 = new javax.swing.JLabel();
         jLabel51 = new javax.swing.JLabel();
@@ -51,24 +53,9 @@ public class VistaArmaPersonaje extends javax.swing.JFrame {
         cbCompetencia = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
         txtAtaque = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbArmaPersonaje = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                formFocusGained(evt);
-            }
-        });
-        addWindowStateListener(new java.awt.event.WindowStateListener() {
-            public void windowStateChanged(java.awt.event.WindowEvent evt) {
-                formWindowStateChanged(evt);
-            }
-        });
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
-            }
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
             }
@@ -76,6 +63,31 @@ public class VistaArmaPersonaje extends javax.swing.JFrame {
                 formWindowOpened(evt);
             }
         });
+
+        tbArmaPersonaje.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Personaje", "Arma", "Ataque", "Bonificador", "Competencia"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tbArmaPersonaje);
 
         jLabel38.setText("Personaje");
 
@@ -139,7 +151,7 @@ public class VistaArmaPersonaje extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel51, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -157,13 +169,13 @@ public class VistaArmaPersonaje extends javax.swing.JFrame {
                                 .addComponent(jLabel39)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtArmaPerBonificador, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 6, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel38, jLabel39, jLabel43, jLabel51});
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cbArmaPerArma, cbArmaPerPersonaje, cbCompetencia, txtArmaPerBonificador});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cbArmaPerArma, cbArmaPerPersonaje, cbCompetencia, txtArmaPerBonificador, txtAtaque});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,31 +208,6 @@ public class VistaArmaPersonaje extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        tbArmaPersonaje.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Personaje", "Arma", "Ataque", "Bonificador", "Competencia"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Boolean.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(tbArmaPersonaje);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -239,11 +226,16 @@ public class VistaArmaPersonaje extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cbArmaPerArmaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbArmaPerArmaItemStateChanged
+        // TODO add your handling code here:
+        ControladorArmaPersonaje.cargarDatosArmaPersonaje();
+    }//GEN-LAST:event_cbArmaPerArmaItemStateChanged
 
     private void btArmaPerGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btArmaPerGuardarActionPerformed
         // TODO add your handling code here:
@@ -255,6 +247,11 @@ public class VistaArmaPersonaje extends javax.swing.JFrame {
         // TODO add your handling code here:
         ControladorArmaPersonaje.borrarArmaPersonaje();
     }//GEN-LAST:event_btArmaPerEliminarActionPerformed
+
+    private void cbArmaPerPersonajeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbArmaPerPersonajeItemStateChanged
+        // TODO add your handling code here:
+        ControladorArmaPersonaje.cargarDatosArmaPersonaje();
+    }//GEN-LAST:event_cbArmaPerPersonajeItemStateChanged
 
     private void btArmasPersonajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btArmasPersonajesActionPerformed
         // TODO add your handling code here:
@@ -272,32 +269,6 @@ public class VistaArmaPersonaje extends javax.swing.JFrame {
         ControladorArmaPersonaje.cerrarSession();
     }//GEN-LAST:event_formWindowClosed
 
-    private void cbArmaPerPersonajeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbArmaPerPersonajeItemStateChanged
-        // TODO add your handling code here:
-        ControladorArmaPersonaje.cargarDatosArmaPersonaje();
-    }//GEN-LAST:event_cbArmaPerPersonajeItemStateChanged
-
-    private void cbArmaPerArmaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbArmaPerArmaItemStateChanged
-        // TODO add your handling code here:
-        ControladorArmaPersonaje.cargarDatosArmaPersonaje();
-    }//GEN-LAST:event_cbArmaPerArmaItemStateChanged
-
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        // TODO add your handling code here:
-    }//GEN-LAST:event_formWindowActivated
-
-    private void formWindowStateChanged(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowStateChanged
-        // TODO add your handling code here:        
-    }//GEN-LAST:event_formWindowStateChanged
-
-    private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_formFocusGained
-
-    public JButton getBtArmasPersonajes() {
-        return btArmasPersonajes;
-    }
-
     public JComboBox<Arma> getCbArmaPerArma() {
         return cbArmaPerArma;
     }
@@ -306,16 +277,16 @@ public class VistaArmaPersonaje extends javax.swing.JFrame {
         return cbArmaPerPersonaje;
     }
 
-    public JTextField getTxtArmaPerBonificador() {
-        return txtArmaPerBonificador;
-    }
-
     public JCheckBox getCbCompetencia() {
         return cbCompetencia;
     }
 
     public JTable getTbArmaPersonaje() {
         return tbArmaPersonaje;
+    }
+
+    public JTextField getTxtArmaPerBonificador() {
+        return txtArmaPerBonificador;
     }
 
     public JLabel getTxtAtaque() {

@@ -20,7 +20,7 @@ import modelo.vo.Arma_Personaje;
 import modelo.vo.Arma_PersonajePK;
 import modelo.vo.Personaje;
 import org.hibernate.Session;
-import vista.VistaArmaPersonaje;
+import vista.vArmaPersonaje;
 
 /**
  *
@@ -30,7 +30,7 @@ public class ControladorArmaPersonaje {
 
     public static Session session;
 
-    public static VistaArmaPersonaje ventana = new VistaArmaPersonaje();
+    public static vArmaPersonaje ventana;
     public static ArmaDAO armaDAO;
     public static ArmaPersonajeDAO armaPerDAO;
     public static PersonajeDAO perDAO;
@@ -39,13 +39,13 @@ public class ControladorArmaPersonaje {
     public static DefaultComboBoxModel modelcbArma = new DefaultComboBoxModel();
     public static DefaultTableModel modelotbArmaPersonaje = new DefaultTableModel();
 
-    public static void iniciar() {
-        ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        ventana.setVisible(true);
-        ventana.setLocationRelativeTo(null);
+    public static void iniciar(JFrame start) {
+        ventana = new vArmaPersonaje(start, true);
         ventana.getCbArmaPerPersonaje().setModel(modelcbPersonaje);
         ventana.getCbArmaPerArma().setModel(modelcbArma);
         modelotbArmaPersonaje = (DefaultTableModel) ventana.getTbArmaPersonaje().getModel();
+        ventana.setLocationRelativeTo(null);
+        ventana.setVisible(true);
     }
 
     public static void iniciarSession() {

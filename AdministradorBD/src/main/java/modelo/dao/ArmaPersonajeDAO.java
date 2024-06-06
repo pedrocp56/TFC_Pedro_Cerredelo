@@ -18,6 +18,7 @@ import org.hibernate.query.Query;
 public class ArmaPersonajeDAO {
 
     public void cargarCb(Session session, DefaultComboBoxModel modelcb) {
+        modelcb.removeAllElements();
         Arma_Personaje a;
         String consulta = "from Arma_Personaje a";
         Query q = session.createQuery(consulta);
