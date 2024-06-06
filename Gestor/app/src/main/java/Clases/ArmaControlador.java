@@ -2,6 +2,7 @@ package Clases;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.SectionIndexer;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -12,6 +13,8 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cerredelo.gestor.Armas;
+import com.cerredelo.gestor.ConfigInicial;
+import com.cerredelo.gestor.ControladorPref;
 import com.cerredelo.gestor.Login;
 
 import org.json.JSONArray;
@@ -26,10 +29,14 @@ import Helper.Variables;
 public class ArmaControlador {
 
     private RequestQueue queue;
-    private static final String URL_Arma= Login.IP+"Armas/";
+
+    private static String IP;
+    private static String URL_Arma;
 
     public ArmaControlador(Context context) {
         // Inicializar la cola de solicitudes Volley en el constructor
+        IP= ControladorPref.obtenerIP(context);
+        URL_Arma= IP+"Armas/";
         queue = Volley.newRequestQueue(context.getApplicationContext());
     }
 

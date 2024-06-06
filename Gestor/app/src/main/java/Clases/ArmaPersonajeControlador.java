@@ -11,6 +11,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.cerredelo.gestor.ControladorPref;
 import com.cerredelo.gestor.Login;
 
 import org.json.JSONArray;
@@ -24,9 +25,11 @@ import Helper.Variables;
 
 public class ArmaPersonajeControlador {
     private RequestQueue queue;
-    private static final String URL_ArmaPersonaje = Login.IP+"ArmaPersonaje/";
+    private static String URL_ArmaPersonaje;
 
     public ArmaPersonajeControlador(Context context) {
+        String IP= ControladorPref.obtenerIP(context);
+        URL_ArmaPersonaje= IP+"ArmaPersonaje/";
         queue = Volley.newRequestQueue(context.getApplicationContext());
     }
 

@@ -115,6 +115,7 @@ public class VerArmaPersonaje extends AppCompatActivity {
         });
     }
 
+
     private void mostrarArmapersonaje(ArmaPersonaje armaper) {
         txtNombrePersonaje.setText(personajeNombre);
         txtNombreArma.setText(armaNombre);

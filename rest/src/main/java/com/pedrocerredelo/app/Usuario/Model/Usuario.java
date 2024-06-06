@@ -20,7 +20,7 @@ public class Usuario {
     private String estado;
 
     @Lob
-    @Column(name = "Foto")
+    @Column(name = "Foto", columnDefinition = "LONGBLOB")
     private byte[] foto;
 
     public Long getId() {

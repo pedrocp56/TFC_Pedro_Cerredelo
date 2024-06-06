@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -47,7 +48,9 @@ public class Notificacion {
         builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
         builder.setLights(Color.MAGENTA, 1000, 1000);
         builder.setVibrate(new long[]{1000, 1000, 1000, 1000, 1000});
-        builder.setDefaults(Notification.DEFAULT_SOUND);
+
+        Uri soundUri = Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.vineboom);
+        builder.setSound(soundUri);
 
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
         if (ActivityCompat.checkSelfPermission(context, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {

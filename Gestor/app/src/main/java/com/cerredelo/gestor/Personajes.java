@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,7 @@ public class Personajes extends AppCompatActivity {
     private PersonajeControlador personajeControlador;
     private ListView listViewPersonajes;
     private long userId;
-    private RequestQueue queue;
+    private MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +52,6 @@ public class Personajes extends AppCompatActivity {
         // Obtener referencia a la lista de personajes
         listViewPersonajes = findViewById(R.id.listaPersonajes);
 
-        // Inicializar la cola de solicitudes de Volley
-        queue = Volley.newRequestQueue(this);
 
         // Obtener la ID del usuario almacenada en SharedPreferences
         SharedPreferences sharedPref = getSharedPreferences("UserPref", Context.MODE_PRIVATE);
@@ -153,6 +152,15 @@ public class Personajes extends AppCompatActivity {
 
         listViewPersonajes.setAdapter(adapter);
     }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Liberar los recursos del MediaPlayer al destruir la actividad
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+    }
 
     // Dentro de tu clase Personajes, agrega un método para mostrar el diálogo de confirmación de eliminación
     private void mostrarDialogoEliminar(final Personaje personaje) {
@@ -165,6 +173,9 @@ public class Personajes extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Lógica para eliminar el personaje
+                mediaPlayer = MediaPlayer.create(Personajes.this, R.raw.eliminar);
+                mediaPlayer.setVolume(1.0f, 1.0f);
+                mediaPlayer.start();
                 eliminarPersonaje(personaje);
             }
         });

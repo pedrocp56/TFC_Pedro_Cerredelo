@@ -10,6 +10,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.cerredelo.gestor.ControladorPref;
 import com.cerredelo.gestor.Login;
 
 import org.json.JSONArray;
@@ -24,11 +25,13 @@ import Helper.Variables;
 public class PersonajeControlador {
 
     private RequestQueue queue;
-    private static final String URL_Personaje = Login.IP+"Personajes/";
+    private static  String URL_Personaje;
 
 
     public PersonajeControlador(Context context) {
         // Inicializar la cola de solicitudes Volley en el constructor
+        String IP= ControladorPref.obtenerIP(context);
+        URL_Personaje= IP+"Personajes/";
         queue = Volley.newRequestQueue(context.getApplicationContext());
     }
 

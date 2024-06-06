@@ -43,12 +43,19 @@ public class Ajustes extends AppCompatActivity {
             public void onClick(View v) {
                 // Get selected language and IP
                 String selectedLanguage = languageSpinner.getSelectedItem().toString();
-
-                // Save selected language and IP to SharedPreferences
-                SharedPreferences sharedPreferences = getSharedPreferences("ConfigPreferences", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("Idioma", selectedLanguage);
-                editor.apply();
+                String idioma="es";
+                switch (selectedLanguage) {
+                    case "Español":
+                        idioma = "es";
+                        break;
+                    case "Gallego":
+                        idioma = "gl";
+                        break;
+                    default:
+                        idioma = "es";
+                        break;
+                }
+                ControladorPref.guardarIdioma(Ajustes.this,idioma);
 
                 // Optional: Show a confirmation message
                 Toast.makeText(Ajustes.this, "Configuración guardada", Toast.LENGTH_SHORT).show();
@@ -68,9 +75,7 @@ public class Ajustes extends AppCompatActivity {
     }
 
     private void loadPreferences() {
-        SharedPreferences sharedPreferences = getSharedPreferences("ConfigPreferences", Context.MODE_PRIVATE);
-        String savedLanguage = sharedPreferences.getString("Idioma", "Español");
-
+        String savedLanguage = ControladorPref.obtenerIdioma(Ajustes.this);
         // Set the selected item in the language spinner
         ArrayAdapter<CharSequence> adapter = (ArrayAdapter<CharSequence>) languageSpinner.getAdapter();
         if (adapter != null) {

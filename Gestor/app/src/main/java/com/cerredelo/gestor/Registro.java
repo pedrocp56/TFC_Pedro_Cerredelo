@@ -43,6 +43,7 @@ import java.io.ByteArrayOutputStream;
 
 import Clases.ImagenUtils;
 import Clases.Usuario;
+import Clases.UsuarioControlador;
 import Helper.Variables;
 
 public class Registro extends AppCompatActivity {
@@ -53,14 +54,14 @@ public class Registro extends AppCompatActivity {
     private Button backToLoginButton;
     private ImageView vistaFoto;
     private ImageButton tomarFotoButton;
-    private RequestQueue queue;
-    private ActivityResultLauncher<Intent> someActivityResultLauncher;
     private byte[] imagen;
+    private UsuarioControlador usuarioControlador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
+        usuarioControlador = new UsuarioControlador(Registro.this);
         imagen = null;
 
         // Inicializar las vistas
@@ -70,9 +71,6 @@ public class Registro extends AppCompatActivity {
         backToLoginButton = findViewById(R.id.back_to_login_button);
         vistaFoto = findViewById(R.id.vistaFoto);
         tomarFotoButton = findViewById(R.id.tomarFoto);
-
-        // Inicializar la cola de solicitudes
-        queue = Volley.newRequestQueue(this);
 
         // Configurar el ActivityResultLauncher para tomar una foto
         ActivityResultLauncher<Intent> someActivityResultLauncher =
@@ -112,12 +110,27 @@ public class Registro extends AppCompatActivity {
                 if (comprobarDatos()) {
                     String username = usernameEditText.getText().toString();
                     String password = passwordEditText.getText().toString();
-                    crearNuevoUsuario(username, password);
+                    usuarioControlador.crearNuevoUsuario(username, password,imagen, new UsuarioControlador.OnUsuarioRegistradoListener() {
+                        @Override
+                        public void onUsuarioRegistrado() {
+                            Notificacion noti = new Notificacion();
+                            noti.mostrarNotificacion(Registro.this, getString(R.string.notification_title_registro), usernameEditText.getText().toString() + getString(R.string.notification_message_registro));
+                            Intent intent = new Intent(Registro.this, Login.class);
+                            startActivity(intent);
+                            finish();
+                        }
+
+                        @Override
+                        public void onRegistroError(String mensajeError) {
+                            Toast.makeText(Registro.this, mensajeError, Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 } else {
                     Toast.makeText(Registro.this, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
 
         // Configurar el botón "Volver al login"
         backToLoginButton.setOnClickListener(new View.OnClickListener() {
@@ -129,52 +142,6 @@ public class Registro extends AppCompatActivity {
                 finish();
             }
         });
-    }
-
-    private void crearNuevoUsuario(String username, String password) {
-        String registerUrl =  Login.IP+"Usuarios/guardarUsuario";
-        JSONObject userData = new JSONObject();
-        try {
-            userData.put("nombre", username);
-            userData.put("contrasenha", password);
-            userData.put("estado", "Nueva cuenta");
-            userData.put("foto", imagen != null ? new JSONArray(imagen) : null); // Convertir byte[] a JSONArray
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(Registro.this, "Error al crear los datos del usuario", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, registerUrl, userData,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            boolean success = response.getBoolean("success");
-                            if (success) {
-                                Notificacion noti = new Notificacion();
-                                noti.mostrarNotificacion(Registro.this, getString(R.string.notification_title_registro), usernameEditText.getText().toString()+getString(R.string.notification_message_registro));
-                                Intent intent = new Intent(Registro.this, Login.class);
-                                startActivity(intent);
-                                finish();
-                            } else {
-                                Toast.makeText(Registro.this, "Fallo al registrar el usuario", Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Toast.makeText(Registro.this, "Error de procesamiento de datos", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(Registro.this, error.toString(), Toast.LENGTH_LONG).show();
-                        Log.d("TAG", error.toString());
-                    }
-                });
-
-        queue.add(request);
     }
 
     private boolean comprobarDatos() {

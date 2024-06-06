@@ -7,7 +7,7 @@ CREATE TABLE Usuario (
     Nombre VARCHAR(25) NOT NULL UNIQUE,
     Contrasenha VARCHAR(25) NOT NULL,
     Estado VARCHAR(100),
-    Foto BLOB
+    Foto LONGBLOB
 );
 
 CREATE TABLE Arma (

@@ -3,6 +3,7 @@ package com.cerredelo.gestor;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,11 +34,17 @@ public class ArmasPersonaje extends AppCompatActivity {
     private ListView listViewArmasPersonaje;
     private long personajeId;
     public String personajeNombre;
+    private MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_armas_personaje);
+
+        // Inicializar y reproducir el audio espadas.mp3
+        mediaPlayer = MediaPlayer.create(this, R.raw.espadas);
+        mediaPlayer.setVolume(0.5f, 0.5f);
+        mediaPlayer.start();
 
         armaPersonajeControlador = new ArmaPersonajeControlador(this);
 
@@ -90,6 +97,15 @@ public class ArmasPersonaje extends AppCompatActivity {
         // Cargar la lista de armas del personaje
         cargarListaArmasPersonaje();
     }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Liberar los recursos del MediaPlayer al destruir la actividad
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+    }
 
     // Método para cargar la lista de armas del personaje
     private void cargarListaArmasPersonaje() {
@@ -118,6 +134,10 @@ public class ArmasPersonaje extends AppCompatActivity {
         armaPersonajeControlador.eliminarArmaPersonaje(armaPersonaje.getArmaId(), armaPersonaje.getPersonajeId(), armaPersonaje.getUsuarioId(), new ArmaPersonajeControlador.OnResponseListener() {
             @Override
             public void onSuccess(String mensaje) {
+                mediaPlayer = MediaPlayer.create(ArmasPersonaje.this, R.raw.eliminar);
+                mediaPlayer.setVolume(1.0f, 1.0f);
+                mediaPlayer.start();
+
                 Toast.makeText(ArmasPersonaje.this, mensaje, Toast.LENGTH_SHORT).show();
                 cargarListaArmasPersonaje();
             }
@@ -129,5 +149,6 @@ public class ArmasPersonaje extends AppCompatActivity {
             }
         });
     }
+
 }
 

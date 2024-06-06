@@ -45,14 +45,25 @@ public class ConfigInicial extends AppCompatActivity {
             public void onClick(View v) {
                 // Get selected language and IP
                 String selectedLanguage = languageSpinner.getSelectedItem().toString();
-                String ipAddress = ipInput.getText().toString();
+                String idioma="es";
+                switch (selectedLanguage) {
+                    case "Español":
+                        idioma = "es";
+                        break;
+                    case "Gallego":
+                        idioma = "gl";
+                        break;
+                    default:
+                        idioma = "es";
+                        break;
+                }
+                ControladorPref.guardarIdioma(ConfigInicial.this,idioma);
 
-                // Save selected language and IP to SharedPreferences
-                SharedPreferences sharedPreferences = getSharedPreferences("ConfigPreferences", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("Idioma", selectedLanguage);
-                editor.putString("IP", ipAddress);
-                editor.apply();
+                if(!ipInput.getText().toString().isEmpty()) {
+                    String ipAddress = ipInput.getText().toString();
+                    ControladorPref.guardarIP(ConfigInicial.this, ipAddress);
+                }
+
 
                 // Optional: Show a confirmation message
                 Toast.makeText(ConfigInicial.this, "Configuración guardada", Toast.LENGTH_SHORT).show();
@@ -72,9 +83,9 @@ public class ConfigInicial extends AppCompatActivity {
     }
 
     private void loadPreferences() {
-        SharedPreferences sharedPreferences = getSharedPreferences("ConfigPreferences", Context.MODE_PRIVATE);
-        String savedLanguage = sharedPreferences.getString("Idioma", "Español");
-        String savedIp = sharedPreferences.getString("IP", "http://192.168.56.1:8080/");
+
+        String savedLanguage = ControladorPref.obtenerIdioma(ConfigInicial.this);
+        String savedIp = ControladorPref.obtenerIP(ConfigInicial.this);
 
         // Set the IP input field
         ipInput.setText(savedIp);
