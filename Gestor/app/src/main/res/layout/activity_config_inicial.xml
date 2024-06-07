@@ -13,7 +13,7 @@
         android:id="@+id/languageLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Seleccione el idioma"
+        android:text="@string/selecIdioma"
         style="@style/TextViewStyleNegrita"/>
 
     <!-- Spinner for Language Selection -->
@@ -29,7 +29,7 @@
         android:id="@+id/ipLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ingrese la IP"
+        android:text="@string/insertarIP"
         style="@style/TextViewStyleNegrita"
         android:layout_marginTop="16dp" />
 
@@ -48,7 +48,7 @@
         android:id="@+id/confirmButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Confirmar"
+        android:text="@string/confirmar"
         android:layout_marginTop="16dp"
         style="@style/ButtonStyle"/>
 
@@ -57,7 +57,7 @@
         android:id="@+id/volverButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Volver"
+        android:text="@string/volver"
         android:layout_marginTop="16dp"
         style="@style/ButtonStyle"/>
 </LinearLayout>

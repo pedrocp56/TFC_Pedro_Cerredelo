@@ -1,16 +1,11 @@
 package com.cerredelo.gestor;
 
-import static Clases.ImagenUtils.base64ToBitmap;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,17 +21,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import Clases.ImagenUtils;
 import Clases.Usuario;
-import Helper.Variables;
+import Clases.UsuarioControlador;
 
 public class Perfil extends AppCompatActivity {
 
@@ -47,9 +42,10 @@ public class Perfil extends AppCompatActivity {
     private TextView tvPerfilNombre;
     private Button btnGuardarCambios;
     private Button btnCambiarFoto;
-    private RequestQueue queue;
     private ActivityResultLauncher<Intent> someActivityResultLauncher;
     private byte[] imagen;
+    Long ID;
+    Usuario user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +60,6 @@ public class Perfil extends AppCompatActivity {
         tvPerfilNombre = findViewById(R.id.tvPerfilNombre);
         btnGuardarCambios = findViewById(R.id.btnGuardarCambios);
         btnCambiarFoto = findViewById(R.id.btnCambiarFoto);
-        queue = Volley.newRequestQueue(this);
 
         // Configurar el botón "Volver"
         Button btnVolver = findViewById(R.id.btnVolver);
@@ -120,24 +115,28 @@ public class Perfil extends AppCompatActivity {
     }
 
     private void cargarDatosUsuario() {
-        SharedPreferences sharedPref = getSharedPreferences("UserPref", Context.MODE_PRIVATE);
-        String userName = sharedPref.getString("userName", "");
-        String userEstado = sharedPref.getString("userEstado", "");
-        String userFoto = sharedPref.getString("userFoto", "");
 
-        tvPerfilNombre.setText(userName);
-        etPerfilEstado.setText(userEstado);
+        ID = ControladorPref.obtenerUsuarioID(Perfil.this);
+        tvPerfilNombre.setText(ControladorPref.obtenerUsuarioNombre(Perfil.this));
+        etPerfilEstado.setText(ControladorPref.obtenerUsuarioEstado(Perfil.this));
+        byte[] foto =ControladorPref.obtenerUsuarioFoto(Perfil.this);
+        if (foto==null){
 
-        if (!userFoto.isEmpty()) {
-            ivPerfilFoto.setImageBitmap(base64ToBitmap(userFoto));
+            ivPerfilFoto.setImageResource(R.drawable.camara);
         }
+        else{
+            ivPerfilFoto.setImageBitmap(ImagenUtils.byteArrayToBitmap(foto));
+        }
+        ivPerfilFoto.setVisibility(View.VISIBLE);
+
     }
 
     private void guardarCambios() {
         String estado = etPerfilEstado.getText().toString();
         String nuevaContrasena = etPerfilContrasena.getText().toString();
         String confirmarContrasena = etPerfilContrasenaConfirmar.getText().toString();
-        if (!nuevaContrasena.isEmpty()&&(nuevaContrasena.length() < 5 || nuevaContrasena.length() > 13 )) {
+
+        if (!nuevaContrasena.isEmpty() && (nuevaContrasena.length() < 5 || nuevaContrasena.length() > 13)) {
             Toast.makeText(Perfil.this, "La contraseña debe tener entre 5 y 13 caracteres", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -146,84 +145,36 @@ public class Perfil extends AppCompatActivity {
             Toast.makeText(Perfil.this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (nuevaContrasena.isEmpty()){
-            Toast.makeText(Perfil.this, "Se mantendra la antigua contraseña", Toast.LENGTH_SHORT).show();
+
+        if (nuevaContrasena.isEmpty()) {
+            Toast.makeText(Perfil.this, "Se mantendrá la antigua contraseña", Toast.LENGTH_SHORT).show();
         }
 
         // Actualizar los datos en el servidor
-        actualizarDatosUsuario(estado, nuevaContrasena, imagen);
-    }
-
-    private void actualizarDatosUsuario(String estado, String contrasena, byte[] foto) {
-        // Obtener el ID del usuario almacenado en SharedPreferences
         SharedPreferences sharedPref = getSharedPreferences("UserPref", Context.MODE_PRIVATE);
-        long userId = sharedPref.getLong("userId", -1);
+        String username = sharedPref.getString("userName", "");
+        String password = sharedPref.getString("userContrasenha", "");
 
-        // Construir la URL de actualización del usuario con su ID
-        String updateUrl =  Variables.IP+"Usuarios/actualizarUsuario/" + userId;
+        // Obtener la imagen actual del perfil como byte[]
+        byte[] foto = imagen; // Si la imagen no ha cambiado, este será el valor actual
 
-        // Crear un objeto JSONObject que contendrá los datos actualizados del usuario
-        JSONObject userData = new JSONObject();
-        try {
-            // Agregar los datos actualizados al objeto JSONObject
-            userData.put("nombre", tvPerfilNombre.getText().toString()); // Nombre obtenido del TextView
-            if(contrasena.isEmpty() ){
-                userData.put("contrasenha",sharedPref.getString("userContrasenha", ""));// Antigua contraseña
-            } else {
-                userData.put("contrasenha", contrasena); // Nueva contraseña
+        // Actualizar los datos en el servidor
+        UsuarioControlador usuarioControlador = new UsuarioControlador(Perfil.this);
+        usuarioControlador.actualizarDatosUsuario(ID,username, password, estado, foto, new UsuarioControlador.OnDatosActualizadosListener() {
+            @Override
+            public void onDatosActualizados() {
+                // Los datos se han actualizado correctamente, puedes mostrar un mensaje de éxito o realizar otras acciones necesarias
+                Toast.makeText(Perfil.this, "Datos actualizados exitosamente", Toast.LENGTH_SHORT).show();
+                // También puedes volver a cargar los datos del usuario en la vista si es necesario
             }
-            userData.put("estado", estado); // Nuevo estado
-            userData.put("foto", foto); // Nueva foto
-        } catch (JSONException e) {
-            e.printStackTrace();
-            // Manejar cualquier error al crear el objeto JSONObject
-            Toast.makeText(Perfil.this, "Error al crear los datos del usuario", Toast.LENGTH_SHORT).show();
-            return;
-        }
 
-        // Crear una solicitud JsonObjectRequest para enviar los datos actualizados al servidor
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, updateUrl, userData,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        // La respuesta se manejará como un String
-                        // Toast.makeText(Perfil.this, "Datos actualizados exitosamente", Toast.LENGTH_SHORT).show();
-                        try {
-                            String message = response.getString("message");
-                            if (message.equals("success")) {
-                                // Si la actualización fue exitosa
-                                Toast.makeText(Perfil.this, "Datos actualizados exitosamente", Toast.LENGTH_SHORT).show();
-                                // Actualizar los datos en SharedPreferences
-                                guardarDatosEnSharedPreferences(estado, userData.getString("contrasenha"));
-                            } else {
-                                // Si hubo un error en la actualización
-                                Toast.makeText(Perfil.this, "Error al actualizar los datos", Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Toast.makeText(Perfil.this, "Error de respuesta del servidor", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // Manejar errores de la solicitud al servidor
-                        Toast.makeText(Perfil.this, "Error al conectar con el servidor", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-        // Agregar la solicitud a la cola de solicitudes
-        queue.add(request);
-    }
-
-
-
-    private void guardarDatosEnSharedPreferences(String estado, String contrasena) {
-        SharedPreferences sharedPref = getSharedPreferences("UserPref", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("userEstado", estado);
-        editor.apply();
+            @Override
+            public void onError(String mensajeError) {
+                // Se produjo un error al actualizar los datos, puedes mostrar un mensaje de error o realizar otras acciones necesarias
+                Toast.makeText(Perfil.this, "Error al actualizar los datos: " + mensajeError, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
+
 

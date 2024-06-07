@@ -11,28 +11,28 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Nombre del Arma"
+        android:text="@string/nombre"
         style="@style/TextViewStyleNegrita"/>
 
     <Button
         android:id="@+id/btnVerArmaPersonaje"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ver"
+        android:text="@string/ver"
         style="@style/ButtonStyle"/>
 
     <Button
         android:id="@+id/btnEditarArmaPersonaje"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Editar"
+        android:text="@string/editar"
         style="@style/ButtonStyle"/>
 
     <Button
         android:id="@+id/btnEliminarArmaPersonaje"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Eliminar"
+        android:text="@string/eliminar"
         style="@style/ButtonStyle"/>
 
 </LinearLayout>

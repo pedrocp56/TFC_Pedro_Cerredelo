@@ -2,6 +2,9 @@ package com.cerredelo.gestor;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Base64;
+
+import java.util.Arrays;
 
 public class ControladorPref {
 
@@ -12,6 +15,7 @@ public class ControladorPref {
     private static final String userId = "userId";
     private static final String userName = "userName";
     private static final String userFoto = "userFoto";
+    private static final String userEstado = "userEstado";
 
     public static void guardarIP(Context contexto, String IP) {
         SharedPreferences sharedPreferences = contexto.getSharedPreferences(preferencias, Context.MODE_PRIVATE);
@@ -65,17 +69,39 @@ public class ControladorPref {
         return nombre;
     }
 
-    public static void guardarUsuarioFoto(Context contexto, String foto) {
+    public static void guardarUsuarioFoto(Context contexto, byte[] foto) {
         SharedPreferences sharedPreferences = contexto.getSharedPreferences(preferencias, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(userFoto, foto);
+        if (Arrays.equals(foto, new byte[]{110, 117, 108, 108})){
+            editor.putString(userFoto, null);
+        }else {
+            String fotoStr = Base64.encodeToString(foto, Base64.DEFAULT);
+            editor.putString(userFoto, fotoStr);
+        }
         editor.apply();
     }
 
-    public static String obtenerUsuarioFoto(Context contexto) {
+    public static byte[] obtenerUsuarioFoto(Context contexto) {
         SharedPreferences sharedPreferences = contexto.getSharedPreferences(preferencias, Context.MODE_PRIVATE);
-        String foto = sharedPreferences.getString(userFoto, null);
-        return foto;
+        String fotoStr = sharedPreferences.getString(userFoto, null);
+        if (fotoStr != null) {
+            return Base64.decode(fotoStr, Base64.DEFAULT);
+        } else {
+            return null;
+        }
+    }
+
+    public static void guardarUsuarioEstado(Context contexto, String estado) {
+        SharedPreferences sharedPreferences = contexto.getSharedPreferences(preferencias, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(userEstado, estado);
+        editor.apply();
+    }
+
+    public static String obtenerUsuarioEstado(Context contexto) {
+        SharedPreferences sharedPreferences = contexto.getSharedPreferences(preferencias, Context.MODE_PRIVATE);
+        String estado = sharedPreferences.getString(userEstado, "Mondongo");
+        return estado;
     }
 
 }

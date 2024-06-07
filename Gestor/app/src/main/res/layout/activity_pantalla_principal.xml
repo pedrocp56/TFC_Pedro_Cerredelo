@@ -21,7 +21,7 @@
                     android:id="@+id/user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nombre de Usuario"
+                    android:text="@string/nombre"
                     android:textSize="30sp"
                     android:textColor="#FFFFFF"
                     android:layout_gravity="center"/>
@@ -71,7 +71,8 @@
                     style="@style/ButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Armas"/>
+                    android:text="@string/armas"
+                    android:layout_marginEnd="5dp"/>
 
                 <!-- Botón de Personajes -->
                 <Button
@@ -79,8 +80,8 @@
                     style="@style/ButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Personajes"
-                    android:layout_marginStart="8dp"/>
+                    android:text="@string/personajes"
+                    android:layout_marginStart="5dp"/>
 
         </LinearLayout>
 

@@ -9,26 +9,26 @@
         android:id="@+id/tvPerfilNombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nombre de Usuario"
+        android:text="@string/nombreU"
         style="@style/TextViewStyleNegrita"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Estado del personaje"
+        android:text="@string/estadoU"
         style="@style/TextViewStyleNegrita"
         android:layout_marginTop="16dp" />
     <EditText
         android:id="@+id/etPerfilEstado"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Estado"
+        android:hint="@string/estado"
         style="@style/EditTextStyle"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Foto de Perfil"
+        android:text="@string/fotoP"
         style="@style/TextViewStyleNegrita"
         android:layout_marginTop="16dp" />
 
@@ -45,14 +45,14 @@
         android:id="@+id/btnCambiarFoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cambiar Foto"
+        android:text="@string/cambiarFoto"
         style="@style/ButtonStyle"
         android:layout_gravity="center"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nueva Contraseña"
+        android:text="@string/nuevaContr"
         style="@style/TextViewStyleNegrita"
         android:layout_marginTop="16dp" />
 
@@ -60,7 +60,7 @@
         android:id="@+id/etPerfilContrasena"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nueva Contraseña"
+        android:hint="@string/nuevaContr"
         style="@style/EditTextStyle"
         android:layout_marginTop="8dp" />
 
@@ -68,7 +68,7 @@
         android:id="@+id/etPerfilContrasenaConfirmar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Confirmar Nueva Contraseña"
+        android:hint="@string/confirmarNuevaContr"
         style="@style/EditTextStyle"
         android:inputType="textPassword"
         android:layout_marginTop="8dp" />
@@ -77,7 +77,7 @@
         android:id="@+id/btnGuardarCambios"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Guardar Cambios"
+        android:text="@string/confirmar"
         style="@style/ButtonStyle"
         android:layout_gravity="center" />
 
@@ -85,7 +85,7 @@
         android:id="@+id/btnVolver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Volver"
+        android:text="@string/volver"
         style="@style/ButtonStyle"
         android:layout_gravity="center"/>
 </LinearLayout>

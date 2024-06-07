@@ -15,17 +15,17 @@
 
         <TextView
             style="@style/TextViewStyleNegrita"
-            android:layout_width="98dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Nombre del arma:" />
+            android:text="@string/nombreA" />
 
         <TextView
             android:id="@+id/txtNombre"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="Nombre"
+            android:layout_weight="1"
+            android:text="@string/nombre"
             style="@style/TextViewStyle"/>
 
     </LinearLayout>
@@ -40,7 +40,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Ataque:"
+            android:text="@string/ataquePuntos"
             style="@style/TextViewStyleNegrita" />
 
         <TextView
@@ -48,7 +48,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Base"
+            android:text="@string/base"
             style="@style/TextViewStyle" />
 
 
@@ -65,7 +65,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Daño:"
+            android:text="@string/danhoPuntos"
             style="@style/TextViewStyleNegrita" />
 
         <TextView
@@ -73,7 +73,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Danho"
+            android:text="@string/danho"
             style="@style/TextViewStyle" />
 
     </LinearLayout>
@@ -89,7 +89,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Tipo:"
+            android:text="@string/tipoPuntos"
             style="@style/TextViewStyleNegrita" />
 
         <TextView
@@ -97,7 +97,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Tipo"
+            android:text="@string/tipo"
             style="@style/TextViewStyle" />
 
 
@@ -113,7 +113,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Arrojadiza:"
+            android:text="@string/arrojadizaPuntos"
             style="@style/TextViewStyleNegrita" />
 
         <TextView
@@ -121,7 +121,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Arrojadiza"
+            android:text="@string/arrojadiza"
             style="@style/TextViewStyle" />
 
 
@@ -137,7 +137,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Caracteristica:"
+            android:text="@string/caracteristicaPuntos"
             style="@style/TextViewStyleNegrita" />
 
         <TextView
@@ -145,7 +145,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Caracteristica"
+            android:text="@string/caracteristica"
             style="@style/TextViewStyle" />
 
 
@@ -161,7 +161,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Caracteristicas:"
+            android:text="@string/caracteristicasPuntos"
             style="@style/TextViewStyleNegrita" />
 
         <TextView
@@ -169,7 +169,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Caracteristicas"
+            android:text="@string/caracteristicas"
             style="@style/TextViewStyle" />
     </LinearLayout>
     <!-- Foto -->
@@ -182,17 +182,17 @@
         <TextView
             android:id="@+id/textFoto"
             style="@style/TextViewStyleNegrita"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="URL de la foto:" />
+            android:text="@string/urlFoto" />
 
         <TextView
             android:id="@+id/txtFoto"
-            android:layout_width="200px"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="URL"
+            android:layout_weight="1"
+            android:text="@string/ingreseUrl"
             style="@style/TextViewStyle"/>
 
     </LinearLayout>
@@ -202,7 +202,7 @@
         android:id="@+id/btnVolver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Volver"
+        android:text="@string/volver"
         style="@style/ButtonStyle"
         android:layout_gravity="center"/>
 

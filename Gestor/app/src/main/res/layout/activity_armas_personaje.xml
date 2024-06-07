@@ -18,16 +18,17 @@
             android:id="@+id/btnVolver"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Volver"
+            android:text="@string/volver"
             style="@style/ButtonStyle"
-            android:layout_marginRight="5dp"/>
+            android:layout_marginEnd="5dp"/>
 
         <!-- Botón para agregar un nueva arma al personaje -->
         <Button
             android:id="@+id/btnNuevaArmaPersonaje"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nueva arma para el personaje"
+            android:text="@string/nArmaPersonaje"
+            android:layout_marginStart="5dp"
             style="@style/ButtonStyle"/>
 
     </LinearLayout>

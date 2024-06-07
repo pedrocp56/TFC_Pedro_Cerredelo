@@ -11,13 +11,13 @@
     <EditText
         android:id="@+id/register_username"
         style="@style/EditTextStyle"
-        android:hint="Nombre de Usuario"
+        android:hint="@string/nombre"
         android:inputType="text" />
 
     <EditText
         android:id="@+id/register_password"
         style="@style/EditTextStyle"
-        android:hint="Contraseña"
+        android:hint="@string/contraseña"
         android:inputType="textPassword" />
 
     <LinearLayout
@@ -48,12 +48,12 @@
     <Button
         android:id="@+id/register_confirm_button"
         style="@style/ButtonStyle"
-        android:text="Registrarse" />
+        android:text="@string/registrarse" />
 
     <Button
         android:id="@+id/back_to_login_button"
         style="@style/ButtonStyle"
-        android:text="Volver a Inicio" />
+        android:text="@string/volver" />
 
 </LinearLayout>
 

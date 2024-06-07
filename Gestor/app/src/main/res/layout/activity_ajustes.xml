@@ -14,7 +14,7 @@
         android:id="@+id/languageLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Seleccione el idioma"
+        android:text="@string/selecIdioma"
         style="@style/TextViewStyleNegrita"/>
 
     <!-- Spinner for Language Selection -->
@@ -29,7 +29,7 @@
         android:id="@+id/confirmButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Confirmar"
+        android:text="@string/confirmar"
         style="@style/ButtonStyle"/>
 
     <!-- Button to Go Back -->
@@ -37,6 +37,6 @@
         android:id="@+id/volverButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Volver"
+        android:text="@string/volver"
         style="@style/ButtonStyle"/>
 </LinearLayout>

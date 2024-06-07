@@ -2,8 +2,6 @@ package Clases;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.SectionIndexer;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -12,10 +10,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.cerredelo.gestor.Armas;
-import com.cerredelo.gestor.ConfigInicial;
 import com.cerredelo.gestor.ControladorPref;
-import com.cerredelo.gestor.Login;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,8 +18,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import Helper.Variables;
 
 public class ArmaControlador {
 

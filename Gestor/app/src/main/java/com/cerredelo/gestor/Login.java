@@ -13,25 +13,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.ClientError;
-import com.android.volley.NetworkError;
-import com.android.volley.NoConnectionError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.ServerError;
-import com.android.volley.TimeoutError;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import Clases.Usuario;
 import Clases.UsuarioControlador;
-import Helper.Variables;
 
 public class Login extends AppCompatActivity {
 
@@ -39,8 +22,6 @@ public class Login extends AppCompatActivity {
     private EditText passwordEditText;
     private Button loginButton, configButton;
     private Button registerButton;
-
-    public static String IP;
     public static String idioma;
     private UsuarioControlador usuarioControlador;
     private MediaPlayer mediaPlayer;
@@ -125,15 +106,14 @@ public class Login extends AppCompatActivity {
 
     private void cargarPreferences() {
         SharedPreferences sharedPreferences = getSharedPreferences("ConfigPreferences", Context.MODE_PRIVATE);
-        IP = ControladorPref.obtenerIP(Login.this);
         idioma = ControladorPref.obtenerIdioma(Login.this);
     }
 
     private void saveUserData(Usuario usuario) {
         ControladorPref.guardarUsuarioID(Login.this, usuario.getId());
         ControladorPref.guardarUsuarioNombre(Login.this, usuario.getNombre());
-        String fotoBase64 = Base64.encodeToString(usuario.getFoto(), Base64.DEFAULT);
-        ControladorPref.guardarUsuarioFoto(Login.this, fotoBase64);
+        ControladorPref.guardarUsuarioEstado(Login.this, usuario.getEstado());
+        ControladorPref.guardarUsuarioFoto(Login.this, usuario.getFoto());
     }
 }
 

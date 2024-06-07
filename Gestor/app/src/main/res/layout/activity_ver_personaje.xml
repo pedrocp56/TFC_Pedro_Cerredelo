@@ -14,16 +14,16 @@
 
         <TextView
             style="@style/TextViewStyleNegrita"
-            android:layout_width="80dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Usuario:" />
+            android:text="@string/usuarioPuntos" />
 
         <TextView
             android:id="@+id/txtNombreUsuario"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Nombre Usuario"
+            android:text="@string/nombre"
             android:layout_weight="1"
             style="@style/TextViewStyle"/>
 
@@ -37,9 +37,9 @@
         android:layout_marginTop="8dp">
 
         <TextView
-            android:layout_width="80dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Nombre del personaje:"
+            android:text="@string/nombreP"
             style="@style/TextViewStyleNegrita"
             android:layout_weight="1"/>
 
@@ -47,8 +47,8 @@
             android:id="@+id/txtNombre"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="Nombre"
+            android:layout_weight="1"
+            android:text="@string/nombre"
             style="@style/TextViewStyle"/>
 
     </LinearLayout>
@@ -63,14 +63,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Caracteristicas"
+            android:text="@string/caracteristicas"
             style="@style/TextViewStyleNegrita" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Base"
+            android:text="@string/base"
             android:gravity="center"
 
             style="@style/TextViewStyleNegrita" />
@@ -79,7 +79,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Bono"
+            android:text="@string/bono"
             android:gravity="center"
             style="@style/TextViewStyleNegrita"/>
 
@@ -96,7 +96,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Fuerza:"
+            android:text="@string/fuerzaPuntos"
             style="@style/TextViewStyleNegrita" />
 
         <TextView
@@ -104,7 +104,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Fuerza"
+            android:text="@string/fuerza"
             style="@style/TextViewStyle" />
 
         <TextView
@@ -112,7 +112,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Bono Fuerza"
+            android:text="@string/bono"
             style="@style/TextViewStyle" />
 
     </LinearLayout>
@@ -128,7 +128,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Destreza:"
+            android:text="@string/destrezaPuntos"
             style="@style/TextViewStyleNegrita" />
 
         <TextView
@@ -136,7 +136,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Destreza"
+            android:text="@string/destreza"
             style="@style/TextViewStyle" />
 
         <TextView
@@ -144,7 +144,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Bono Destreza"
+            android:text="@string/bono"
             style="@style/TextViewStyle" />
 
     </LinearLayout>
@@ -159,7 +159,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Constitucion:"
+            android:text="@string/constritucion"
             style="@style/TextViewStyleNegrita" />
 
         <TextView
@@ -167,7 +167,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Constitucion"
+            android:text="@string/constritucion"
             style="@style/TextViewStyle" />
 
         <TextView
@@ -175,7 +175,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Bono Constitucion"
+            android:text="@string/bono"
             style="@style/TextViewStyle" />
 
     </LinearLayout>
@@ -190,7 +190,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Inteligencia:"
+            android:text="@string/inteligenciaPuntos"
             style="@style/TextViewStyleNegrita" />
 
         <TextView
@@ -198,7 +198,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Inteligencia"
+            android:text="@string/inteligencia"
             style="@style/TextViewStyle" />
 
         <TextView
@@ -206,7 +206,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Bono Inteligencia"
+            android:text="@string/bono"
             style="@style/TextViewStyle" />
 
     </LinearLayout>
@@ -221,7 +221,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Sabiduria:"
+            android:text="@string/sabiduriaPuntos"
             style="@style/TextViewStyleNegrita" />
 
         <TextView
@@ -229,7 +229,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Sabiduria"
+            android:text="@string/sabiduria"
             style="@style/TextViewStyle" />
 
         <TextView
@@ -237,7 +237,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Bono Sabiduria"
+            android:text="@string/bono"
             style="@style/TextViewStyle" />
 
     </LinearLayout>
@@ -252,7 +252,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Carisma:"
+            android:text="@string/carismaPuntos"
             style="@style/TextViewStyleNegrita" />
 
         <TextView
@@ -260,7 +260,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Carisma"
+            android:text="@string/carisma"
             style="@style/TextViewStyle" />
 
         <TextView
@@ -268,7 +268,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Bono Carisma"
+            android:text="@string/bono"
             style="@style/TextViewStyle" />
 
     </LinearLayout>
@@ -280,18 +280,18 @@
         android:layout_marginTop="8dp">
 
         <TextView
-            android:layout_width="200px"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Competencia:"
+            android:text="@string/competenciaPuntos"
             style="@style/TextViewStyleNegrita"
             android:layout_weight="1"/>
 
         <TextView
             android:id="@+id/txtCompetencia"
-            android:layout_width="200px"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="Ingrese la Competencia"
+            android:layout_weight="1"
+            android:text="@string/competencia"
             style="@style/TextViewStyle"/>
 
     </LinearLayout>
@@ -305,18 +305,18 @@
         <TextView
             android:id="@+id/textFoto"
             style="@style/TextViewStyleNegrita"
-            android:layout_width="80dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="URL de la foto:" />
+            android:text="@string/urlFoto" />
 
         <TextView
             android:id="@+id/txtFoto"
             style="@style/TextViewStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="URL" />
+            android:layout_weight="1"
+            android:text="@string/ingreseUrl" />
 
     </LinearLayout>
 
@@ -325,7 +325,7 @@
         android:id="@+id/btnArmas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Armas"
+        android:text="@string/armas"
         style="@style/ButtonStyle"
         android:layout_gravity="center"
         android:layout_marginEnd="8dp"/>
@@ -334,7 +334,7 @@
         android:id="@+id/btnVolver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Volver"
+        android:text="@string/volver"
         style="@style/ButtonStyle"
         android:layout_gravity="center"
         android:layout_marginEnd="8dp"/>
