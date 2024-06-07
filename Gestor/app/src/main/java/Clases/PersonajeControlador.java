@@ -11,6 +11,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cerredelo.gestor.ControladorPref;
+import com.cerredelo.gestor.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,10 +24,12 @@ public class PersonajeControlador {
 
     private RequestQueue queue;
     private static  String URL_Personaje;
+    private Context context;
 
 
     public PersonajeControlador(Context context) {
         // Inicializar la cola de solicitudes Volley en el constructor
+        this.context = context;
         String IP= ControladorPref.obtenerIP(context);
         URL_Personaje= IP+"Personajes/";
         queue = Volley.newRequestQueue(context.getApplicationContext());
@@ -57,7 +60,8 @@ public class PersonajeControlador {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Llamar al método callback para manejar el error
-                        listener.onError("Error al obtener personajes");
+                        String errorMessage = context.getString(R.string.error_Buscar_Personaje);
+                        listener.onError(errorMessage);
                     }
                 });
 
@@ -85,7 +89,8 @@ public class PersonajeControlador {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Mostrar mensaje de error al no poder realizar la solicitud
-                        listener.onError("Error al eliminar el personaje");
+                        String errorMessage = context.getString(R.string.error_Eliminar_Personaje);
+                        listener.onError(errorMessage);
                     }
                 });
 
@@ -115,7 +120,8 @@ public class PersonajeControlador {
                         } catch (JSONException e) {
                             e.printStackTrace();
                             // Llamar al listener con un mensaje de error
-                            listener.onError("Error al parsear la respuesta del servidor");
+                            String errorMessage = context.getString(R.string.error_Parsear);
+                            listener.onError(errorMessage);
                         }
                     }
                 },
@@ -123,7 +129,8 @@ public class PersonajeControlador {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Mostrar mensaje de error al no poder realizar la solicitud
-                        listener.onError("Error al buscar el personaje");
+                        String errorMessage = context.getString(R.string.error_Buscar_Personaje);
+                        listener.onError(errorMessage);
                     }
                 });
 
@@ -155,7 +162,8 @@ public class PersonajeControlador {
             }
         } catch (JSONException e) {
             e.printStackTrace();
-            listener.onError("Error al crear JSON para el personaje");
+            String errorMessage = context.getString(R.string.error_Json_Personaje);
+            listener.onError(errorMessage);
             return;
         }
 
@@ -164,13 +172,15 @@ public class PersonajeControlador {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        listener.onPersonajeActualizado("Personaje " + personaje.getNombre() + " actualizado exitosamente");
+                        String successMessage = context.getString(R.string.Success_Actualizar_Personaje);
+                        listener.onPersonajeActualizado(successMessage);
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        listener.onError("Error al actualizar el personaje " + personaje.getNombre());
+                        String errorMessage = context.getString(R.string.error_Actualizar_Personaje);
+                        listener.onError(errorMessage);
                     }
                 });
 
@@ -202,7 +212,8 @@ public class PersonajeControlador {
             }
         } catch (JSONException e) {
             e.printStackTrace();
-            listener.onError("Error al crear JSON para el personaje");
+            String errorMessage = context.getString(R.string.error_Json_Personaje);
+            listener.onError(errorMessage);
             return;
         }
 
@@ -211,13 +222,15 @@ public class PersonajeControlador {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        listener.onPersonajeCreado("Personaje creado exitosamente");
+                        String successMessage = context.getString(R.string.Success_Crear_Personaje);
+                        listener.onPersonajeCreado(successMessage);
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        listener.onError("Error al crear el personaje");
+                        String errorMessage = context.getString(R.string.error_Crear_Personaje);
+                        listener.onError(errorMessage);
                     }
                 });
 

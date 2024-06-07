@@ -1,26 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Nombre de la aplicación -->
+    <!-- Nome da aplicación -->
     <string name="app_name">Xestor</string>
 
-    <!-- Opciones de perfil -->
+    <!-- Opcións de perfil -->
     <string-array name="opcionesPerfil">
         <item></item>
         <item>Axustes</item>
         <item>Perfil</item>
-        <item>Pechar sesión</item>
+        <item>Pechar Sesión</item>
     </string-array>
 
-    <!-- Opciones de idiomas -->
+    <!-- Opcións de idiomas -->
     <string-array name="idiomas">
         <item>Español</item>
         <item>Galego</item>
     </string-array>
-    <string name="notification_message_registro">" rexistrado exitosamente"</string>
+    <string name="notification_message_registro">" rexistrado con éxito"</string>
     <string name="notification_title_registro">Rexistro</string>
     <string name="selecIdioma">Seleccione un idioma</string>
     <string name="confirmar">Confirmar</string>
-    <string name="volver">Votar</string>
+    <string name="volver">Volver</string>
     <string name="nArmaPersonaje">Nova arma para o personaxe</string>
-    <string name="insertarIP">Ingrese a IP</string>
+    <string name="insertarIP">Introduza o IP</string>
+    <string name="nombreP">Nome do personaxe:</string>
+    <string name="nombreU">Nome do usuario:</string>
+    <string name="fuerza">Forza</string>
+    <string name="destreza">Destreza</string>
+    <string name="ingerseNombre">Introduza o nome</string>
+    <string name="ingreseFuerza">Introduza a forza</string>
+    <string name="ingreseDestreza">Introduza a destreza</string>
+    <string name="constritucion">Constitución</string>
+    <string name="ingreseConstitucion">Introduza a Constitución</string>
+    <string name="inteligencia">Intelixencia</string>
+    <string name="ingreseInteligencia">Introduza a intelixencia</string>
+    <string name="sabiduria">Sabedoría</string>
+    <string name="ingreseSabiduria">Introduza a sabedoría</string>
+    <string name="carisma">Carisma</string>
+    <string name="ingreseCarisma">Introduza o carisma</string>
+    <string name="competencia">Competencia</string>
+    <string name="ingreseCompetencia">Introduza a competencia</string>
+    <string name="urlFoto">URL da foto:</string>
+    <string name="ingreseUrl">Introduza o URL</string>
+    <string name="nombre">Nome</string>
+    <string name="nombreA">Nome da arma:</string>
+    <string name="ataqueT">Ataque total:</string>
+    <string name="ataque">Ataque</string>
+    <string name="bonificadorAdic">Bonificador adicional:</string>
+    <string name="bonificador">Bonificador</string>
+    <string name="ver">Ver</string>
+    <string name="editar">Editar</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="contraseña">Contrasinal</string>
+    <string name="iniciarS">Iniciar Sesión</string>
+    <string name="registrarse">Rexistrarse</string>
+    <string name="configuracion">Configuración</string>
+    <string name="armas">Armas</string>
+    <string name="personajes">Personaxes</string>
+    <string name="estadoU">Estado do usuario</string>
+    <string name="estado">Estado</string>
+    <string name="fotoP">Foto de Perfil</string>
+    <string name="cambiarFoto">Cambiar Foto</string>
+    <string name="nuevaContr">Novo contrasinal</string>
+    <string name="confirmarNuevaContr">Confirmar novo contrasinal</string>
+    <string name="nuevoP">Novo Personaxe</string>
+    <string name="ataquePuntos">Ataque:</string>
+    <string name="base">Base</string>
+    <string name="danho">Dano</string>
+    <string name="danhoPuntos">Dano:</string>
+    <string name="tipoPuntos">Tipo:</string>
+    <string name="tipo">Tipo</string>
+    <string name="arrojadizaPuntos">Arroxadiza:</string>
+    <string name="arrojadiza">Arroxadiza</string>
+    <string name="caracteristicaPuntos">Característica:</string>
+    <string name="caracteristica">Característica</string>
+    <string name="caracteristicasPuntos">Características:</string>
+    <string name="caracteristicas">Características</string>
+    <string name="competenciaPuntos">Competencia:</string>
+    <string name="usuarioPuntos">Usuario:</string>
+    <string name="bono">Bono</string>
+    <string name="fuerzaPuntos">Forza:</string>
+    <string name="destrezaPuntos">Destreza:</string>
+    <string name="inteligenciaPuntos">Intelixencia:</string>
+    <string name="sabiduriaPuntos">Sabedoría:</string>
+    <string name="carismaPuntos">Carisma:</string>
+    <string name="constitucion">Constitución</string>
+    <string name="constitucionPuntos">Constitución:</string>
+
+    <string name="error_Arma">Erro ao obter armas</string>
+    <string name="error_Parsear">Erro ao analizar a resposta do servidor</string>
+    <string name="error_Buscar_Arma">Erro ao buscar a arma</string>
+    <string name="error_Lista_ArmaPersonaje">Erro ao cargar a lista de armas do personaxe</string>
+    <string name="error_Buscar_ArmaPersonaje">Erro ao buscar a arma polos seus IDs</string>
+    <string name="error_Equipada_ArmaPersonaje">O personaxe xa ten equipada a arma</string>
+    <string name="error_Crear_ArmaPersonaje">Erro ao crear os parámetros da arma-personaxe</string>
+    <string name="Success_Equipada_ArmaPersonaje">Arma equipada con éxito</string>
+    <string name="Success_Desequipada_ArmaPersonaje">Arma desequipada</string>
+    <string name="error_Desequipar_ArmaPersonaje">Erro ao desequipar a arma do personaxe</string>
+    <string name="error_Buscar_Personaje">Erro ao obter personaxes</string>
+    <string name="error_Eliminar_Personaje">Erro ao eliminar o personaxe</string>
+    <string name="error_Json_Personaje">Erro ao crear JSON para o personaxe</string>
+    <string name="error_Actualizar_Personaje">Erro ao actualizar o personaxe</string>
+    <string name="Success_Actualizar_Personaje">Personaxe actualizado con éxito</string>
+    <string name="Success_Crear_Personaje">Personaxe creado con éxito</string>
+    <string name="error_Crear_Personaje">Erro ao crear o personaxe</string>
+    <string name="error_Buscar_Usuario">Erro ao buscar o usuario</string>
+    <string name="error_Respuesta_Servidor">Resposta do servidor non válida</string>
+    <string name="error_Procesar_Datos">Erro de procesamento de datos</string>
+    <string name="error_LoginIncorecto_Usuario">Nome de usuario ou contrasinal incorrectos</string>
+    <string name="error_Desconocido">Erro descoñecido</string>
+    <string name="error_CrearDatos_Usuario">Erro ao crear os datos do usuario</string>
+    <string name="error_Crear_Usuario">Fallo ao rexistrar o usuario</string>
+    <string name="error_Conectar_Servidor">Erro ao conectar co servidor</string>
+    <string name="error_Actualizar_Usuario">Erro ao actualizar os datos</string>
+    <string name="eliminar_ArmaPersonaje">Eliminar Arma do Personaxe</string>
+    <string name="preguntarEliminar">"Está seguro de que quere eliminar "</string>
+    <string name="del_Personaje">" do personaxe?"</string>
+    <string name="si">Si</string>
+    <string name="no">Non</string>
+    <string name="confGuardada">Configuración gardada</string>
+    <string name="nombreVacio">O nome non pode estar baleiro</string>
+    <string name="competenciaMal">A competencia debe ser un número entre 2 e 6</string>
+    <string name="carismaMal">O carisma debe ser un número entre 1 e 30</string>
+    <string name="sabiduriaMal">A sabedoría debe ser un número entre 1 e 30</string>
+    <string name="inteligenciaMal">A intelixencia debe ser un número entre 1 e 30</string>
+    <string name="constitucionMal">A constitución debe ser un número entre 1 e 30</string>
+    <string name="destrezaMal">A destreza debe ser un número entre 1 e 30</string>
+    <string name="fuerzaMal">A forza debe ser un número entre 1 e 30</string>
+    <string name="bonificadorAdicMal">O valor de bonificación adicional debe ser numérico</string>
+    <string name="inicioSesion">Inicio de sesión con éxito</string>
+    <string name="contraseñaMalTamanho">A contrasinal debe ter entre 5 e 13 caracteres</string>
+    <string name="contraseñaMalCoincidencia">As contrasinais non coinciden</string>
+    <string name="datosActualizados">Datos actualizados con éxito</string>
+    <string name="eliminar_Personaje">Eliminar Personaxe</string>
+    <string name="mensajeEliminar_Personaje1">"Está seguro de que quere eliminar o personaxe "</string>
+    <string name="mensajeEliminar_Personaje2">\? Tamén se eliminarán todas as armas que o personaxe ten equipadas.</string>
+    <string name="relleneCampos">Por favor, cubra todos os campos</string>
+    <string name="correoMal">Por favor, introduza un correo electrónico válido</string>
+    <string name="contrasenhaMal">A contrasinal debe ter entre 5 e 13 caracteres alfanuméricos</string>
+
 </resources>

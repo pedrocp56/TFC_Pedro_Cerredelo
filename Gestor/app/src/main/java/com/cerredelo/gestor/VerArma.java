@@ -83,7 +83,7 @@ public class VerArma extends AppCompatActivity {
         txtAtaque.setText(String.valueOf(arma.getAtaque()));
         txtDanho.setText(arma.getDanho());
         txtTipo.setText(arma.getTipo());
-        txtArrojadiza.setText(arma.isArrojadiza() ? "Sí" : "No");
+        txtArrojadiza.setText(arma.isArrojadiza() ? VerArma.this.getString(R.string.si) : VerArma.this.getString(R.string.no));
         txtCaracteristica.setText(arma.getCar());
         txtCaracteristicas.setText(arma.getCaracteristicas());
         // Si deseas manejar la foto, puedes hacerlo aquí

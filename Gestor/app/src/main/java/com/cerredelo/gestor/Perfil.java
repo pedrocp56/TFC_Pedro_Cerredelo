@@ -45,7 +45,8 @@ public class Perfil extends AppCompatActivity {
     private ActivityResultLauncher<Intent> someActivityResultLauncher;
     private byte[] imagen;
     Long ID;
-    Usuario user;
+    String contrasenha;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,11 +118,11 @@ public class Perfil extends AppCompatActivity {
     private void cargarDatosUsuario() {
 
         ID = ControladorPref.obtenerUsuarioID(Perfil.this);
+        contrasenha = ControladorPref.obtenerUsuarioContrasenha(Perfil.this);
         tvPerfilNombre.setText(ControladorPref.obtenerUsuarioNombre(Perfil.this));
         etPerfilEstado.setText(ControladorPref.obtenerUsuarioEstado(Perfil.this));
         byte[] foto =ControladorPref.obtenerUsuarioFoto(Perfil.this);
         if (foto==null){
-
             ivPerfilFoto.setImageResource(R.drawable.camara);
         }
         else{
@@ -137,41 +138,39 @@ public class Perfil extends AppCompatActivity {
         String confirmarContrasena = etPerfilContrasenaConfirmar.getText().toString();
 
         if (!nuevaContrasena.isEmpty() && (nuevaContrasena.length() < 5 || nuevaContrasena.length() > 13)) {
-            Toast.makeText(Perfil.this, "La contraseña debe tener entre 5 y 13 caracteres", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Perfil.this, Perfil.this.getString(R.string.contraseñaMalTamanho), Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (!nuevaContrasena.equals(confirmarContrasena)) {
-            Toast.makeText(Perfil.this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Perfil.this, Perfil.this.getString(R.string.contraseñaMalCoincidencia), Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (nuevaContrasena.isEmpty()) {
-            Toast.makeText(Perfil.this, "Se mantendrá la antigua contraseña", Toast.LENGTH_SHORT).show();
+        String username = ControladorPref.obtenerUsuarioNombre(Perfil.this);
+        if(nuevaContrasena.isEmpty()){
+            nuevaContrasena = contrasenha;
         }
-
-        // Actualizar los datos en el servidor
-        SharedPreferences sharedPref = getSharedPreferences("UserPref", Context.MODE_PRIVATE);
-        String username = sharedPref.getString("userName", "");
-        String password = sharedPref.getString("userContrasenha", "");
-
-        // Obtener la imagen actual del perfil como byte[]
         byte[] foto = imagen; // Si la imagen no ha cambiado, este será el valor actual
 
-        // Actualizar los datos en el servidor
         UsuarioControlador usuarioControlador = new UsuarioControlador(Perfil.this);
-        usuarioControlador.actualizarDatosUsuario(ID,username, password, estado, foto, new UsuarioControlador.OnDatosActualizadosListener() {
+        String finalNuevaContrasena = nuevaContrasena;
+        usuarioControlador.actualizarDatosUsuario(ID,username, nuevaContrasena, estado, foto, new UsuarioControlador.OnDatosActualizadosListener() {
             @Override
             public void onDatosActualizados() {
                 // Los datos se han actualizado correctamente, puedes mostrar un mensaje de éxito o realizar otras acciones necesarias
-                Toast.makeText(Perfil.this, "Datos actualizados exitosamente", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Perfil.this, Perfil.this.getString(R.string.datosActualizados), Toast.LENGTH_SHORT).show();
+                ControladorPref.guardarUsuarioContrasenha(Perfil.this, finalNuevaContrasena);
+                ControladorPref.guardarUsuarioEstado(Perfil.this, estado);
+                ControladorPref.guardarUsuarioFoto(Perfil.this,foto);
+
                 // También puedes volver a cargar los datos del usuario en la vista si es necesario
             }
 
             @Override
             public void onError(String mensajeError) {
                 // Se produjo un error al actualizar los datos, puedes mostrar un mensaje de error o realizar otras acciones necesarias
-                Toast.makeText(Perfil.this, "Error al actualizar los datos: " + mensajeError, Toast.LENGTH_SHORT).show();
+                Toast.makeText(Perfil.this, mensajeError, Toast.LENGTH_SHORT).show();
             }
         });
     }

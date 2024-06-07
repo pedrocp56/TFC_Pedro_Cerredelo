@@ -3,6 +3,9 @@ package com.cerredelo.gestor;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -11,6 +14,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.Locale;
 
 public class ConfigInicial extends AppCompatActivity {
 
@@ -57,7 +62,8 @@ public class ConfigInicial extends AppCompatActivity {
                         idioma = "es";
                         break;
                 }
-                ControladorPref.guardarIdioma(ConfigInicial.this,idioma);
+                ControladorPref.guardarIdioma(ConfigInicial.this, idioma);
+                setLocale(idioma);
 
                 if(!ipInput.getText().toString().isEmpty()) {
                     String ipAddress = ipInput.getText().toString();
@@ -66,7 +72,7 @@ public class ConfigInicial extends AppCompatActivity {
 
 
                 // Optional: Show a confirmation message
-                Toast.makeText(ConfigInicial.this, "Configuración guardada", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ConfigInicial.this, ConfigInicial.this.getString(R.string.confGuardada), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -93,9 +99,40 @@ public class ConfigInicial extends AppCompatActivity {
         // Set the selected item in the language spinner
         ArrayAdapter<CharSequence> adapter = (ArrayAdapter<CharSequence>) languageSpinner.getAdapter();
         if (adapter != null) {
-            int position = adapter.getPosition(savedLanguage);
+            int position;
+            switch (savedLanguage) {
+                case "es":
+                    position =0 ;
+                    break;
+                case "gl":
+                    position = 1;
+                    break;
+                default:
+                    position = 0;
+                    break;
+            }
             languageSpinner.setSelection(position);
         }
+    }
+    public void setLocale(String lang) {
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Resources res = getResources();
+        Configuration config = res.getConfiguration();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            config.setLocale(locale);
+        } else {
+            config.locale = locale;
+        }
+        res.updateConfiguration(config, res.getDisplayMetrics());
+
+        // Save the language in SharedPreferences
+        ControladorPref.guardarIdioma(this,lang);
+
+        // Reload the activity to apply the language
+        Intent refresh = new Intent(this, ConfigInicial.class);
+        startActivity(refresh);
+        finish();
     }
 }
 

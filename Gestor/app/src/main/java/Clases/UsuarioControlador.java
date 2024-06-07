@@ -9,6 +9,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cerredelo.gestor.ControladorPref;
+import com.cerredelo.gestor.R;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -18,8 +19,10 @@ import org.json.JSONObject;
 public class UsuarioControlador {
     private RequestQueue queue;
     private static String URL_Usuario;
+    private Context context;
 
     public UsuarioControlador(Context context) {
+        this.context = context;
         String IP = ControladorPref.obtenerIP(context);
         URL_Usuario = IP + "Usuarios/";
         queue = Volley.newRequestQueue(context.getApplicationContext());
@@ -36,10 +39,14 @@ public class UsuarioControlador {
                         listener.onUsuarioEncontrado(usuario);
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        listener.onError("Error al parsear la respuesta del servidor");
+                        String errorMessage = context.getString(R.string.error_Parsear);
+                        listener.onError(errorMessage);
                     }
                 },
-                error -> listener.onError("Error al buscar el usuario")
+                error -> {
+                    String errorMessage = context.getString(R.string.error_Buscar_Usuario);
+                    listener.onError(errorMessage);
+                }
         );
 
         queue.add(stringRequest);
@@ -60,27 +67,21 @@ public class UsuarioControlador {
                             Usuario login = new Usuario(response);
                             listener.onLoginSuccess(login);
                         } else {
-                            listener.onLoginError("Respuesta del servidor no válida");
+                            String errorMessage = context.getString(R.string.error_Respuesta_Servidor);
+                            listener.onLoginError(errorMessage);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        listener.onLoginError("Error de procesamiento de datos");
+                        String errorMessage = context.getString(R.string.error_Procesar_Datos);
+                        listener.onLoginError(errorMessage);
                     }
                 },
                 error -> {
                     String errorMessage;
                     if (error instanceof com.android.volley.ClientError) {
-                        errorMessage = "Nombre de usuario o contraseña incorrectos";
-                    } else if (error instanceof com.android.volley.NoConnectionError) {
-                        errorMessage = "No se puede conectar al servidor";
-                    } else if (error instanceof com.android.volley.TimeoutError) {
-                        errorMessage = "Tiempo de espera agotado";
-                    } else if (error instanceof com.android.volley.ServerError || error instanceof com.android.volley.NetworkError) {
-                        errorMessage = "Error del servidor, inténtelo de nuevo más tarde";
-                    } else if (error instanceof com.android.volley.AuthFailureError) {
-                        errorMessage = "Error de autenticación";
+                        errorMessage = context.getString(R.string.error_LoginIncorecto_Usuario);
                     } else {
-                        errorMessage = "Error desconocido";
+                        errorMessage = context.getString(R.string.error_Desconocido);
                     }
                     listener.onLoginError(errorMessage);
                 }
@@ -107,7 +108,8 @@ public class UsuarioControlador {
             }
         } catch (JSONException e) {
             e.printStackTrace();
-            listener.onRegistroError("Error al crear los datos del usuario");
+            String errorMessage = context.getString(R.string.error_CrearDatos_Usuario);
+            listener.onRegistroError(errorMessage);
             return;
         }
 
@@ -118,14 +120,19 @@ public class UsuarioControlador {
                         if (success) {
                             listener.onUsuarioRegistrado();
                         } else {
-                            listener.onRegistroError("Fallo al registrar el usuario");
+                            String errorMessage = context.getString(R.string.error_Crear_Usuario);
+                            listener.onRegistroError(errorMessage);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        listener.onRegistroError("Error de procesamiento de datos");
+                        String errorMessage = context.getString(R.string.error_Procesar_Datos);
+                        listener.onRegistroError(errorMessage);
                     }
                 },
-                error -> listener.onRegistroError("Error: " + error.toString())
+                error -> {
+                    String errorMessage = context.getString(R.string.error_Desconocido);
+                    listener.onRegistroError(errorMessage);
+                }
         );
 
         queue.add(request);
@@ -153,7 +160,8 @@ public class UsuarioControlador {
             }
         } catch (JSONException e) {
             e.printStackTrace();
-            listener.onError("Error al crear los datos del usuario");
+            String errorMessage = context.getString(R.string.error_CrearDatos_Usuario);
+            listener.onError(errorMessage);
             return;
         }
 
@@ -164,14 +172,20 @@ public class UsuarioControlador {
                         if ("success".equals(message)) {
                             listener.onDatosActualizados();
                         } else {
-                            listener.onError("Error al actualizar los datos");
+                            String errorMessage = context.getString(R.string.error_Actualizar_Usuario);
+                            listener.onError(errorMessage);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        listener.onError("Error de respuesta del servidor");
+                        String errorMessage = context.getString(R.string.error_Respuesta_Servidor);
+                        listener.onError(errorMessage);
+
                     }
                 },
-                error -> listener.onError("Error al conectar con el servidor")
+                error -> {
+                    String errorMessage = context.getString(R.string.error_Conectar_Servidor);
+                    listener.onError(errorMessage);
+                }
         );
 
         queue.add(request);

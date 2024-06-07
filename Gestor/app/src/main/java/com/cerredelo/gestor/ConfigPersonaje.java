@@ -214,42 +214,42 @@ public class ConfigPersonaje extends AppCompatActivity {
         String competenciaStr = editCompetencia.getText().toString().trim();
 
         if (nombre.isEmpty()) {
-            Toast.makeText(ConfigPersonaje.this, "El nombre no puede estar vacío", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ConfigPersonaje.this, ConfigPersonaje.this.getString(R.string.nombreVacio), Toast.LENGTH_SHORT).show();
             return false;
         }
 
         if (fuerzaStr.isEmpty() || !isValidRange(fuerzaStr, 1, 30)) {
-            Toast.makeText(ConfigPersonaje.this, "La fuerza debe ser un número entre 1 y 30", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ConfigPersonaje.this, ConfigPersonaje.this.getString(R.string.fuerzaMal), Toast.LENGTH_SHORT).show();
             return false;
         }
 
         if (destrezaStr.isEmpty() || !isValidRange(destrezaStr, 1, 30)) {
-            Toast.makeText(ConfigPersonaje.this, "La destreza debe ser un número entre 1 y 30", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ConfigPersonaje.this, ConfigPersonaje.this.getString(R.string.destrezaMal), Toast.LENGTH_SHORT).show();
             return false;
         }
 
         if (constitucionStr.isEmpty() || !isValidRange(constitucionStr, 1, 30)) {
-            Toast.makeText(ConfigPersonaje.this, "La constitución debe ser un número entre 1 y 30", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ConfigPersonaje.this, ConfigPersonaje.this.getString(R.string.constitucionMal), Toast.LENGTH_SHORT).show();
             return false;
         }
 
         if (inteligenciaStr.isEmpty() || !isValidRange(inteligenciaStr, 1, 30)) {
-            Toast.makeText(ConfigPersonaje.this, "La inteligencia debe ser un número entre 1 y 30", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ConfigPersonaje.this, ConfigPersonaje.this.getString(R.string.inteligenciaMal), Toast.LENGTH_SHORT).show();
             return false;
         }
 
         if (sabiduriaStr.isEmpty() || !isValidRange(sabiduriaStr, 1, 30)) {
-            Toast.makeText(ConfigPersonaje.this, "La sabiduría debe ser un número entre 1 y 30", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ConfigPersonaje.this, ConfigPersonaje.this.getString(R.string.sabiduriaMal), Toast.LENGTH_SHORT).show();
             return false;
         }
 
         if (carismaStr.isEmpty() || !isValidRange(carismaStr, 1, 30)) {
-            Toast.makeText(ConfigPersonaje.this, "El carisma debe ser un número entre 1 y 30", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ConfigPersonaje.this, ConfigPersonaje.this.getString(R.string.carismaMal), Toast.LENGTH_SHORT).show();
             return false;
         }
 
         if (competenciaStr.isEmpty() || !isValidRange(competenciaStr, 2, 6)) {
-            Toast.makeText(ConfigPersonaje.this, "La competencia debe ser un número entre 2 y 6", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ConfigPersonaje.this, ConfigPersonaje.this.getString(R.string.competenciaMal), Toast.LENGTH_SHORT).show();
             return false;
         }
 

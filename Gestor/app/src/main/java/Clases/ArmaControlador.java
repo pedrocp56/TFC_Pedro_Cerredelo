@@ -11,6 +11,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cerredelo.gestor.ControladorPref;
+import com.cerredelo.gestor.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,9 +26,11 @@ public class ArmaControlador {
 
     private static String IP;
     private static String URL_Arma;
+    private Context context;
 
     public ArmaControlador(Context context) {
         // Inicializar la cola de solicitudes Volley en el constructor
+        this.context = context;
         IP= ControladorPref.obtenerIP(context);
         URL_Arma= IP+"Armas/";
         queue = Volley.newRequestQueue(context.getApplicationContext());
@@ -59,7 +62,8 @@ public class ArmaControlador {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Llamar al método callback para manejar el error
-                        listener.onError("Error al obtener armas");
+                        String errorMessage = context.getString(R.string.error_Arma);
+                        listener.onError(errorMessage);
                     }
                 });
 
@@ -90,7 +94,8 @@ public class ArmaControlador {
                         } catch (JSONException e) {
                             e.printStackTrace();
                             // Llamar al listener con un mensaje de error
-                            listener.onError("Error al parsear la respuesta del servidor");
+                            String errorMessage = context.getString(R.string.error_Parsear);
+                            listener.onError(errorMessage);
                         }
                     }
                 },
@@ -98,7 +103,8 @@ public class ArmaControlador {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Mostrar mensaje de error al no poder realizar la solicitud
-                        listener.onError("Error al buscar el arma");
+                        String errorMessage = context.getString(R.string.error_Buscar_Arma);
+                        listener.onError(errorMessage);
                     }
                 });
 

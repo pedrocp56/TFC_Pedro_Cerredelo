@@ -117,12 +117,15 @@ public class ArmasPersonajeAdapter extends ArrayAdapter<ArmaPersonaje> {
     // Método para mostrar el diálogo de confirmación de eliminación
     private void mostrarDialogoEliminar(final ArmaPersonaje armaPersonaje, final String nombreArma) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
-        builder.setTitle("Eliminar Arma del Personaje");
-        //implementar buscar nombre
-        builder.setMessage("¿Estás seguro de que quieres eliminar el arma '" + nombreArma+ "' del personaje?");
+        String mensaje = context.getString(R.string.eliminar_ArmaPersonaje);
+        builder.setTitle(mensaje);
+
+        mensaje = context.getString(R.string.preguntarEliminar);
+        String mensaje2 = context.getString(R.string.del_Personaje);
+        builder.setMessage(mensaje + nombreArma+ mensaje2);
 
         // Agregar el botón "Sí" para confirmar la eliminación
-        builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(context.getString(R.string.si), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Lógica para eliminar el arma del personaje
@@ -130,8 +133,8 @@ public class ArmasPersonajeAdapter extends ArrayAdapter<ArmaPersonaje> {
             }
         });
 
-        // Agregar el botón "Cancelar" para cancelar la eliminación
-        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+        // Agregar el botón "No" para cancelar la eliminación
+        builder.setNegativeButton(context.getString(R.string.no), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Cerrar el diálogo y no hacer nada

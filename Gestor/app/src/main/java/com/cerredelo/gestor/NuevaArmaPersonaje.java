@@ -227,29 +227,12 @@ public class NuevaArmaPersonaje extends AppCompatActivity {
         });
     }
     private boolean comprobarDatos() {
-        String ataqueStr = txtAtaque.getText().toString().trim();
         String boniStr = txtBoni.getText().toString().trim();
 
-        if (ataqueStr.isEmpty()) {
-            Toast.makeText(NuevaArmaPersonaje.this, "El valor de ataque no puede estar vacío", Toast.LENGTH_SHORT).show();
+        if (boniStr.isEmpty()||!isNumeric(boniStr)) {
+            Toast.makeText(NuevaArmaPersonaje.this,NuevaArmaPersonaje.this.getString(R.string.bonificadorAdicMal) , Toast.LENGTH_SHORT).show();
             return false;
         }
-
-        if (!isNumeric(ataqueStr)) {
-            Toast.makeText(NuevaArmaPersonaje.this, "El valor de ataque debe ser numérico", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        if (boniStr.isEmpty()) {
-            Toast.makeText(NuevaArmaPersonaje.this, "El valor de bonificación adicional no puede estar vacío", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        if (!isNumeric(boniStr)) {
-            Toast.makeText(NuevaArmaPersonaje.this, "El valor de bonificación adicional debe ser numérico", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
         return true;
     }
 

@@ -60,7 +60,6 @@ public class ArmasPersonaje extends AppCompatActivity {
                 // Buscar y mostrar los datos del personaje
                 personajeId = perId;
             } else {
-                Toast.makeText(ArmasPersonaje.this, "Error: personaje no encontrado", Toast.LENGTH_SHORT).show();
                 Intent intent2 = new Intent(ArmasPersonaje.this, Personajes.class);
                 startActivity(intent2);
                 finish();

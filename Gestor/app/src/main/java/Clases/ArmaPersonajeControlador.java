@@ -12,6 +12,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.cerredelo.gestor.ControladorPref;
+import com.cerredelo.gestor.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,8 +24,11 @@ import java.util.List;
 public class ArmaPersonajeControlador {
     private RequestQueue queue;
     private static String URL_ArmaPersonaje;
+    private Context context;
+
 
     public ArmaPersonajeControlador(Context context) {
+        this.context = context;
         String IP= ControladorPref.obtenerIP(context);
         URL_ArmaPersonaje= IP+"ArmaPersonaje/";
         queue = Volley.newRequestQueue(context.getApplicationContext());
@@ -51,7 +55,8 @@ public class ArmaPersonajeControlador {
                         } catch (JSONException e) {
                             e.printStackTrace();
                             // Llamar al listener con un mensaje de error
-                            listener.onError("Error al parsear la respuesta del servidor");
+                            String errorMessage = context.getString(R.string.error_Parsear);
+                            listener.onError(errorMessage);
                         }
                     }
                 },
@@ -59,7 +64,8 @@ public class ArmaPersonajeControlador {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Mostrar mensaje de error al no poder realizar la solicitud
-                        listener.onError("Error al cargar la lista de armas del personaje");
+                        String errorMessage = context.getString(R.string.error_Lista_ArmaPersonaje);
+                        listener.onError(errorMessage);
                     }
                 });
 
@@ -89,7 +95,8 @@ public class ArmaPersonajeControlador {
                         } catch (JSONException e) {
                             e.printStackTrace();
                             // Llamar al listener con un mensaje de error
-                            listener.onError("Error al parsear la respuesta del servidor");
+                            String errorMessage = context.getString(R.string.error_Parsear);
+                            listener.onError(errorMessage);
                         }
                     }
                 },
@@ -97,7 +104,8 @@ public class ArmaPersonajeControlador {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Mostrar mensaje de error al no poder realizar la solicitud
-                        listener.onError("Error al buscar el arma por sus IDs");
+                        String errorMessage = context.getString(R.string.error_Buscar_ArmaPersonaje);
+                        listener.onError(errorMessage);
                     }
                 });
 
@@ -116,7 +124,8 @@ public class ArmaPersonajeControlador {
             @Override
             public void onArmaEncontrada(ArmaPersonaje arma) {
                 // Si se encuentra un arma para el personaje, notificar al listener de error
-                listener.onError("El personaje ya tiene equipada el arma");
+                String errorMessage = context.getString(R.string.error_Equipada_ArmaPersonaje);
+                listener.onError(errorMessage);
             }
 
             @Override
@@ -132,7 +141,8 @@ public class ArmaPersonajeControlador {
                     armaPersonajeJson.put("competencia", armaPersonaje.isCompetencia());
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    listener.onError("Error al crear los parámetros del arma-personaje");
+                    String errorMessage = context.getString(R.string.error_Crear_ArmaPersonaje);
+                    listener.onError(errorMessage);
                     return;
                 }
 
@@ -144,7 +154,8 @@ public class ArmaPersonajeControlador {
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
-                                listener.onSuccess("Arma equipada exitosamente");
+                                String successMessage = context.getString(R.string.Success_Equipada_ArmaPersonaje);
+                                listener.onSuccess(successMessage);
 
                             }
                         },
@@ -174,7 +185,8 @@ public class ArmaPersonajeControlador {
             postParams.put("competencia", armaPersonaje.isCompetencia());
         } catch (JSONException e) {
             e.printStackTrace();
-            listener.onError("Error al crear los parámetros del arma-personaje");
+            String errorMessage = context.getString(R.string.error_Crear_ArmaPersonaje);
+            listener.onError(errorMessage);
             return;
         }
 
@@ -202,13 +214,15 @@ public class ArmaPersonajeControlador {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        listener.onSuccess("Arma desequipada");
+                        String successMessage = context.getString(R.string.Success_Desequipada_ArmaPersonaje);
+                        listener.onSuccess(successMessage);
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        listener.onError("Error al desequipar el arma del personaje: " + error.getMessage());
+                        String errorMessage = context.getString(R.string.error_Desequipar_ArmaPersonaje);
+                        listener.onError(errorMessage);
                     }
                 });
 

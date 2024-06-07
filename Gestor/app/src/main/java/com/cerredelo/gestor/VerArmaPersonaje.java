@@ -121,6 +121,6 @@ public class VerArmaPersonaje extends AppCompatActivity {
         txtNombreArma.setText(armaNombre);
         txtAtaque.setText(String.valueOf(armaper.getAtaqueTotal()));
         txtBoni.setText(String.valueOf(armaper.getBonificacionAdicional()));
-        txtCompetencia.setText(armaper.isCompetencia() ? "Sí" : "No");
+        txtCompetencia.setText(armaper.isCompetencia() ? VerArmaPersonaje.this.getString(R.string.si) : VerArmaPersonaje.this.getString(R.string.no));
     }
 }

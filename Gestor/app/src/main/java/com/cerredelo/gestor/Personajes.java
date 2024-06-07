@@ -165,11 +165,11 @@ public class Personajes extends AppCompatActivity {
     // Dentro de tu clase Personajes, agrega un método para mostrar el diálogo de confirmación de eliminación
     private void mostrarDialogoEliminar(final Personaje personaje) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Eliminar Personaje");
-        builder.setMessage("¿Estás seguro de que quieres eliminar el personaje '" + personaje.getNombre() + "'? Tambien se eliminaran todas las armas que el personaje tiene asociadas.");
+        builder.setTitle(Personajes.this.getString(R.string.eliminar_Personaje));
+        builder.setMessage(Personajes.this.getString(R.string.mensajeEliminar_Personaje1) + personaje.getNombre() +Personajes.this.getString(R.string.mensajeEliminar_Personaje2));
 
         // Agregar el botón "Sí" para confirmar la eliminación
-        builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(Personajes.this.getString(R.string.si), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Lógica para eliminar el personaje
@@ -181,7 +181,7 @@ public class Personajes extends AppCompatActivity {
         });
 
         // Agregar el botón "No" para cancelar la eliminación
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(Personajes.this.getString(R.string.no), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Cerrar el diálogo y no hacer nada

@@ -103,7 +103,7 @@ public class Registro extends AppCompatActivity {
                         }
                     });
                 } else {
-                    Toast.makeText(Registro.this, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registro.this, Registro.this.getString(R.string.relleneCampos), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -127,13 +127,13 @@ public class Registro extends AppCompatActivity {
 
         // Validar que el username sea un correo electrónico
         if (!isValidEmail(username)) {
-            Toast.makeText(Registro.this, "Por favor, ingrese un correo electrónico válido", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Registro.this, Registro.this.getString(R.string.correoMal), Toast.LENGTH_SHORT).show();
             return false;
         }
 
         // Validar que la contraseña tenga entre 5 y 12 caracteres alfanuméricos
         if (!isValidPassword(password)) {
-            Toast.makeText(Registro.this, "La contraseña debe tener entre 5 y 13 caracteres alfanuméricos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Registro.this, Registro.this.getString(R.string.contrasenhaMal), Toast.LENGTH_SHORT).show();
             return false;
         }
 

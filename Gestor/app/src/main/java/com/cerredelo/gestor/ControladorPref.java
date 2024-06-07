@@ -13,6 +13,7 @@ public class ControladorPref {
     private static final String Idioma = "Idioma";
     private static final String ip = "IP";
     private static final String userId = "userId";
+    private static final String contrasenha = "userContrasenha";
     private static final String userName = "userName";
     private static final String userFoto = "userFoto";
     private static final String userEstado = "userEstado";
@@ -30,10 +31,10 @@ public class ControladorPref {
         return IP;
     }
 
-    public static void guardarIdioma(Context contexto, String Idioma) {
+    public static void guardarIdioma(Context contexto, String idioma) {
         SharedPreferences sharedPreferences = contexto.getSharedPreferences(preferencias, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(Idioma, Idioma);
+        editor.putString(Idioma, idioma);
         editor.apply();
     }
 
@@ -54,6 +55,19 @@ public class ControladorPref {
         SharedPreferences sharedPreferences = contexto.getSharedPreferences(preferencias, Context.MODE_PRIVATE);
         Long id = sharedPreferences.getLong(userId, 0);
         return id;
+    }
+
+    public static void guardarUsuarioContrasenha(Context contexto, String contra) {
+        SharedPreferences sharedPreferences = contexto.getSharedPreferences(preferencias, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(contrasenha, contra);
+        editor.apply();
+    }
+
+    public static String obtenerUsuarioContrasenha(Context contexto) {
+        SharedPreferences sharedPreferences = contexto.getSharedPreferences(preferencias, Context.MODE_PRIVATE);
+        String contra = sharedPreferences.getString(contrasenha, "1");
+        return contra;
     }
 
     public static void guardarUsuarioNombre(Context contexto, String nombre) {

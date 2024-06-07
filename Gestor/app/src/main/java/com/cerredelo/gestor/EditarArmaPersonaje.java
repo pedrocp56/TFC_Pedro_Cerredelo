@@ -105,8 +105,6 @@ public class EditarArmaPersonaje extends AppCompatActivity {
                                 Toast.makeText(EditarArmaPersonaje.this, error, Toast.LENGTH_SHORT).show();
                             }
                         });
-                    } else {
-                        Toast.makeText(EditarArmaPersonaje.this, "Error: Arma editado es nulo", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -191,13 +189,8 @@ public class EditarArmaPersonaje extends AppCompatActivity {
     private boolean comprobarDatos() {
         String boniStr = txtBoni.getText().toString().trim();
 
-        if (boniStr.isEmpty()) {
-            Toast.makeText(EditarArmaPersonaje.this, "El valor de bonificación adicional no puede estar vacío", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        if (!isNumeric(boniStr)) {
-            Toast.makeText(EditarArmaPersonaje.this, "El valor de bonificación adicional debe ser numérico", Toast.LENGTH_SHORT).show();
+        if (boniStr.isEmpty()||!isNumeric(boniStr)) {
+            Toast.makeText(EditarArmaPersonaje.this, EditarArmaPersonaje.this.getString(R.string.bonificadorAdicMal), Toast.LENGTH_SHORT).show();
             return false;
         }
 

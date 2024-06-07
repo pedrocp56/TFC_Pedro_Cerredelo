@@ -3,7 +3,10 @@ package com.cerredelo.gestor;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
@@ -12,6 +15,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.Locale;
 
 import Clases.Usuario;
 import Clases.UsuarioControlador;
@@ -29,11 +34,10 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        cargarPreferences();
         setContentView(R.layout.activity_login);
 
         usuarioControlador = new UsuarioControlador(Login.this);
-
-        cargarPreferences();
 
         usernameEditText = findViewById(R.id.username);
         passwordEditText = findViewById(R.id.password);
@@ -55,7 +59,7 @@ public class Login extends AppCompatActivity {
                         mediaPlayer = MediaPlayer.create(Login.this, R.raw.login);
                         mediaPlayer.setVolume(10.f, 1.0f);
                         mediaPlayer.start();
-                        Toast.makeText(Login.this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login.this, Login.this.getString(R.string.inicioSesion), Toast.LENGTH_SHORT).show();
                         // Guardar los datos del usuario en SharedPreferences
                         saveUserData(usuario);
                         Intent intent3 = new Intent(Login.this, PantallaPrincipal.class);
@@ -107,13 +111,29 @@ public class Login extends AppCompatActivity {
     private void cargarPreferences() {
         SharedPreferences sharedPreferences = getSharedPreferences("ConfigPreferences", Context.MODE_PRIVATE);
         idioma = ControladorPref.obtenerIdioma(Login.this);
+        setLocale(idioma);
     }
 
     private void saveUserData(Usuario usuario) {
         ControladorPref.guardarUsuarioID(Login.this, usuario.getId());
+        ControladorPref.guardarUsuarioContrasenha(Login.this, usuario.getContrasenha());
         ControladorPref.guardarUsuarioNombre(Login.this, usuario.getNombre());
         ControladorPref.guardarUsuarioEstado(Login.this, usuario.getEstado());
         ControladorPref.guardarUsuarioFoto(Login.this, usuario.getFoto());
+    }
+    public void setLocale(String lang) {
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Resources res = getResources();
+        Configuration config = res.getConfiguration();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            config.setLocale(locale);
+        } else {
+            config.locale = locale;
+        }
+        res.updateConfiguration(config, res.getDisplayMetrics());
+
+
     }
 }
 
