@@ -152,10 +152,7 @@ public class EditarArmaPersonaje extends AppCompatActivity {
     }
     private void cargarDatosUsuario() {
         // Obtener el objeto SharedPreferences
-        SharedPreferences sharedPref = getSharedPreferences("UserPref", Context.MODE_PRIVATE);
-
-        // Recuperar los datos del usuario
-        usuarioId = sharedPref.getLong("userId", -1);
+        usuarioId=ControladorPref.obtenerUsuarioID(EditarArmaPersonaje.this);
 
         // Cargar los datos del arma del personaje
         buscarArmapersonaje(armaId, personajeId, usuarioId);

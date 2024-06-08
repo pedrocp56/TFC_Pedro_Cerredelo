@@ -188,9 +188,7 @@ public class NuevaArmaPersonaje extends AppCompatActivity {
 
     private void cargarDatosUsuario() {
         // Obtener el objeto SharedPreferences
-        SharedPreferences sharedPref = getSharedPreferences("UserPref", Context.MODE_PRIVATE);
-        // Recuperar los datos del usuario
-        usuarioId = sharedPref.getLong("userId", -1);
+        usuarioId=ControladorPref.obtenerUsuarioID(NuevaArmaPersonaje.this);
     }
 
     private void crearArmaPersonaje() {

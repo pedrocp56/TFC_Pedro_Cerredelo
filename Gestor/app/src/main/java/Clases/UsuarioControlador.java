@@ -1,7 +1,6 @@
 package Clases;
 
 import android.content.Context;
-import android.util.Base64;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -15,6 +14,8 @@ import com.google.gson.GsonBuilder;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Base64;
 
 public class UsuarioControlador {
     private RequestQueue queue;
@@ -65,6 +66,18 @@ public class UsuarioControlador {
                     try {
                         if (response.has("id")) {
                             Usuario login = new Usuario(response);
+
+                            // Deserializar la imagen del usuario si está presente en la respuesta
+                            if (response.has("foto")) {
+                                String imagenBase64 = response.getString("foto");
+                                byte[] imagenBytes = new byte[0];
+                                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                                    imagenBytes = Base64.getDecoder().decode(imagenBase64);
+                                }
+                                login.setFoto(imagenBytes); // Asignar la imagen decodificada al objeto Usuario
+                            }
+
+                            // Notificar al listener sobre el inicio de sesión exitoso
                             listener.onLoginSuccess(login);
                         } else {
                             String errorMessage = context.getString(R.string.error_Respuesta_Servidor);
@@ -103,7 +116,10 @@ public class UsuarioControlador {
             userData.put("contrasenha", password);
             userData.put("estado", "Nueva cuenta");
             if (imagen != null) {
-                String imagenBase64 = Base64.encodeToString(imagen, Base64.DEFAULT);
+                String imagenBase64 = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    imagenBase64 = Base64.getEncoder().encodeToString(imagen);
+                }
                 userData.put("foto", imagenBase64);
             }
         } catch (JSONException e) {
@@ -152,7 +168,10 @@ public class UsuarioControlador {
             userData.put("contrasenha", password);
             userData.put("estado", estado);
             if (foto != null) {
-                String imagenBase64 = Base64.encodeToString(foto, Base64.DEFAULT);
+                String imagenBase64 = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    imagenBase64 = Base64.getEncoder().encodeToString(foto);
+                }
                 userData.put("foto", imagenBase64);
             }
             /*

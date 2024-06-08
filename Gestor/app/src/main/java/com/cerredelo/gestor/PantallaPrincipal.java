@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Arrays;
+
 import Clases.ImagenUtils;
 
 public class PantallaPrincipal extends AppCompatActivity {
@@ -114,7 +116,7 @@ public class PantallaPrincipal extends AppCompatActivity {
         userNameTextView.setText(userName);
 
         // Verificar foto y ponerla
-        if (foto==null){
+        if (foto==null|| Arrays.equals(foto, new byte[]{-98,-23,101})){
 
             userIconImageView.setImageResource(R.drawable.camara);
         }

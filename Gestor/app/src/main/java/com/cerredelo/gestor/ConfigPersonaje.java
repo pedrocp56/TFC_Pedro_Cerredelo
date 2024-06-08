@@ -179,14 +179,9 @@ public class ConfigPersonaje extends AppCompatActivity {
 
     private void cargarDatosUsuario() {
         // Obtener el objeto SharedPreferences
+        userId = ControladorPref.obtenerUsuarioID(ConfigPersonaje.this);
+        String userName = ControladorPref.obtenerUsuarioNombre(ConfigPersonaje.this);
         SharedPreferences sharedPref = getSharedPreferences("UserPref", Context.MODE_PRIVATE);
-
-        // Recuperar los datos del usuario
-        userId = sharedPref.getLong("userId", 0);
-        String userName = sharedPref.getString("userName", "");
-
-        // Asignar el nombre de usuario recuperado a la vista (esto se puede hacer inmediatamente)
-        textNombreUsuario.setText(userName);
 
         // Buscar el usuario completo en el servidor
         usuarioControlador.buscarUsuario(userId, new UsuarioControlador.OnUsuarioEncontradoListener() {

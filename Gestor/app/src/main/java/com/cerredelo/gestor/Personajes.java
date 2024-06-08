@@ -54,8 +54,7 @@ public class Personajes extends AppCompatActivity {
 
 
         // Obtener la ID del usuario almacenada en SharedPreferences
-        SharedPreferences sharedPref = getSharedPreferences("UserPref", Context.MODE_PRIVATE);
-        userId = sharedPref.getLong("userId", -1);
+        userId=ControladorPref.obtenerUsuarioID(Personajes.this);
 
         // Configurar botón para agregar un nuevo personaje
         Button btnNuevoPersonaje = findViewById(R.id.btnNuevoPersonaje);

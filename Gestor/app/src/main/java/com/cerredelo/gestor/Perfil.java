@@ -29,6 +29,8 @@ import com.google.gson.GsonBuilder;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Arrays;
+
 import Clases.ImagenUtils;
 import Clases.Usuario;
 import Clases.UsuarioControlador;
@@ -120,7 +122,7 @@ public class Perfil extends AppCompatActivity {
         tvPerfilNombre.setText(ControladorPref.obtenerUsuarioNombre(Perfil.this));
         etPerfilEstado.setText(ControladorPref.obtenerUsuarioEstado(Perfil.this));
         byte[] foto =ControladorPref.obtenerUsuarioFoto(Perfil.this);
-        if (foto==null){
+        if (foto==null|| Arrays.equals(foto, new byte[]{-98,-23,101})){
             ivPerfilFoto.setImageResource(R.drawable.camara);
         }
         else{
