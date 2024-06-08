@@ -69,9 +69,7 @@ public class UsuarioController {
 
         // Actualizar los campos del usuario
         usuarioExistente.setNombre(usuario.getNombre());
-        if(usuario.getContrasenha()==null){
-            usuarioExistente.setContrasenha(usuario.getContrasenha());
-        }
+        usuarioExistente.setContrasenha(usuario.getContrasenha());
         usuarioExistente.setEstado(usuario.getEstado());
         usuarioExistente.setFoto(usuario.getFoto());
 

@@ -12,7 +12,7 @@
         android:id="@+id/register_username"
         style="@style/EditTextStyle"
         android:hint="@string/nombre"
-        android:inputType="text" />
+        android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/register_password"

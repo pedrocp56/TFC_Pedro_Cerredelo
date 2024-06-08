@@ -69,9 +69,7 @@ public class Perfil extends AppCompatActivity {
             public void onClick(View v) {
                 // Crear un Intent para volver a la PantallaPrincipal
                 Intent intent = new Intent(Perfil.this, PantallaPrincipal.class);
-                // Iniciar la actividad de la PantallaPrincipal
                 startActivity(intent);
-                // Cerrar la actividad actual (Perfil)
                 finish();
             }
         });
@@ -162,9 +160,8 @@ public class Perfil extends AppCompatActivity {
                 Toast.makeText(Perfil.this, Perfil.this.getString(R.string.datosActualizados), Toast.LENGTH_SHORT).show();
                 ControladorPref.guardarUsuarioContrasenha(Perfil.this, finalNuevaContrasena);
                 ControladorPref.guardarUsuarioEstado(Perfil.this, estado);
+                //error al guardar la foto
                 ControladorPref.guardarUsuarioFoto(Perfil.this,foto);
-
-                // También puedes volver a cargar los datos del usuario en la vista si es necesario
             }
 
             @Override

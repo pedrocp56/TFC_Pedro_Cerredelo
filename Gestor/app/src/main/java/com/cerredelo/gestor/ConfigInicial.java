@@ -58,6 +58,9 @@ public class ConfigInicial extends AppCompatActivity {
                     case "Gallego":
                         idioma = "gl";
                         break;
+                    case "Galego":
+                        idioma = "gl";
+                        break;
                     default:
                         idioma = "es";
                         break;

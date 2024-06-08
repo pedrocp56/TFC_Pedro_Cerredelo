@@ -152,12 +152,19 @@ public class UsuarioControlador {
             userData.put("contrasenha", password);
             userData.put("estado", estado);
             if (foto != null) {
+                String imagenBase64 = Base64.encodeToString(foto, Base64.DEFAULT);
+                userData.put("foto", imagenBase64);
+            }
+            /*
+            if (foto != null) {
                 Gson gson = new GsonBuilder()
                         .registerTypeAdapter(byte[].class, new ImagenUtils())
                         .create();
                 String fotoBase64 = gson.toJson(foto);
                 userData.put("foto", fotoBase64);
             }
+            */
+
         } catch (JSONException e) {
             e.printStackTrace();
             String errorMessage = context.getString(R.string.error_CrearDatos_Usuario);

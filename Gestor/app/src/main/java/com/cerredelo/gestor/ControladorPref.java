@@ -86,7 +86,7 @@ public class ControladorPref {
     public static void guardarUsuarioFoto(Context contexto, byte[] foto) {
         SharedPreferences sharedPreferences = contexto.getSharedPreferences(preferencias, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        if (Arrays.equals(foto, new byte[]{110, 117, 108, 108})){
+        if (foto==null||Arrays.equals(foto, new byte[]{110, 117, 108, 108})){
             editor.putString(userFoto, null);
         }else {
             String fotoStr = Base64.encodeToString(foto, Base64.DEFAULT);
